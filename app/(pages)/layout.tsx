@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ja'>
-      <body className={`${mPlus1.className} antialiased text-my-dark`}>
+      <body className={`${mPlus1.className} text-my-dark antialiased`}>
         <Header />
         {children}
         <Footer />
