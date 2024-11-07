@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Play, Pause, RotateCcw } from 'lucide-react';
+import { Play, Pause, RotateCcw, SkipForward } from 'lucide-react';
 import { workSans } from '../utils/fonts';
 
 const FOCUS_TIME = 25 * 60;
@@ -72,29 +72,30 @@ const Home = () => {
       <div className='relative h-80 w-80'>
         <svg className='h-full w-full -rotate-90' viewBox='0 0 100 100'>
           <circle className='stroke-current text-gray-300' strokeWidth='4' cx='50' cy='50' r='47' fill='transparent' />
-          <circle className='stroke-current text-my-dark' strokeWidth='4' strokeLinecap='round' cx='50' cy='50' r='47' fill='transparent' strokeDasharray='295.31' strokeDashoffset={295.31 * (1 - percentage / 100)} />
+          <circle className='stroke-current ' strokeWidth='4' strokeLinecap='round' cx='50' cy='50' r='47' fill='transparent' strokeDasharray='295.31' strokeDashoffset={295.31 * (1 - percentage / 100)} />
         </svg>
         <div className='absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center'>
-          <span className={`${workSans.className} text-5xl font-bold text-my-dark`} aria-live='polite'>
+          <span className={`${workSans.className} text-5xl font-bold `} aria-live='polite'>
             {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
           </span>
-          <span className=' text-lg text-my-dark' aria-live='polite'>
+          <span className=' text-lg ' aria-live='polite'>
             {currentPhase === 'focus' ? '集中時間' : currentPhase === 'short-break' ? '小休憩' : '長休憩'}
           </span>
-          <span className='mt-1 text-sm text-my-dark'>{currentPhase === 'long-break' ? 'サイクル完了' : `${currentCycle} of ${TOTAL_CYCLES}`}</span>
+          <span className='mt-1 text-sm '>{currentPhase === 'long-break' ? 'サイクル完了' : `${currentCycle} of ${TOTAL_CYCLES}`}</span>
         </div>
       </div>
       <div className='flex gap-4'>
-        <button type='button' onClick={toggleTimer} className={`flex items-center gap-2 rounded-lg border border-my-dark bg-my-dark px-4 py-2 text-my-light transition-colors`}>
+        <button type='button' onClick={toggleTimer} className={`flex items-center gap-2 rounded-lg  bg-my-dark px-4 py-2 text-my-light  dark:bg-my-light dark:text-my-dark`}>
           {isActive ? <Pause size={16} /> : <Play size={16} />}
           {isActive ? '一時停止' : 'スタート'}
         </button>
-        <button type='button' onClick={resetTimer} className='flex items-center gap-2 rounded-lg border border-my-dark px-4 py-2 transition-colors'>
+        <button type='button' onClick={resetTimer} className='flex items-center gap-2 rounded-lg border border-my-dark px-4 py-2  dark:border-my-light'>
           <RotateCcw size={16} />
           リセット
         </button>
       </div>
-      <button type='button' onClick={() => handlePhaseComplete()} className='rounded-lg border border-my-dark px-4 py-2 transition-colors'>
+      <button type='button' onClick={() => handlePhaseComplete()} className='flex items-center gap-2 rounded-lg border border-my-dark px-4 py-2  dark:border-my-light'>
+        <SkipForward size={16} />
         フェーズスキップ
       </button>
       <p className='text-center'>
