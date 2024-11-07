@@ -40,11 +40,11 @@ const Header = () => {
               <Sun size={24} />
             </button>
           )}
-          {/* <Settings size={24} />
+          <Settings size={24} />
           <button type='button' className='flex items-center gap-2 rounded-lg border border-my-dark px-4 py-2 transition-colors hover:bg-my-dark hover:text-my-light dark:border-my-light dark:hover:bg-my-light dark:hover:text-my-dark'>
             <LogIn size={16} />
             ログイン
-          </button> */}
+          </button>
         </div>
       </div>
     </header>
