@@ -3,6 +3,7 @@ import '../globals.css';
 import Header from '../_components/header';
 import Footer from '../_components/footer';
 import { mPlus1 } from '../utils/fonts';
+import { ThemeProvider } from 'next-themes';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,11 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ja'>
-      <body className={`${mPlus1.className} text-my-dark antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+    <html lang='ja' suppressHydrationWarning>
+      <body className={`${mPlus1.className} text-my-dark antialiased transition-colors dark:bg-my-dark dark:text-my-light`}>
+        <ThemeProvider attribute='data-mode'>
+          <Header />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
