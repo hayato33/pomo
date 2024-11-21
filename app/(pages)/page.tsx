@@ -68,7 +68,7 @@ const Home = () => {
   const percentage = (1 - time / (currentPhase === 'focus' ? FOCUS_TIME : currentPhase === 'short-break' ? SHORT_BREAK_TIME : LONG_BREAK_TIME)) * 100;
 
   return (
-    <div className='mt-[15vw] grid place-content-center place-items-center gap-8'>
+    <div className='mt-12 grid place-content-center place-items-center gap-8'>
       <div className='relative h-80 w-80'>
         <svg className='h-full w-full -rotate-90' viewBox='0 0 100 100'>
           <circle className='stroke-current text-gray-300' strokeWidth='4' cx='50' cy='50' r='47' fill='transparent' />
