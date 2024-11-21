@@ -9,7 +9,6 @@ import { useSupabaseSession } from '../_hooks/useSupabaseSession';
 import { supabase } from '../utils/supabase';
 import request from '../utils/api';
 import { User } from '@prisma/client';
-import Image from 'next/image';
 
 const Header = () => {
   const { theme, setTheme } = useTheme();

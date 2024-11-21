@@ -57,8 +57,12 @@ export default function Page() {
         setPassword('');
         alert('確認メールを送信しました。メールをご確認ください。');
       }
-    } catch (error: any) {
-      alert(error.message || '予期しないエラーが発生しました。');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert('予期しないエラーが発生しました。');
+      }
     } finally {
       setIsLoading(false);
     }
