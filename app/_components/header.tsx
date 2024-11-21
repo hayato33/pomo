@@ -25,10 +25,8 @@ const Header = () => {
     if (!token) return;
 
     const fetcher = async () => {
-      console.log('token', token);
       const res = await request('/api/user', 'GET', undefined, token);
       const { user } = await res.json();
-      console.log('user', user);
       setUser(user);
     };
 
