@@ -19,7 +19,7 @@ model User {
 }
 
 model PomodoroLog {
-  id              Int             @id @default(autoincrement())
+  id              String          @id @default(uuid())
   userId          String          
   completedCount  Int
   completedTime   Int
@@ -30,7 +30,7 @@ model PomodoroLog {
 }
 
 model UserSetting {
-  id                  Int             @id @default(autoincrement())
+  id              		String          @id @default(uuid())
   userId              String          @unique
   autoStartShortBreak Boolean
   autoStartFocusTime  Boolean
