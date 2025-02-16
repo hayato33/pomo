@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import PasswordInput from "./PasswordInput";
+import { supabase } from "@/utils/supabase";
+import { useRouter } from "next/navigation";
 
 /**
  * 認証フォームのバリデーションスキーマ
@@ -33,18 +35,15 @@ const schema = z.object({
 /** バリデーションスキーマから推論された型 */
 export type FormData = z.infer<typeof schema>;
 
-interface AuthFormProps {
-  /** ログインまたは新規登録 */
-  formType: "login" | "signup";
-  /** フォーム送信時の処理 */
-  onSubmit: (data: FormData) => Promise<void>;
-}
+/** フォームの種類 */
+type FormType = "login" | "signup";
 
 /**
  * ログインと新規登録で共通して使用されるフォームコンポーネント
  * React Hook FormとZodによるバリデーション、パスワードの表示切り替え機能付き
  */
-export default function AuthForm({ formType, onSubmit }: AuthFormProps) {
+export default function AuthForm({ formType }: { formType: FormType }) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -59,7 +58,39 @@ export default function AuthForm({ formType, onSubmit }: AuthFormProps) {
   /** フォーム送信処理 */
   const onSubmitHandler = async (data: FormData) => {
     try {
-      await onSubmit(data);
+      const { data: authData, error } =
+        formType === "login"
+          ? await supabase.auth.signInWithPassword({
+              email: data.email,
+              password: data.password,
+            })
+          : await supabase.auth.signUp({
+              email: data.email,
+              password: data.password,
+              options: {
+                emailRedirectTo: `${window.location.origin}/login`,
+              },
+            });
+
+      if (error) {
+        alert(
+          formType === "login" ? "ログインに失敗しました" : "登録に失敗しました"
+        );
+        return;
+      }
+
+      if (formType === "login") {
+        router.replace("/");
+      } else {
+        // 登録されているメールアドレスの場合、空の配列が返ってくる
+        const identities = authData.user?.identities;
+        if (identities?.length === 0) {
+          alert("このメールアドレスは既に登録されています。");
+        } else {
+          alert("確認メールを送信しました。");
+        }
+      }
+
       reset();
     } catch (error) {
       console.error(error);
