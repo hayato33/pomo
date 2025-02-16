@@ -62,7 +62,7 @@ export default function Header() {
                   />
                   <Button
                     size="3"
-                    className="absolute right-0 top-full hidden w-[128px] group-hover:flex"
+                    className="absolute right-0 top-full hidden w-[128px] cursor-pointer group-hover:flex"
                     color="gray"
                     variant="solid"
                     highContrast
