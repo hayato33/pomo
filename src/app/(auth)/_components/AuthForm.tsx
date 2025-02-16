@@ -90,7 +90,7 @@ export default function AuthForm({ formType, onSubmit }: AuthFormProps) {
   };
 
   return (
-    <div className="my-12 flex justify-center">
+    <div className="mx-4 my-12 flex justify-center">
       <form
         onSubmit={handleSubmit(onSubmitHandler)}
         className="w-full max-w-[400px] space-y-6"
