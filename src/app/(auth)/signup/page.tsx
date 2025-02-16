@@ -11,7 +11,7 @@ export default function Page() {
       email: formData.email,
       password: formData.password,
       options: {
-        emailRedirectTo: `http://localhost:3000/login`,
+        emailRedirectTo: `${window.location.origin}/login`, // リダイレクト先のURL
       },
     });
 
