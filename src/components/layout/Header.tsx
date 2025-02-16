@@ -5,7 +5,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { useSupabaseSession } from "@/hooks/useSupabaseSession";
 import { LuLogIn, LuLogOut } from "react-icons/lu";
 import { supabase } from "@/utils/supabase";
-import { Avatar } from "@radix-ui/themes";
+import { Avatar, Button } from "@radix-ui/themes";
 
 export default function Header() {
   const handleLogout = async () => {
@@ -50,18 +50,27 @@ export default function Header() {
                   <Avatar
                     size="2"
                     src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
+                    radius="full"
                     variant="solid"
                     color="gray"
-                    fallback="A"
+                    fallback={
+                      session.user?.email
+                        ? session.user.email[0].toUpperCase()
+                        : "?"
+                    }
                     highContrast
                   />
-                  <button
+                  <Button
+                    size="3"
+                    className="absolute right-0 top-full hidden w-[128px] group-hover:flex"
+                    color="gray"
+                    variant="solid"
+                    highContrast
                     onClick={handleLogout}
-                    className="absolute right-0 top-full hidden w-[138px] items-center gap-2 rounded-lg border border-gray-900 px-4 py-2 transition-colors hover:bg-gray-900 hover:text-white group-hover:flex"
                   >
                     ログアウト
-                    <LuLogOut size={16} />
-                  </button>
+                    <LuLogOut />
+                  </Button>
                 </div>
               </>
             ) : (
@@ -69,7 +78,7 @@ export default function Header() {
                 href="/login"
                 className="flex items-center gap-2 rounded-lg border border-gray-900 px-4 py-2 transition-colors hover:bg-gray-900 hover:text-white"
               >
-                <LuLogIn size={16} />
+                <LuLogIn />
                 ログイン
               </Link>
             )}
