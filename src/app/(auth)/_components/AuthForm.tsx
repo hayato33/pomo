@@ -7,7 +7,6 @@ import { Button, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import PasswordInput from "./PasswordInput";
 import { supabase } from "@/utils/supabase";
-import { useRouter } from "next/navigation";
 
 /**
  * 認証フォームのバリデーションスキーマ
@@ -43,7 +42,6 @@ type FormType = "login" | "signup";
  * React Hook FormとZodによるバリデーション、パスワードの表示切り替え機能付き
  */
 export default function AuthForm({ formType }: { formType: FormType }) {
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -80,7 +78,7 @@ export default function AuthForm({ formType }: { formType: FormType }) {
       }
 
       if (formType === "login") {
-        router.replace("/");
+        window.location.href = "/";
       } else {
         // 登録されているメールアドレスの場合、空の配列が返ってくる
         const identities = authData.user?.identities;
