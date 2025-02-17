@@ -43,7 +43,6 @@ type FormType = "login" | "signup";
  * React Hook FormとZodによるバリデーション、パスワードの表示切り替え機能付き
  */
 export default function AuthForm({ formType }: { formType: FormType }) {
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -54,6 +53,7 @@ export default function AuthForm({ formType }: { formType: FormType }) {
     resolver: zodResolver(schema),
     mode: "onTouched",
   });
+  const router = useRouter();
 
   /** フォーム送信処理 */
   const onSubmitHandler = async (data: FormData) => {
