@@ -7,6 +7,7 @@ import { Button, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import PasswordInput from "./PasswordInput";
 import { supabase } from "@/utils/supabase";
+import { useRouter } from "next/navigation";
 
 /**
  * 認証フォームのバリデーションスキーマ
@@ -52,6 +53,7 @@ export default function AuthForm({ formType }: { formType: FormType }) {
     resolver: zodResolver(schema),
     mode: "onTouched",
   });
+  const router = useRouter();
 
   /** フォーム送信処理 */
   const onSubmitHandler = async (data: FormData) => {
@@ -78,7 +80,7 @@ export default function AuthForm({ formType }: { formType: FormType }) {
       }
 
       if (formType === "login") {
-        window.location.href = "/";
+        router.replace("/");
       } else {
         // 登録されているメールアドレスの場合、空の配列が返ってくる
         const identities = authData.user?.identities;
