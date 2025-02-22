@@ -3,7 +3,8 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Text } from "@radix-ui/themes";
+import Button from "@/components/elements/Button";
+import { Text } from "@radix-ui/themes";
 import Link from "next/link";
 import PasswordInput from "./PasswordInput";
 import { supabase } from "@/utils/supabase";
@@ -132,15 +133,7 @@ export default function AuthForm({ formType }: { formType: FormType }) {
         />
 
         <div>
-          <Button
-            size="3"
-            className="w-full"
-            type="submit"
-            color="gray"
-            variant="solid"
-            highContrast
-            disabled={isSubmitting}
-          >
+          <Button className="w-full" type="submit" disabled={isSubmitting}>
             {isSubmitting
               ? "送信中..."
               : formType === "login"
