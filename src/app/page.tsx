@@ -1,101 +1,186 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Button from "@/components/elements/Button";
+import { useState, useEffect } from "react";
+import { BsSkipEndFill } from "react-icons/bs";
+import { HiPause } from "react-icons/hi2";
+import { RiResetLeftFill } from "react-icons/ri";
+import { VscDebugStart } from "react-icons/vsc";
+
+/** ポモドーロタイマー初期値 */
+const defaultTimerConfig = {
+  focus: 25 * 60,
+  shortBreak: 5 * 60,
+  longBreak: 30 * 60,
+  totalCycles: 4,
+};
+
+/** ポモドーロタイマーフェーズ */
+type Phase = "focus" | "short-break" | "long-break";
+
+export default function Page() {
+  // 現在のフェーズの残り時間（秒）
+  const [remainingTime, setRemainingTime] = useState(defaultTimerConfig.focus);
+  // タイマーが動作中かどうか
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  // 現在のフェーズ
+  const [currentPhase, setCurrentPhase] = useState<Phase>("focus");
+  // 現在のサイクル
+  const [currentCycle, setCurrentCycle] = useState(1);
+
+  // タイマーのカウントダウンの制御
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isTimerRunning && remainingTime > 0) {
+      interval = setInterval(() => {
+        setRemainingTime((prevTime: number) => prevTime - 1);
+      }, 1000);
+    } else if (remainingTime === 0) {
+      handlePhaseComplete();
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isTimerRunning, remainingTime]);
+
+  /**
+   * 現在のフェーズが完了した時の処理
+   * - 次のフェーズに移行し、適切な時間をセットする
+   * - focus → short-break → focus → ... と繰り返し、最終サイクルのshort-break後にlong-breakに移行する
+   */
+  const handlePhaseComplete = () => {
+    setIsTimerRunning(false);
+    if (currentPhase === "focus") {
+      setCurrentPhase("short-break");
+      setRemainingTime(defaultTimerConfig.shortBreak);
+    } else if (currentPhase === "short-break") {
+      if (currentCycle === defaultTimerConfig.totalCycles) {
+        setCurrentPhase("long-break");
+        setRemainingTime(defaultTimerConfig.longBreak);
+      } else {
+        setCurrentPhase("focus");
+        setRemainingTime(defaultTimerConfig.focus);
+        setCurrentCycle((prev) => prev + 1);
+      }
+    } else if (currentPhase === "long-break") {
+      setCurrentPhase("focus");
+      setRemainingTime(defaultTimerConfig.focus);
+      setCurrentCycle(1);
+    }
+  };
+
+  /** タイマーの開始/停止を切り替える */
+  const toggleTimer = () => {
+    setIsTimerRunning(!isTimerRunning);
+  };
+
+  /** タイマーをデフォルト状態にリセットする */
+  const resetTimer = () => {
+    setCurrentPhase("focus");
+    setIsTimerRunning(false);
+    setCurrentCycle(1);
+    setRemainingTime(defaultTimerConfig.focus);
+  };
+
+  // 現在のフェーズをスキップする関数
+  const skipPhase = () => handlePhaseComplete();
+
+  // 表示用の分数を計算
+  const minutes = Math.floor(remainingTime / 60);
+
+  // 表示用の秒数を計算
+  const seconds = remainingTime % 60;
+
+  // プログレスバーの進捗率を計算
+  const percentage =
+    (1 -
+      remainingTime /
+        (currentPhase === "focus"
+          ? defaultTimerConfig.focus
+          : currentPhase === "short-break"
+            ? defaultTimerConfig.shortBreak
+            : defaultTimerConfig.longBreak)) *
+    100;
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col items-center justify-center">
+      <div className="relative aspect-square w-80 max-w-full">
+        <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
+          <circle
+            className="stroke-current text-gray-200"
+            strokeWidth="4"
+            cx="50"
+            cy="50"
+            r="47"
+            fill="transparent"
+          />
+          <circle
+            className={`stroke-current ${
+              currentPhase === "focus"
+                ? "text-primary"
+                : currentPhase === "short-break"
+                  ? "text-green-500"
+                  : "text-blue-500"
+            }`}
+            strokeWidth="4"
+            strokeLinecap="round"
+            cx="50"
+            cy="50"
+            r="47"
+            fill="transparent"
+            strokeDasharray="295.31"
+            strokeDashoffset={295.31 * (1 - percentage / 100)}
+          />
+        </svg>
+        <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center">
+          <span className="text-5xl font-bold text-gray-800" aria-live="polite">
+            {minutes.toString().padStart(2, "0")}:
+            {seconds.toString().padStart(2, "0")}
+          </span>
+          <span
+            className="mt-2 text-lg font-medium text-gray-500"
+            aria-live="polite"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            {currentPhase === "focus"
+              ? "集中時間"
+              : currentPhase === "short-break"
+                ? "短い休憩"
+                : "長い休憩"}
+          </span>
+          <span className="mt-1 text-sm text-gray-400">
+            {currentCycle} / {defaultTimerConfig.totalCycles}
+          </span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="mt-4 grid gap-4">
+        <div className="flex gap-4">
+          <Button onClick={toggleTimer}>
+            {isTimerRunning ? (
+              <>
+                <HiPause />
+                一時停止
+              </>
+            ) : (
+              <>
+                <VscDebugStart />
+                スタート
+              </>
+            )}
+          </Button>
+          <Button variant="outline" onClick={resetTimer}>
+            <RiResetLeftFill />
+            リセット
+          </Button>
+        </div>
+        <div className="grid place-content-center">
+          <Button variant="ghost" onClick={skipPhase}>
+            <BsSkipEndFill />
+            フェーズスキップ
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
