@@ -27,7 +27,7 @@ export default function TimerController({
   const skipPhase = () => handlePhaseComplete();
 
   return (
-    <div className="mt-4 grid gap-4">
+    <div className="grid gap-4">
       <div className="flex gap-4">
         <Button onClick={toggleTimer}>
           {isTimerRunning ? (

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import PomodoroTimer from "./(timer)/_components/PomodoroTimer";
 import TimerController from "./(timer)/_components/TimerController";
+import TimerSettingsForm from "./(timer)/_components/TimerSettingsForm";
 
 /** ポモドーロタイマー各数値の型定義 */
 interface TimerConfig {
@@ -66,7 +67,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-6">
       <PomodoroTimer
         isTimerRunning={isTimerRunning}
         handlePhaseComplete={handlePhaseComplete}
@@ -81,6 +82,7 @@ export default function Page() {
         handlePhaseComplete={handlePhaseComplete}
         resetTimer={resetTimer}
       />
+      <TimerSettingsForm />
     </div>
   );
 }
