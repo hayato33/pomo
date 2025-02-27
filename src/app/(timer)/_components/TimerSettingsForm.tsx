@@ -3,11 +3,7 @@ import Button from "@/components/elements/Button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FormItem from "./FormItem";
-import {
-  DEFAULT_TIMER_SETTINGS,
-  TIMER_SETTINGS_KEY,
-  TimerSettings,
-} from "@/config/timerConfig";
+import { DEFAULT_TIMER_SETTINGS, TimerSettings } from "@/config/timerConfig";
 import { useEffect, useState } from "react";
 import ConfirmDialog from "@/components/elements/ConfirmDialog";
 
@@ -52,10 +48,10 @@ interface TimerSettingsFormProps {
   setStoredSettings: (settings: TimerSettings) => void;
 }
 
-export default function TimerSettingsForm({ 
-  resetTimer, 
+export default function TimerSettingsForm({
+  resetTimer,
   storedSettings,
-  setStoredSettings 
+  setStoredSettings
 }: TimerSettingsFormProps) {
   // ダイアログの表示状態
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
