@@ -3,6 +3,13 @@ import Button from "@/components/elements/Button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FormItem from "./FormItem";
+import {
+  DEFAULT_TIMER_SETTINGS,
+  TIMER_SETTINGS_KEY,
+  TimerSettings,
+} from "@/config/timerConfig";
+import { useEffect, useState } from "react";
+import ConfirmDialog from "@/components/elements/ConfirmDialog";
 
 /**
  * ポモドーロタイマー各種数値変更フォームのバリデーションスキーマ
@@ -38,23 +45,60 @@ const schema = z.object({
     .max(10, "サイクル数は10以下で入力してください"),
 });
 
-/** バリデーションスキーマから推論された型 */
-export type FormData = z.infer<typeof schema>;
+/** Propsの型定義 */
+interface TimerSettingsFormProps {
+  resetTimer: () => void;
+  storedSettings: TimerSettings;
+  setStoredSettings: (settings: TimerSettings) => void;
+}
 
-export default function TimerSettingsForm() {
+export default function TimerSettingsForm({ 
+  resetTimer, 
+  storedSettings,
+  setStoredSettings 
+}: TimerSettingsFormProps) {
+  // ダイアログの表示状態
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+  // 確認待ちの設定値
+  const [pendingSettings, setPendingSettings] = useState<TimerSettings | null>(null);
+
+  // フォームの状態管理
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
+  } = useForm<TimerSettings>({
     resolver: zodResolver(schema),
     mode: "onTouched",
+    defaultValues: storedSettings,
   });
 
-  /** フォーム送信処理 */
-  const onSubmitHandler = async (data: FormData) => {
-    console.log(data);
+  // storedSettingsが変更されたらフォームもリセット
+  // ただし、ユーザーが直接修正した場合は除く
+  useEffect(() => {
+    // ユーザーが編集中でない場合のみリセットを適用
+    if (!isSubmitting) {
+      reset(storedSettings);
+    }
+  }, [storedSettings, reset, isSubmitting]);
+
+  /** フォーム送信処理 - 確認ダイアログを表示 */
+  const onSubmitHandler = async (data: TimerSettings) => {
+    setPendingSettings(data);
+    setIsConfirmDialogOpen(true);
+  };
+
+  /** 設定保存を確定する処理 */
+  const confirmSaveSettings = () => {
+    if (pendingSettings) {
+      // LocalStorageに設定を保存
+      setStoredSettings(pendingSettings);
+      console.log("設定を保存しました:", pendingSettings);
+      setPendingSettings(null);
+      // タイマーをリセット
+      resetTimer();
+    }
   };
 
   return (
@@ -69,7 +113,6 @@ export default function TimerSettingsForm() {
           disabled={isSubmitting}
           min={1}
           max={90}
-          defaultValue={25}
         />
         <FormItem
           label="短い休憩時間(分)"
@@ -79,7 +122,6 @@ export default function TimerSettingsForm() {
           disabled={isSubmitting}
           min={1}
           max={30}
-          defaultValue={5}
         />
         <FormItem
           label="長い休憩時間(分)"
@@ -89,7 +131,6 @@ export default function TimerSettingsForm() {
           disabled={isSubmitting}
           min={1}
           max={90}
-          defaultValue={30}
         />
         <FormItem
           label="サイクル数(回)"
@@ -99,21 +140,22 @@ export default function TimerSettingsForm() {
           disabled={isSubmitting}
           min={1}
           max={10}
-          defaultValue={4}
         />
 
         <div className="flex justify-between">
           <Button
             variant="outline"
             type="reset"
-            onClick={() =>
-              reset({
-                focusTime: 25,
-                shortBreakTime: 5,
-                longBreakTime: 30,
-                cycles: 4,
-              })
-            }
+            onClick={() => {
+              // デフォルト設定を適用
+              const defaultSettings = { ...DEFAULT_TIMER_SETTINGS };
+              // フォームをリセット
+              reset(defaultSettings);
+              // ローカルストレージを更新
+              setStoredSettings(defaultSettings);
+              // タイマーをリセット
+              resetTimer();
+            }}
             disabled={isSubmitting}
           >
             リセット
@@ -123,6 +165,23 @@ export default function TimerSettingsForm() {
           </Button>
         </div>
       </form>
+
+      {/* 設定保存確認ダイアログ */}
+      <ConfirmDialog
+        isOpen={isConfirmDialogOpen}
+        onClose={() => setIsConfirmDialogOpen(false)}
+        onConfirm={confirmSaveSettings}
+        title="タイマー設定の保存"
+        message={
+          <p>
+            設定を保存すると、現在進行中のタイマーが初期化されます。
+            <br />
+            新しい設定を保存してもよろしいですか？
+          </p>
+        }
+        confirmText="保存する"
+        cancelText="キャンセル"
+      />
     </div>
   );
 }

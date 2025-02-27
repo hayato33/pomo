@@ -1,6 +1,7 @@
 "use client";
 
-import { PomodoroTimerPhase, defaultTimerConfig } from "@/app/page";
+import { PomodoroTimerPhase } from "@/app/page";
+import { TimerSettings } from "@/config/timerConfig";
 import { useEffect } from "react";
 
 /** Propsの型定義 */
@@ -10,11 +11,14 @@ interface PomodoroTimerProps {
   currentPhase: PomodoroTimerPhase;
   currentCycle: number;
   remainingTime: number;
-  setRemainingTime: (
-    remainingTime: number | ((prevTime: number) => number)
-  ) => void;
+  setRemainingTime: (time: number) => void;
+  timerSettings: TimerSettings;
 }
 
+/**
+ * ポモドーロタイマーのメインコンポーネント
+ * カウントダウンと表示を担当
+ */
 export default function PomodoroTimer({
   isTimerRunning,
   handlePhaseComplete,
@@ -22,6 +26,7 @@ export default function PomodoroTimer({
   currentCycle,
   remainingTime,
   setRemainingTime,
+  timerSettings,
 }: PomodoroTimerProps) {
   // タイマーのカウントダウンの制御
   useEffect(() => {
@@ -38,7 +43,7 @@ export default function PomodoroTimer({
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isTimerRunning, remainingTime]);
+  }, [isTimerRunning, remainingTime, handlePhaseComplete, setRemainingTime]);
 
   // 表示用の分数を計算
   const minutes = Math.floor(remainingTime / 60);
@@ -51,10 +56,10 @@ export default function PomodoroTimer({
     (1 -
       remainingTime /
         (currentPhase === "focus"
-          ? defaultTimerConfig.focus
+          ? timerSettings.focusTime * 60
           : currentPhase === "short-break"
-            ? defaultTimerConfig.shortBreak
-            : defaultTimerConfig.longBreak)) *
+            ? timerSettings.shortBreakTime * 60
+            : timerSettings.longBreakTime * 60)) *
     100;
 
   return (
@@ -102,7 +107,7 @@ export default function PomodoroTimer({
               : "長い休憩"}
         </span>
         <span className="mt-1 text-sm text-gray-400">
-          {currentCycle} / {defaultTimerConfig.totalCycles}
+          {currentCycle} / {timerSettings.cycles}
         </span>
       </div>
     </div>

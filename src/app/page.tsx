@@ -1,37 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PomodoroTimer from "./(timer)/_components/PomodoroTimer";
 import TimerController from "./(timer)/_components/TimerController";
 import TimerSettingsForm from "./(timer)/_components/TimerSettingsForm";
-
-/** ポモドーロタイマー各数値の型定義 */
-interface TimerConfig {
-  focus: number;
-  shortBreak: number;
-  longBreak: number;
-  totalCycles: number;
-}
-/** ポモドーロタイマー初期値 */
-export const defaultTimerConfig: TimerConfig = {
-  focus: 25 * 60,
-  shortBreak: 5 * 60,
-  longBreak: 30 * 60,
-  totalCycles: 4,
-} as const;
+import { DEFAULT_TIMER_SETTINGS, TIMER_SETTINGS_KEY, TimerSettings } from "@/config/timerConfig";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
 
 export default function Page() {
+  // ローカルストレージから設定を取得
+  const [storedSettings, setStoredSettings] = useLocalStorage<TimerSettings>(
+    TIMER_SETTINGS_KEY,
+    DEFAULT_TIMER_SETTINGS
+  );
+
   // 現在のフェーズの残り時間（秒）
-  const [remainingTime, setRemainingTime] = useState(defaultTimerConfig.focus);
+  const [remainingTime, setRemainingTime] = useState(
+    storedSettings.focusTime * 60
+  );
   // タイマーが動作中かどうか
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   // 現在のフェーズ
   const [currentPhase, setCurrentPhase] = useState<PomodoroTimerPhase>("focus");
   // 現在のサイクル
   const [currentCycle, setCurrentCycle] = useState(1);
+
+  // 設定が変更されたときに残り時間を更新する
+  useEffect(() => {
+    if (currentPhase === "focus") {
+      setRemainingTime(storedSettings.focusTime * 60);
+    } else if (currentPhase === "short-break") {
+      setRemainingTime(storedSettings.shortBreakTime * 60);
+    } else if (currentPhase === "long-break") {
+      setRemainingTime(storedSettings.longBreakTime * 60);
+    }
+  }, [storedSettings, currentPhase]);
 
   /**
    * 現在のフェーズが完了した時の処理
@@ -41,19 +47,19 @@ export default function Page() {
     setIsTimerRunning(false);
     if (currentPhase === "focus") {
       setCurrentPhase("short-break");
-      setRemainingTime(defaultTimerConfig.shortBreak);
+      setRemainingTime(storedSettings.shortBreakTime * 60);
     } else if (currentPhase === "short-break") {
-      if (currentCycle === defaultTimerConfig.totalCycles) {
+      if (currentCycle === storedSettings.cycles) {
         setCurrentPhase("long-break");
-        setRemainingTime(defaultTimerConfig.longBreak);
+        setRemainingTime(storedSettings.longBreakTime * 60);
       } else {
         setCurrentPhase("focus");
-        setRemainingTime(defaultTimerConfig.focus);
+        setRemainingTime(storedSettings.focusTime * 60);
         setCurrentCycle((prev) => prev + 1);
       }
     } else if (currentPhase === "long-break") {
       setCurrentPhase("focus");
-      setRemainingTime(defaultTimerConfig.focus);
+      setRemainingTime(storedSettings.focusTime * 60);
       setCurrentCycle(1);
     }
   };
@@ -63,7 +69,8 @@ export default function Page() {
     setCurrentPhase("focus");
     setIsTimerRunning(false);
     setCurrentCycle(1);
-    setRemainingTime(defaultTimerConfig.focus);
+    // 常に最新のstoredSettingsを使用
+    setRemainingTime(storedSettings.focusTime * 60);
   };
 
   return (
@@ -75,6 +82,7 @@ export default function Page() {
         currentCycle={currentCycle}
         remainingTime={remainingTime}
         setRemainingTime={setRemainingTime}
+        timerSettings={storedSettings}
       />
       <TimerController
         isTimerRunning={isTimerRunning}
@@ -82,7 +90,7 @@ export default function Page() {
         handlePhaseComplete={handlePhaseComplete}
         resetTimer={resetTimer}
       />
-      <TimerSettingsForm />
+      <TimerSettingsForm resetTimer={resetTimer} storedSettings={storedSettings} setStoredSettings={setStoredSettings} />
     </div>
   );
 }
