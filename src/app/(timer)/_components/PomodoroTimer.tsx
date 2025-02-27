@@ -11,7 +11,7 @@ interface PomodoroTimerProps {
   currentPhase: PomodoroTimerPhase;
   currentCycle: number;
   remainingTime: number;
-  setRemainingTime: (time: number) => void;
+  setRemainingTime: (time: number | ((time: number) => number)) => void;
   timerSettings: TimerSettings;
 }
 
