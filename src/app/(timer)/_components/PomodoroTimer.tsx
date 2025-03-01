@@ -2,7 +2,7 @@
 
 import { PomodoroTimerPhase } from "@/app/page";
 import { TimerSettings } from "@/config/timerConfig";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 /** Propsの型定義 */
 interface PomodoroTimerProps {
@@ -52,15 +52,25 @@ export default function PomodoroTimer({
   const seconds = remainingTime % 60;
 
   // プログレスバーの進捗率を計算
-  const percentage =
-    (1 -
-      remainingTime /
-        (currentPhase === "focus"
-          ? timerSettings.focusTime * 60
-          : currentPhase === "short-break"
-            ? timerSettings.shortBreakTime * 60
-            : timerSettings.longBreakTime * 60)) *
-    100;
+  const percentage = useMemo(() => {
+    let totalTime = 0;
+
+    switch (currentPhase) {
+      case "focus":
+        totalTime = timerSettings.focusTime * 60;
+        break;
+      case "short-break":
+        totalTime = timerSettings.shortBreakTime * 60;
+        break;
+      case "long-break":
+        totalTime = timerSettings.longBreakTime * 60;
+        break;
+      default:
+        totalTime = 1; // 0除算を防ぐため
+    }
+
+    return (1 - remainingTime / totalTime) * 100;
+  }, [remainingTime, currentPhase, timerSettings]);
 
   return (
     <div className="relative aspect-square w-80 max-w-full">
