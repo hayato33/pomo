@@ -5,7 +5,7 @@ import { z } from "zod";
 import FormItem from "./FormItem";
 import { DEFAULT_TIMER_SETTINGS, TimerSettings } from "@/config/timerConfig";
 import { useEffect, useState } from "react";
-import ConfirmDialog from "@/components/elements/ConfirmDialog";
+import { Modal } from "@/components/elements/Modal";
 
 /**
  * ポモドーロタイマー各種数値変更フォームのバリデーションスキーマ
@@ -51,12 +51,14 @@ interface TimerSettingsFormProps {
 export default function TimerSettingsForm({
   resetTimer,
   storedSettings,
-  setStoredSettings
+  setStoredSettings,
 }: TimerSettingsFormProps) {
   // ダイアログの表示状態
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   // 確認待ちの設定値
-  const [pendingSettings, setPendingSettings] = useState<TimerSettings | null>(null);
+  const [pendingSettings, setPendingSettings] = useState<TimerSettings | null>(
+    null
+  );
 
   // フォームの状態管理
   const {
@@ -162,22 +164,35 @@ export default function TimerSettingsForm({
         </div>
       </form>
 
-      {/* 設定保存確認ダイアログ */}
-      <ConfirmDialog
+      <Modal
         isOpen={isConfirmDialogOpen}
         onClose={() => setIsConfirmDialogOpen(false)}
-        onConfirm={confirmSaveSettings}
-        title="タイマー設定の保存"
-        message={
+      >
+        <div className="grid gap-4">
+          <h2 className="text-xl font-bold">タイマー設定の保存</h2>
           <p>
             設定を保存すると、現在進行中のタイマーが初期化されます。
             <br />
             新しい設定を保存してもよろしいですか？
           </p>
-        }
-        confirmText="保存する"
-        cancelText="キャンセル"
-      />
+          <div className="flex justify-end gap-3">
+            <Button
+              variant="outline"
+              onClick={() => setIsConfirmDialogOpen(false)}
+            >
+              キャンセル
+            </Button>
+            <Button
+              onClick={() => {
+                confirmSaveSettings();
+                setIsConfirmDialogOpen(false);
+              }}
+            >
+              保存する
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
