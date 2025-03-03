@@ -1,5 +1,5 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { TimerSettings } from "@/config/timerConfig";
+import { TimerSettings } from "@/app/_config/timerConfig";
 
 /** Propsの型定義 */
 interface FormItemProps {

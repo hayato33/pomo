@@ -3,11 +3,11 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Button from "@/components/elements/Button";
+import Button from "@/app/_components/elements/Button";
 import { Text } from "@radix-ui/themes";
 import Link from "next/link";
 import PasswordInput from "./PasswordInput";
-import { supabase } from "@/utils/supabase";
+import { supabase } from "@/app/_utils/supabase";
 import { useRouter } from "next/navigation";
 
 /**

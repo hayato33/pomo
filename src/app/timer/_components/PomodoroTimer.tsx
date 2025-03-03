@@ -1,7 +1,7 @@
 "use client";
 
-import { PomodoroTimerPhase } from "@/app/page";
-import { TimerSettings } from "@/config/timerConfig";
+import { PomodoroTimerPhase } from "@/app/timer/page";
+import { TimerSettings } from "@/app/_config/timerConfig";
 import { useEffect, useMemo } from "react";
 
 /** Propsの型定義 */

@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { IoSettingsOutline } from "react-icons/io5";
-import { useSupabaseSession } from "@/hooks/useSupabaseSession";
+import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { LuLogIn, LuLogOut } from "react-icons/lu";
-import { supabase } from "@/utils/supabase";
+import { supabase } from "@/app/_utils/supabase";
 import { Avatar, Button } from "@radix-ui/themes";
 
 export default function Header() {

@@ -1,11 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import Button from "@/components/elements/Button";
+import Button from "@/app/_components/elements/Button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FormItem from "./FormItem";
-import { DEFAULT_TIMER_SETTINGS, TimerSettings } from "@/config/timerConfig";
+import { DEFAULT_TIMER_SETTINGS, TimerSettings } from "@/app/_config/timerConfig";
 import { useEffect, useState } from "react";
-import { Modal } from "@/components/elements/Modal";
+import { Modal } from "@/app/_components/elements/Modal";
 
 /**
  * ポモドーロタイマー各種数値変更フォームのバリデーションスキーマ
