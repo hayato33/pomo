@@ -43,7 +43,7 @@ model UserSetting {
   postButtonToTimeline Boolean
   rankingPageLink     Boolean
   showOnRanking       Boolean
-  backgroundImageKey  String
+  backgroundImageKey  String?
   font                String
   hideExplainText     Boolean
   setRandomTime       Boolean
