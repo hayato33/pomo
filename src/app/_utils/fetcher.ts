@@ -2,7 +2,7 @@ interface FetcherProps {
   apiPath: string;
   method?: "GET" | "POST" | "PUT" | "DELETE";
   body?: Record<string, unknown>;
-  token: string;
+  token?: string;
 }
 
 export const fetcher = async ({
@@ -16,7 +16,7 @@ export const fetcher = async ({
       method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: token ?? "",
       },
       body: body ? JSON.stringify(body) : null,
     });
