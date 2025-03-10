@@ -1,5 +1,5 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { FormData } from "./AuthForm";
+import { FormData } from "../_lib/authSchema";
 
 interface Props {
   id: keyof FormData;
