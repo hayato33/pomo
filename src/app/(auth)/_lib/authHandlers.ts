@@ -8,7 +8,7 @@ import { supabase } from "@/app/_utils/supabase";
  * @param accessToken アクセストークン
  * @param router Next.jsのルーターインスタンス
  */
-export const handleLoginSuccess = async (
+const handleLoginSuccess = async (
   accessToken: string,
   router: AppRouterInstance
 ): Promise<void> => {
@@ -29,7 +29,7 @@ export const handleLoginSuccess = async (
  * @param user ユーザー情報
  * @param reset フォームリセット関数
  */
-export const handleSignupSuccess = (
+const handleSignupSuccess = (
   user: { identities?: Array<{ id: string; provider: string }> | null } | null,
   reset: () => void
 ): void => {
@@ -46,32 +46,19 @@ export const handleSignupSuccess = (
 };
 
 /**
- * フォーム送信処理
+ * ログイン処理
  * @param formData フォームデータ
- * @param formType フォームの種類（login/signup）
  * @param router Next.jsのルーターインスタンス
- * @param reset フォームリセット関数
  */
-export const onSubmitHandler = async (
+export const loginHandler = async (
   formData: FormData,
-  formType: "login" | "signup",
-  router: AppRouterInstance,
-  reset: () => void
+  router: AppRouterInstance
 ) => {
   try {
-    const { data, error } =
-      formType === "login"
-        ? await supabase.auth.signInWithPassword({
-            email: formData.email,
-            password: formData.password,
-          })
-        : await supabase.auth.signUp({
-            email: formData.email,
-            password: formData.password,
-            options: {
-              emailRedirectTo: `${window.location.origin}/login`,
-            },
-          });
+    const { error } = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    });
 
     if (error) {
       let errorMessage = "認証エラーが発生しました。";
@@ -82,21 +69,47 @@ export const onSubmitHandler = async (
       return;
     }
 
-    // ログインとサインアップで処理を分岐
-    if (formType === "login") {
-      // セッションからアクセストークンを取得
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+    // セッションからアクセストークンを取得
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-      if (session?.access_token) {
-        await handleLoginSuccess(session.access_token, router);
-      }
-    } else {
-      handleSignupSuccess(data.user, reset);
+    if (session?.access_token) {
+      await handleLoginSuccess(session.access_token, router);
     }
   } catch (error) {
-    console.error("認証処理中にエラーが発生しました:", error);
+    console.error("ログイン処理中にエラーが発生しました:", error);
+    alert("処理中にエラーが発生しました。もう一度お試しください。");
+  }
+};
+
+/**
+ * サインアップ処理
+ * @param formData フォームデータ
+ * @param reset フォームリセット関数
+ */
+export const signupHandler = async (formData: FormData, reset: () => void) => {
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/login`,
+      },
+    });
+
+    if (error) {
+      let errorMessage = "認証エラーが発生しました。";
+      if (error.message.includes("credentials")) {
+        errorMessage = "メールアドレスまたはパスワードが正しくありません。";
+      }
+      alert(errorMessage);
+      return;
+    }
+
+    handleSignupSuccess(data.user, reset);
+  } catch (error) {
+    console.error("サインアップ処理中にエラーが発生しました:", error);
     alert("処理中にエラーが発生しました。もう一度お試しください。");
   }
 };

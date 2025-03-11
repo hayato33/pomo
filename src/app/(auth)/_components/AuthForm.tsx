@@ -7,7 +7,7 @@ import AuthFormItem from "./AuthFormItem";
 import PasswordInput from "./PasswordInput";
 import FormActions from "./FormActions";
 import { authSchema, FormData, FormType } from "../_lib/authSchema";
-import { onSubmitHandler } from "../_lib/authHandlers";
+import { loginHandler, signupHandler } from "../_lib/authHandlers";
 
 /**
  * ログインと新規登録で共通して使用されるフォームコンポーネント
@@ -31,7 +31,11 @@ export default function AuthForm({ formType }: { formType: FormType }) {
    * @param formData フォームデータ
    */
   const submitHandler = async (formData: FormData) => {
-    await onSubmitHandler(formData, formType, router, reset);
+    if (formType === "login") {
+      await loginHandler(formData, router);
+    } else {
+      await signupHandler(formData, reset);
+    }
   };
 
   return (
