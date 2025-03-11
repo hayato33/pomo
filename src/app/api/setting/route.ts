@@ -1,25 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/app/_utils/supabase";
 import { prisma } from "@/app/_lib/prisma";
 import { DEFAULT_USER_SETTINGS } from "@/app/_config/userSettingConfig";
+import { getCurrentUser } from "../_lib/getCurrentUser";
 
 /** ユーザー設定を作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
   try {
-    const token = req.headers.get("Authorization") ?? "";
-    const { error } = await supabase.auth.getUser(token);
-    // 認証エラーがあれば早期リターン
-    if (error)
-      return NextResponse.json({ error: error.message }, { status: 401 });
+    const { currentUser } = await getCurrentUser(req);
 
-    const { userId } = await req.json();
+    // ユーザーが見つからない場合はエラーを返す
+    if (!currentUser)
+      return NextResponse.json(
+        { error: "ユーザーが見つかりません" },
+        { status: 404 }
+      );
 
     // ユーザー設定をデータベースに作成
     const userSetting = await prisma.userSetting.create({
       data: {
         user: {
           connect: {
-            id: userId,
+            id: currentUser.id,
           },
         },
         ...DEFAULT_USER_SETTINGS,
@@ -44,23 +45,10 @@ export const POST = async (req: NextRequest) => {
 /** ユーザー設定を取得するAPIエンドポイント */
 export const GET = async (req: NextRequest) => {
   try {
-    const token = req.headers.get("Authorization") ?? "";
-    const { data, error } = await supabase.auth.getUser(token);
-
-    // 認証エラーがあれば早期リターン
-    if (error)
-      return NextResponse.json({ error: error.message }, { status: 401 });
-
-    const supabaseUserId = data.user.id;
-
-    // ユーザーをデータベースから取得
-    const user = await prisma.user.findUnique({
-      where: { supabaseUserId },
-      select: { id: true },
-    });
+    const { currentUser } = await getCurrentUser(req);
 
     // ユーザーが見つからない場合はエラーを返す
-    if (!user)
+    if (!currentUser)
       return NextResponse.json(
         { error: "ユーザーが見つかりません" },
         { status: 404 }
@@ -68,7 +56,7 @@ export const GET = async (req: NextRequest) => {
 
     // ユーザー設定をデータベースから取得
     const userSetting = await prisma.userSetting.findUnique({
-      where: { userId: user.id },
+      where: { userId: currentUser.id },
     });
 
     // ユーザー設定が見つからない場合はエラーを返す
