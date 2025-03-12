@@ -8,7 +8,7 @@
 import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { FieldError, UseFormRegister, UseFormWatch } from "react-hook-form";
-import { FormData } from "./AuthForm";
+import { FormData } from "../_lib/authSchema";
 
 interface PasswordInputProps {
   /** React Hook Formのregister関数 */
