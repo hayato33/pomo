@@ -24,7 +24,7 @@ model PomodoroLog {
   completedCount  Int
   completedTime   Int
   displayInTimeline Boolean
-  loggedAt        DateTime
+  loggedAt        DateTime				@default(now())
 
   user            User            @relation(fields: [userId], references: [id])
 }
