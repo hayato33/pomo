@@ -65,13 +65,6 @@ export const GET = async (req: NextRequest) => {
       },
     });
 
-    // ユーザー設定が見つからない場合はエラーを返す
-    if (!pomodoroLog)
-      return NextResponse.json(
-        { error: "ポモドーロログが見つかりません" },
-        { status: 404 }
-      );
-
     // 成功レスポンスを返す
     return NextResponse.json(
       {
