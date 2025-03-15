@@ -17,6 +17,9 @@ export const GET = async () => {
           },
         },
       },
+      orderBy: {
+        loggedAt: "desc",
+      },
     });
 
     // 成功レスポンスを返す

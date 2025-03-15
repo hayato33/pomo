@@ -63,14 +63,6 @@ export const GET = async (req: NextRequest) => {
       where: {
         userId: currentUser.id,
       },
-      include: {
-        user: {
-          select: {
-            nickname: true,
-            profileImageKey: true,
-          },
-        },
-      },
     });
 
     // 成功レスポンスを返す

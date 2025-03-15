@@ -2,12 +2,12 @@
 
 import PomodoroLog from "../_components/elements/PomodoroLog";
 import { TimelineLoading } from "./_components/TimelineLoading";
-import { usePomodoro } from "./_hooks/usePomodoro";
+import { useTimelinePomodoro } from "./_hooks/useTimelinePomodoro";
 import { PomodoroLogResponse } from "../types/pomodoro";
 
 /** タイムラインページ */
 export default function Page() {
-  const { data, isLoading, isError } = usePomodoro();
+  const { data, isLoading, isError } = useTimelinePomodoro();
   const logs = data?.data;
 
   if (isError) return <div>エラーが発生しました</div>;
