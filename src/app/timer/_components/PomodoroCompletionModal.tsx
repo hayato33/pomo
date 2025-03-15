@@ -5,6 +5,7 @@ import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { useUser } from "@/app/_hooks/useUser";
 import { createPomodoroLog } from "../_lib/createPomodoroLog";
 import { TimerSettings } from "@/app/_config/timerConfig";
+import Confetti from "./Confetti";
 
 interface Props {
   storedSettings: TimerSettings;
@@ -31,6 +32,7 @@ export default function PomodoroCompletionModal({
       displayInTimeline,
       token: token ?? "",
     });
+    Confetti();
   };
   return (
     <Modal
