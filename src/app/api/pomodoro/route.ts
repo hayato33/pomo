@@ -17,7 +17,7 @@ export const POST = async (req: NextRequest) => {
     const { completedCount, completedTime, displayInTimeline } =
       await req.json();
 
-    // ユーザー設定をデータベースに作成
+    // ポモドーロログをデータベースに作成
     const pomodoroLog = await prisma.pomodoroLog.create({
       data: {
         completedCount,
@@ -58,12 +58,21 @@ export const GET = async (req: NextRequest) => {
         { status: 404 }
       );
 
-    // ユーザー設定をデータベースから取得
+    // ポモドーロログをデータベースから取得
     const pomodoroLog = await prisma.pomodoroLog.findMany({
       where: {
         userId: currentUser.id,
       },
+      include: {
+        user: {
+          select: {
+            nickname: true,
+            profileImageKey: true,
+          },
+        },
+      },
     });
+    console.log("pomodoroLog", pomodoroLog);
 
     // 成功レスポンスを返す
     return NextResponse.json(

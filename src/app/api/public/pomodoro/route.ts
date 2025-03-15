@@ -4,7 +4,7 @@ import { prisma } from "@/app/_lib/prisma";
 /** ポモドーロログを取得するAPIエンドポイント */
 export const GET = async () => {
   try {
-    // ユーザー設定をデータベースから取得
+    // ポモドーロログをデータベースから取得
     const pomodoroLog = await prisma.pomodoroLog.findMany({
       where: {
         displayInTimeline: true,
