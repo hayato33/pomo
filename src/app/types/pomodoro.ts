@@ -19,5 +19,4 @@ export interface PomodoroLogDisplayProps {
   completedTime: number;
   completedCount: number;
   loggedAt: Date;
-  isLoading?: boolean;
 }
