@@ -92,7 +92,6 @@ export default function TimerSettingsForm({
     if (pendingSettings) {
       // LocalStorageに設定を保存
       setStoredSettings(pendingSettings);
-      console.log("設定を保存しました:", pendingSettings);
       setPendingSettings(null);
       // タイマーをリセット
       resetTimer();

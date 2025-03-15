@@ -72,7 +72,6 @@ export const GET = async (req: NextRequest) => {
         },
       },
     });
-    console.log("pomodoroLog", pomodoroLog);
 
     // 成功レスポンスを返す
     return NextResponse.json(
