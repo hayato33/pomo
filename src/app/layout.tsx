@@ -34,7 +34,7 @@ export default function RootLayout({
       >
         <Theme>
           <Header />
-          <main className="px-4 py-12">{children}</main>
+          <main className="px-4 pb-12 pt-4 md:py-12">{children}</main>
           <Footer />
         </Theme>
       </body>
