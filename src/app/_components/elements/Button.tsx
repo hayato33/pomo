@@ -2,6 +2,7 @@ import { Button } from "@radix-ui/themes";
 
 export default function ButtonComponent({
   children,
+  size = "3",
   variant = "solid",
   className,
   type = "button",
@@ -9,6 +10,7 @@ export default function ButtonComponent({
   disabled,
 }: {
   children: React.ReactNode;
+  size?: "1" | "2" | "3" | "4";
   variant?: "solid" | "outline" | "ghost";
   className?: string;
   type?: "button" | "submit" | "reset";
@@ -17,7 +19,7 @@ export default function ButtonComponent({
 }) {
   return (
     <Button
-      size="3"
+      size={size}
       color="gray"
       variant={variant}
       highContrast
