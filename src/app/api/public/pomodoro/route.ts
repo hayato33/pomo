@@ -1,33 +1,57 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/app/_lib/prisma";
 
 /** ポモドーロログを取得するAPIエンドポイント */
-export const GET = async () => {
+export const GET = async (request: NextRequest) => {
   try {
-    // ポモドーロログをデータベースから取得
-    const pomodoroLog = await prisma.pomodoroLog.findMany({
-      where: {
-        displayInTimeline: true,
-      },
-      include: {
-        user: {
-          select: {
-            nickname: true,
-            profileImageKey: true,
+    // URLからクエリパラメータを取得
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
+    const skip = (page - 1) * limit;
+
+    // 共通のwhere条件
+    const whereCondition = {
+      displayInTimeline: true,
+    };
+
+    // クエリをトランザクションで実行
+    const [totalCount, pomodoroLog] = await prisma.$transaction([
+      // ポモドーロログの総数を取得
+      prisma.pomodoroLog.count({
+        where: whereCondition,
+      }),
+      // ポモドーロログをデータベースから取得
+      prisma.pomodoroLog.findMany({
+        where: whereCondition,
+        include: {
+          user: {
+            select: {
+              nickname: true,
+              profileImageKey: true,
+            },
           },
         },
-      },
-      orderBy: {
-        loggedAt: "desc",
-      },
-    });
+        orderBy: {
+          loggedAt: "desc",
+        },
+        skip,
+        take: limit,
+      }),
+    ]);
 
     // 成功レスポンスを返す
     return NextResponse.json(
       {
         status: "success",
-        message: "すべてのポモドーロログを取得しました",
+        message: "ポモドーロログを取得しました",
         data: pomodoroLog,
+        pagination: {
+          totalCount,
+          totalPages: Math.ceil(totalCount / limit),
+          currentPage: page,
+          limit,
+        },
       },
       { status: 200 }
     );
