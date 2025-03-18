@@ -2,8 +2,8 @@ import { useUser } from "@/app/_hooks/useUser";
 import { Avatar } from "@radix-ui/themes";
 
 interface Props {
-  profileImageKey: string | null;
-  nickname: string;
+  profileImageKey?: string | null;
+  nickname?: string;
 }
 
 /**
