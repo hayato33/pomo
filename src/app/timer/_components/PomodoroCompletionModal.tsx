@@ -25,9 +25,9 @@ export default function PomodoroCompletionModal({
   const { data: userData } = useUser();
   const currentUser = userData?.data;
 
-  const onSubmitPomodoroLogModal = (displayInTimeline: boolean) => {
+  const onSubmitPomodoroLogModal = async (displayInTimeline: boolean) => {
     setIsPomodoroCompletionModalOpen(false);
-    createPomodoroLog({
+    await createPomodoroLog({
       completedCount: storedSettings.cycles,
       completedTime: storedSettings.focusTime,
       displayInTimeline,
