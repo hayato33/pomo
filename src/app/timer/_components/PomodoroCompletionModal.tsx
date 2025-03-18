@@ -6,6 +6,7 @@ import { useUser } from "@/app/_hooks/useUser";
 import { createPomodoroLog } from "../_lib/createPomodoroLog";
 import { TimerSettings } from "@/app/_config/timerConfig";
 import Confetti from "./Confetti";
+import PomodoroLogType from "@/app/types/pomodoro";
 
 interface Props {
   storedSettings: TimerSettings;
@@ -34,6 +35,18 @@ export default function PomodoroCompletionModal({
     });
     Confetti();
   };
+
+  // プレビュー用のログデータ
+  const log: PomodoroLogType = {
+    user: {
+      nickname: currentUser?.nickname,
+      profileImageKey: currentUser?.profileImageKey,
+    },
+    completedTime: storedSettings.focusTime,
+    completedCount: storedSettings.cycles,
+    loggedAt: new Date(),
+  };
+
   return (
     <Modal
       isOpen={isPomodoroCompletionModalOpen}
@@ -60,13 +73,7 @@ export default function PomodoroCompletionModal({
         <h3 className="border-b border-gray-900 pb-1 text-lg font-bold">
           プレビュー
         </h3>
-        <PomodoroLog
-          name={currentUser?.nickname}
-          profileImageKey={currentUser?.profileImageKey}
-          completedTime={storedSettings.focusTime}
-          completedCount={storedSettings.cycles}
-          loggedAt={new Date()}
-        />
+        <PomodoroLog log={log} />
       </div>
     </Modal>
   );

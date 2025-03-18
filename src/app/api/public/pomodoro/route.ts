@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/app/_lib/prisma";
+import PomodoroLogType from "@/app/types/pomodoro";
 
 /** ポモドーロログを取得するAPIエンドポイント */
 export const GET = async (request: NextRequest) => {
@@ -40,8 +41,20 @@ export const GET = async (request: NextRequest) => {
       }),
     ]);
 
+    interface ResponseType {
+      status: string;
+      message: string;
+      data: PomodoroLogType[];
+      pagination: {
+        totalCount: number;
+        totalPages: number;
+        currentPage: number;
+        limit: number;
+      };
+    }
+
     // 成功レスポンスを返す
-    return NextResponse.json(
+    return NextResponse.json<ResponseType>(
       {
         status: "success",
         message: "ポモドーロログを取得しました",

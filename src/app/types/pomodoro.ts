@@ -1,22 +1,13 @@
-/** サーバーから取得するポモドーロログデータの型 */
-export interface PomodoroLogResponse {
-  id: string;
-  userId: string;
+/** ポモドーロログデータの型 */
+export default interface PomodoroLogType {
+  id?: string;
+  userId?: string;
   completedCount: number;
   completedTime: number;
-  displayInTimeline: boolean;
-  loggedAt: string;
+  loggedAt: Date;
+  displayInTimeline?: boolean;
   user: {
     nickname: string;
-    profileImageKey: string | undefined;
+    profileImageKey: string | null;
   };
-}
-
-/** ポモドーロログ表示コンポーネントのプロパティ型 */
-export interface PomodoroLogDisplayProps {
-  name?: string;
-  profileImageKey?: string;
-  completedTime: number;
-  completedCount: number;
-  loggedAt: Date;
 }

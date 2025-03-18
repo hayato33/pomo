@@ -3,7 +3,7 @@
 import PomodoroLog from "../_components/elements/PomodoroLog";
 import { TimelineLoading } from "./_components/TimelineLoading";
 import { useTimelinePomodoro } from "./_hooks/useTimelinePomodoro";
-import { PomodoroLogResponse } from "../types/pomodoro";
+import PomodoroLogType from "../types/pomodoro";
 import { Pagination } from "./_components/Pagination";
 
 /** タイムラインページ */
@@ -18,15 +18,8 @@ export default function Page() {
       <h1 className="mb-6 text-2xl font-bold">タイムライン</h1>
       <div className="flex flex-col items-center justify-center gap-6">
         {isLoading && <TimelineLoading />}
-        {data?.map((log: PomodoroLogResponse) => (
-          <PomodoroLog
-            key={log.id}
-            name={log.user.nickname}
-            profileImageKey={log.user.profileImageKey}
-            completedTime={log.completedTime}
-            completedCount={log.completedCount}
-            loggedAt={new Date(log.loggedAt)}
-          />
+        {data?.map((log: PomodoroLogType) => (
+          <PomodoroLog key={log.id} log={log} />
         ))}
         {data?.length === 0 && <div>ログがありません</div>}
       </div>
