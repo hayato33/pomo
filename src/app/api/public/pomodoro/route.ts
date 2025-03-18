@@ -16,8 +16,8 @@ export const GET = async (request: NextRequest) => {
       displayInTimeline: true,
     };
 
-    // クエリをトランザクションで実行
-    const [totalCount, pomodoroLog] = await prisma.$transaction([
+    // クエリをPromise.allで実行
+    const [totalCount, pomodoroLog] = await Promise.all([
       // ポモドーロログの総数を取得
       prisma.pomodoroLog.count({
         where: whereCondition,
