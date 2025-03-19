@@ -4,10 +4,10 @@ interface Props {
 }
 
 /** 統計カード */
-export default function StatCard({ title, children }: Props) {
+export default function ChartCard({ title, children }: Props) {
   return (
     <div className="relative rounded-md border p-4">
-      <h2 className="text-lg font-bold">{title}</h2>
+      <h2 className="mb-4 text-lg font-bold">{title}</h2>
       {children}
     </div>
   );
