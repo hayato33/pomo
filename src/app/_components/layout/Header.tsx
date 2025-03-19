@@ -5,7 +5,8 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { LuLogIn, LuLogOut } from "react-icons/lu";
 import { supabase } from "@/app/_utils/supabase";
-import { Avatar, Button } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
+import UserProfileImage from "../elements/UserProfileImage";
 
 export default function Header() {
   const handleLogout = async () => {
@@ -47,19 +48,7 @@ export default function Header() {
                   <IoSettingsOutline size={24} />
                 </Link>
                 <div className="group relative flex items-center gap-2">
-                  <Avatar
-                    size="2"
-                    src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
-                    radius="full"
-                    variant="solid"
-                    color="gray"
-                    fallback={
-                      session.user?.email
-                        ? session.user.email[0].toUpperCase()
-                        : "?"
-                    }
-                    highContrast
-                  />
+                  <UserProfileImage />
                   <Button
                     size="3"
                     className="absolute right-0 top-full hidden w-[128px] cursor-pointer group-hover:flex"

@@ -4,13 +4,20 @@ import { useState, useEffect } from "react";
 import PomodoroTimer from "./_components/PomodoroTimer";
 import TimerController from "./_components/TimerController";
 import TimerSettingsForm from "./_components/TimerSettingsForm";
-import { DEFAULT_TIMER_SETTINGS, TIMER_SETTINGS_KEY, TimerSettings } from "@/app/_config/timerConfig";
+import {
+  DEFAULT_TIMER_SETTINGS,
+  TIMER_SETTINGS_KEY,
+  TimerSettings,
+} from "@/app/_config/timerConfig";
 import { useLocalStorage } from "@/app/_hooks/useLocalStorage";
+import PomodoroCompletionModal from "./_components/PomodoroCompletionModal";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
 
 export default function Page() {
+  const [isPomodoroCompletionModalOpen, setIsPomodoroCompletionModalOpen] =
+    useState(false);
   // ローカルストレージから設定を取得
   const [storedSettings, setStoredSettings] = useLocalStorage<TimerSettings>(
     TIMER_SETTINGS_KEY,
@@ -58,6 +65,7 @@ export default function Page() {
         setCurrentCycle((prev) => prev + 1);
       }
     } else if (currentPhase === "long-break") {
+      setIsPomodoroCompletionModalOpen(true);
       setCurrentPhase("focus");
       setRemainingTime(storedSettings.focusTime * 60);
       setCurrentCycle(1);
@@ -90,7 +98,16 @@ export default function Page() {
         handlePhaseComplete={handlePhaseComplete}
         resetTimer={resetTimer}
       />
-      <TimerSettingsForm resetTimer={resetTimer} storedSettings={storedSettings} setStoredSettings={setStoredSettings} />
+      <TimerSettingsForm
+        resetTimer={resetTimer}
+        storedSettings={storedSettings}
+        setStoredSettings={setStoredSettings}
+      />
+      <PomodoroCompletionModal
+        storedSettings={storedSettings}
+        isPomodoroCompletionModalOpen={isPomodoroCompletionModalOpen}
+        setIsPomodoroCompletionModalOpen={setIsPomodoroCompletionModalOpen}
+      />
     </div>
   );
 }
