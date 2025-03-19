@@ -5,6 +5,7 @@ import { TimelineLoading } from "./_components/TimelineLoading";
 import { useTimelinePomodoro } from "./_hooks/useTimelinePomodoro";
 import PomodoroLogType from "../_types/pomodoro";
 import { Pagination } from "./_components/Pagination";
+import PageTitle from "../_components/elements/PageTItle";
 
 /** タイムラインページ */
 export default function Page() {
@@ -15,7 +16,7 @@ export default function Page() {
 
   return (
     <div className="mx-auto max-w-[400px]">
-      <h1 className="mb-6 text-2xl font-bold">タイムライン</h1>
+      <PageTitle>タイムライン</PageTitle>
       <div className="flex flex-col items-center justify-center gap-6">
         {isLoading && <TimelineLoading />}
         {data?.map((log: PomodoroLogType) => (
