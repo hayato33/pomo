@@ -6,7 +6,7 @@ import { useUser } from "@/app/_hooks/useUser";
 import { createPomodoroLog } from "../_lib/createPomodoroLog";
 import { TimerSettings } from "@/app/_config/timerConfig";
 import Confetti from "./Confetti";
-import PomodoroLogType from "@/app/types/pomodoro";
+import PomodoroLogType from "@/app/_types/pomodoro";
 
 interface Props {
   storedSettings: TimerSettings;

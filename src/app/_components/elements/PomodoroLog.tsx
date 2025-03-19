@@ -1,5 +1,5 @@
 import UserProfileImage from "./UserProfileImage";
-import PomodoroLogType from "@/app/types/pomodoro";
+import PomodoroLogType from "@/app/_types/pomodoro";
 
 /** ポモドーロログコンポーネント */
 export default function PomodoroLog({ log }: { log: PomodoroLogType }) {

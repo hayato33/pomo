@@ -3,7 +3,7 @@
 import PomodoroLog from "../_components/elements/PomodoroLog";
 import { TimelineLoading } from "./_components/TimelineLoading";
 import { useTimelinePomodoro } from "./_hooks/useTimelinePomodoro";
-import PomodoroLogType from "../types/pomodoro";
+import PomodoroLogType from "../_types/pomodoro";
 import { Pagination } from "./_components/Pagination";
 
 /** タイムラインページ */
