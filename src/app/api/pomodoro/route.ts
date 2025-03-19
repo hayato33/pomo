@@ -63,6 +63,11 @@ export const GET = async (req: NextRequest) => {
       where: {
         userId: currentUser.id,
       },
+      select: {
+        completedTime: true,
+        completedCount: true,
+        loggedAt: true,
+      },
     });
 
     // 成功レスポンスを返す
