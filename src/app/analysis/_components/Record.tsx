@@ -12,6 +12,7 @@ import {
   createTimeChartData,
 } from "../_lib/createChartData";
 import { PeriodicPomoData } from "@/app/_types/pomodoro";
+import PeriodTabsList from "./PeriodTabsList";
 
 interface Props {
   weeklyData: PeriodicPomoData;
@@ -37,7 +38,7 @@ export default function Record({ weeklyData, monthlyData }: Props) {
     <>
       <ChartCard title="ポモドーロ記録">
         <Tabs defaultValue="time">
-          <TabsList className="absolute right-36 top-4">
+          <TabsList className="sm:absolute sm:right-36 sm:top-4">
             <TabsTrigger value="time">時間</TabsTrigger>
             <TabsTrigger value="count">回数</TabsTrigger>
           </TabsList>
@@ -48,10 +49,7 @@ export default function Record({ weeklyData, monthlyData }: Props) {
                 setPeriodType(value.split("-")[1] as "weekly" | "monthly")
               }
             >
-              <TabsList className="absolute right-4 top-4">
-                <TabsTrigger value="time-weekly">週間</TabsTrigger>
-                <TabsTrigger value="time-monthly">月間</TabsTrigger>
-              </TabsList>
+              <PeriodTabsList type="time" />
               <AnalysisTabsContent
                 value="time-weekly"
                 chartData={chartData.time.weekly}
@@ -71,10 +69,7 @@ export default function Record({ weeklyData, monthlyData }: Props) {
                 setPeriodType(value.split("-")[1] as "weekly" | "monthly")
               }
             >
-              <TabsList className="absolute right-4 top-4">
-                <TabsTrigger value="count-weekly">週間</TabsTrigger>
-                <TabsTrigger value="count-monthly">月間</TabsTrigger>
-              </TabsList>
+              <PeriodTabsList type="count" />
               <AnalysisTabsContent
                 value="count-weekly"
                 chartData={chartData.count.weekly}

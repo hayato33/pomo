@@ -37,7 +37,7 @@ export default function AnalysisTabsContent({
   dataKey,
 }: Props) {
   return (
-    <TabsContent value={value}>
+    <TabsContent value={value} className="-mt-8 sm:mt-2">
       <Card>
         <CardHeader>
           <CardTitle className="font-normal">
