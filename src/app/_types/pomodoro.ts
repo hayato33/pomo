@@ -1,5 +1,5 @@
 /** ポモドーロログデータの型 */
-export default interface PomodoroLogType {
+export interface PomodoroLogType {
   id?: string;
   userId?: string;
   completedCount: number;
@@ -11,3 +11,12 @@ export default interface PomodoroLogType {
     profileImageKey: string | null;
   };
 }
+
+/** 期間（週・月）ごとのポモドーロログデータの型定義 */
+export type PeriodicPomoData = Record<
+  string,
+  {
+    totalTime: number;
+    totalCount: number;
+  }
+>;
