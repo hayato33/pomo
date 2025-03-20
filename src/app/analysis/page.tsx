@@ -42,6 +42,7 @@ export default function Page() {
             />
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+            {/* TODO: 前後の週/月への切り替え機能実装 */}
             <Record
               weeklyData={data.weeklyData}
               monthlyData={data.monthlyData}
