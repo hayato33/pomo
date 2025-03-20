@@ -1,6 +1,6 @@
 /** 分析ページ用のポモドーロログの型 */
 export default interface AnalysisPomodoroLog {
-  loggedAt: string;
+  loggedAt: Date;
   completedTime: number;
   completedCount: number;
 }
