@@ -46,6 +46,7 @@ export default function Page() {
               weeklyData={data.weeklyData}
               monthlyData={data.monthlyData}
             />
+            {/* TODO: カテゴリ機能追加後にカテゴリごとのデータを追加 */}
           </div>
         </>
       )}
