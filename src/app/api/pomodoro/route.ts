@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/_lib/prisma";
 import { getCurrentUser } from "../_lib/getCurrentUser";
+import { calcPomoStats } from "@/app/analysis/_lib/stats";
+import { PomodoroStatsResponseType } from "./_types/response";
 
 /** ポモドーロログを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -70,12 +72,17 @@ export const GET = async (req: NextRequest) => {
       },
     });
 
+    // pomodoroLogを分析用データに変換
+    const stats = calcPomoStats(pomodoroLog);
+
     // 成功レスポンスを返す
-    return NextResponse.json(
+    return NextResponse.json<PomodoroStatsResponseType>(
       {
         status: "success",
         message: "ポモドーロログを取得しました",
-        data: pomodoroLog,
+        data: {
+          ...stats,
+        },
       },
       { status: 200 }
     );
