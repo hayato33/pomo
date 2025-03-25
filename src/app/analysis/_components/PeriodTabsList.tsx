@@ -1,4 +1,4 @@
-import { TabsList, TabsTrigger } from "@/app/_components/ui/tabs";
+import { TabsList, TabsTrigger } from "@/app/_components/Tabs";
 
 /**
  * 週間/月間を切り替えるタブリストコンポーネント

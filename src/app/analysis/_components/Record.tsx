@@ -4,7 +4,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/app/_components/ui/tabs";
+} from "@/app/_components/Tabs";
 import AnalysisTabsContent from "./AnalysisTabsContent";
 import { useState } from "react";
 import { PeriodicPomoData } from "@/app/_types/pomodoro";

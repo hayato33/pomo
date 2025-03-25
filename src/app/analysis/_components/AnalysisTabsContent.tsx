@@ -18,7 +18,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/app/_components/Chart";
-import { TabsContent } from "@/app/_components/ui/tabs";
+import { TabsContent } from "@/app/_components/Tabs";
 import { PeriodicPomoData } from "@/app/_types/pomodoro";
 
 const chartConfig = {
