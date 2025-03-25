@@ -12,11 +12,9 @@ export interface PomodoroLogType {
   };
 }
 
-/** 期間（週・月）ごとのポモドーロログデータの型定義 */
-export type PeriodicPomoData = Record<
-  string,
-  {
-    totalTime: number;
-    totalCount: number;
-  }
->;
+/** 期間ごとのポモドーロデータの型定義 */
+export interface PeriodicPomoData {
+  date: string;
+  time: number;
+  count: number;
+}

@@ -38,7 +38,7 @@ export default function Page() {
             <StatCard
               title="平均ポモ時間"
               text="1日あたりの平均集中時間"
-              value={minutesToHours(data.average)}
+              value={minutesToHours(data.averageTimePerDay)}
             />
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">

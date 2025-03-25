@@ -7,16 +7,13 @@ import {
 } from "@/app/_components/ui/tabs";
 import AnalysisTabsContent from "./AnalysisTabsContent";
 import { useState } from "react";
-import {
-  createCountChartData,
-  createTimeChartData,
-} from "../_lib/createChartData";
 import { PeriodicPomoData } from "@/app/_types/pomodoro";
 import PeriodTabsList from "./PeriodTabsList";
 
+/** Recordコンポーネントのprops型定義 */
 interface Props {
-  weeklyData: PeriodicPomoData;
-  monthlyData: PeriodicPomoData;
+  weeklyData: PeriodicPomoData[];
+  monthlyData: PeriodicPomoData[];
 }
 
 export default function Record({ weeklyData, monthlyData }: Props) {
@@ -24,14 +21,8 @@ export default function Record({ weeklyData, monthlyData }: Props) {
   const [periodType, setPeriodType] = useState<"weekly" | "monthly">("weekly");
 
   const chartData = {
-    time: {
-      weekly: createTimeChartData(weeklyData),
-      monthly: createTimeChartData(monthlyData),
-    },
-    count: {
-      weekly: createCountChartData(weeklyData),
-      monthly: createCountChartData(monthlyData),
-    },
+    weekly: weeklyData,
+    monthly: monthlyData,
   };
 
   return (
@@ -52,12 +43,12 @@ export default function Record({ weeklyData, monthlyData }: Props) {
               <PeriodTabsList type="time" />
               <AnalysisTabsContent
                 value="time-weekly"
-                chartData={chartData.time.weekly}
+                chartData={chartData.weekly}
                 dataKey="time"
               />
               <AnalysisTabsContent
                 value="time-monthly"
-                chartData={chartData.time.monthly}
+                chartData={chartData.monthly}
                 dataKey="time"
               />
             </Tabs>
@@ -72,12 +63,12 @@ export default function Record({ weeklyData, monthlyData }: Props) {
               <PeriodTabsList type="count" />
               <AnalysisTabsContent
                 value="count-weekly"
-                chartData={chartData.count.weekly}
+                chartData={chartData.weekly}
                 dataKey="count"
               />
               <AnalysisTabsContent
                 value="count-monthly"
-                chartData={chartData.count.monthly}
+                chartData={chartData.monthly}
                 dataKey="count"
               />
             </Tabs>

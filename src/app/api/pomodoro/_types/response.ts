@@ -8,8 +8,8 @@ export interface PomodoroStatsResponseType {
     totalCompletedCount: number;
     totalTime: number;
     totalDays: number;
-    average: number;
-    weeklyData: PeriodicPomoData;
-    monthlyData: PeriodicPomoData;
+    averageTimePerDay: number;
+    weeklyData: PeriodicPomoData[];
+    monthlyData: PeriodicPomoData[];
   };
 }
