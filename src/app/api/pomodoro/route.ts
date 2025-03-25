@@ -3,7 +3,8 @@ import { prisma } from "@/app/_lib/prisma";
 import { getCurrentUser } from "../_lib/getCurrentUser";
 import { PomodoroStatsResponseType } from "./_types/response";
 import { getStatsData } from "./_lib/getStatsData";
-import { getWeeklyData, getMonthlyData } from "./_lib/getPeriodicData";
+import { getWeeklyDataSQL } from "./_lib/getWeeklyData";
+import { getMonthlyDataSQL } from "./_lib/getMonthlyData";
 
 /** ポモドーロログを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -63,8 +64,8 @@ export const GET = async (req: NextRequest) => {
 
     const [statsData, weeklyData, monthlyData] = await Promise.all([
       getStatsData(currentUser.id),
-      getWeeklyData(currentUser.id),
-      getMonthlyData(currentUser.id),
+      getWeeklyDataSQL(currentUser.id),
+      getMonthlyDataSQL(currentUser.id),
     ]);
 
     const responseData = {
