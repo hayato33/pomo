@@ -11,7 +11,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/app/_components/ui/card";
+} from "@/app/_components/Card";
 import {
   type ChartConfig,
   ChartContainer,
