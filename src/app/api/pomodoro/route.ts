@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/_lib/prisma";
 import { getCurrentUser } from "../_lib/getCurrentUser";
+import { PomodoroStatsResponseType } from "./_types/response";
+import { getStatsData } from "./_lib/getStatsData";
+import { getWeeklyDataSQL } from "./_lib/getWeeklyData";
+import { getMonthlyDataSQL } from "./_lib/getMonthlyData";
 
 /** ポモドーロログを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -58,19 +62,26 @@ export const GET = async (req: NextRequest) => {
         { status: 404 }
       );
 
-    // ポモドーロログをデータベースから取得
-    const pomodoroLog = await prisma.pomodoroLog.findMany({
-      where: {
-        userId: currentUser.id,
-      },
-    });
+    const [statsData, weeklyData, monthlyData] = await Promise.all([
+      getStatsData(currentUser.id),
+      getWeeklyDataSQL(currentUser.id),
+      getMonthlyDataSQL(currentUser.id),
+    ]);
 
-    // 成功レスポンスを返す
-    return NextResponse.json(
+    const responseData = {
+      totalCompletedCount: statsData.totalCompletedCount,
+      totalTime: statsData.totalTime,
+      totalDays: statsData.totalDays,
+      averageTimePerDay: statsData.averageTimePerDay,
+      weeklyData: weeklyData,
+      monthlyData: monthlyData,
+    };
+
+    return NextResponse.json<PomodoroStatsResponseType>(
       {
         status: "success",
         message: "ポモドーロログを取得しました",
-        data: pomodoroLog,
+        data: responseData,
       },
       { status: 200 }
     );

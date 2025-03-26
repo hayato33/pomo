@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/app/_lib/prisma";
-import PomodoroLogType from "@/app/types/pomodoro";
+import { PomodoroLogType } from "@/app/_types/pomodoro";
 
 /** ポモドーロログを取得するAPIエンドポイント */
 export const GET = async (request: NextRequest) => {
