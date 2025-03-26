@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/_lib/prisma";
 import { DEFAULT_USER_SETTINGS } from "@/app/_config/userSettingConfig";
 import { getCurrentUser } from "../_lib/getCurrentUser";
-import { UserSetting } from "@prisma/client";
+import { UpdateUserSetting } from "@/app/_types/setting";
+import { UpdateSettingResponseType } from "./_types/response";
+import { updateSetting } from "./_lib/updateSetting";
 
 /** ユーザー設定を作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -94,24 +96,13 @@ export const PUT = async (req: NextRequest) => {
         { status: 404 }
       );
 
-    const body = await req.json();
+    const body: UpdateUserSetting = await req.json();
 
     // ユーザー設定をデータベースに作成
-    const userSetting = await prisma.userSetting.update({
-      where: { userId: currentUser.id },
-      data: {
-        ...body,
-      },
-    });
-
-    interface ResponseType {
-      status: string;
-      message: string;
-      data: UserSetting;
-    }
+    const userSetting = await updateSetting({ userId: currentUser.id, body });
 
     // 成功レスポンスを返す
-    return NextResponse.json<ResponseType>(
+    return NextResponse.json<UpdateSettingResponseType>(
       {
         status: "success",
         message: "ユーザー設定を更新しました",
