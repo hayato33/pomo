@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/_lib/prisma";
 import { DEFAULT_USER_SETTINGS } from "@/app/_config/userSettingConfig";
 import { getCurrentUser } from "../_lib/getCurrentUser";
+import { UserSetting } from "@prisma/client";
 
 /** ユーザー設定を作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -71,6 +72,49 @@ export const GET = async (req: NextRequest) => {
       {
         status: "success",
         message: "ユーザー設定を取得しました",
+        data: userSetting,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    if (error instanceof Error)
+      return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+};
+
+/** ユーザー設定を更新するAPIエンドポイント */
+export const PUT = async (req: NextRequest) => {
+  try {
+    const { currentUser } = await getCurrentUser(req);
+
+    // ユーザーが見つからない場合はエラーを返す
+    if (!currentUser)
+      return NextResponse.json(
+        { error: "ユーザーが見つかりません" },
+        { status: 404 }
+      );
+
+    const body = await req.json();
+
+    // ユーザー設定をデータベースに作成
+    const userSetting = await prisma.userSetting.update({
+      where: { userId: currentUser.id },
+      data: {
+        ...body,
+      },
+    });
+
+    interface ResponseType {
+      status: string;
+      message: string;
+      data: UserSetting;
+    }
+
+    // 成功レスポンスを返す
+    return NextResponse.json<ResponseType>(
+      {
+        status: "success",
+        message: "ユーザー設定を更新しました",
         data: userSetting,
       },
       { status: 200 }

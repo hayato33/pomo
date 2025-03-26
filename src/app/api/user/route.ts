@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/app/_utils/supabase";
 import { prisma } from "@/app/_lib/prisma";
+import { getCurrentUser } from "../_lib/getCurrentUser";
+import { User } from "@prisma/client";
 
 /** ユーザーを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -67,6 +69,49 @@ export const GET = async (req: NextRequest) => {
       {
         status: "success",
         message: "ユーザーを取得しました",
+        data: user,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    if (error instanceof Error)
+      return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+};
+
+/** ユーザー情報を更新するAPIエンドポイント */
+export const PUT = async (req: NextRequest) => {
+  try {
+    const { currentUser } = await getCurrentUser(req);
+
+    // ユーザーが見つからない場合はエラーを返す
+    if (!currentUser)
+      return NextResponse.json(
+        { error: "ユーザーが見つかりません" },
+        { status: 404 }
+      );
+
+    const body = await req.json();
+
+    // ユーザー情報を更新
+    const user = await prisma.user.update({
+      where: { id: currentUser.id },
+      data: {
+        ...body,
+      },
+    });
+
+    interface ResponseType {
+      status: string;
+      message: string;
+      data: User;
+    }
+
+    // 成功レスポンスを返す
+    return NextResponse.json<ResponseType>(
+      {
+        status: "success",
+        message: "ユーザーを更新しました",
         data: user,
       },
       { status: 200 }
