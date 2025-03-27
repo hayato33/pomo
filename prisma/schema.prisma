@@ -35,6 +35,7 @@ model UserSetting {
   autoStartShortBreak Boolean
   autoStartFocusTime  Boolean
   autoStartLongBreak  Boolean
+  focusTimeBgm        String          @default("noBgm")
   focusTimeSound      String
   shortBreakSound     String
   longBreakSound      String
