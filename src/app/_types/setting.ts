@@ -3,6 +3,7 @@ export interface UpdateUserSetting {
   autoStartShortBreak: boolean;
   autoStartFocusTime: boolean;
   autoStartLongBreak: boolean;
+  focusTimeBgm: string;
   focusTimeSound: string;
   shortBreakSound: string;
   longBreakSound: string;
