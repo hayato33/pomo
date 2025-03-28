@@ -1,22 +1,25 @@
 import Section from "../Section";
-import SectionItem from "../SectionItem";
-import { Switch } from "@/app/_components/elements/Switch";
+import { SectionProps } from "../../_types/SectionProps";
+import FormFieldSwitch from "../FormFieldSwitch";
 
-export default function RankingSection() {
+export default function RankingSection({
+  control,
+  isSubmitting,
+}: SectionProps) {
   return (
     <Section title="ランキング設定">
-      <SectionItem
-        labelText="ヘッダーメニューにランキングページへのリンクを表示する"
-        id="rankingPageLink"
-      >
-        <Switch id="rankingPageLink" />
-      </SectionItem>
-      <SectionItem
-        labelText="ランキングに自分の記録を公開する"
-        id="showOnRanking"
-      >
-        <Switch id="showOnRanking" />
-      </SectionItem>
+      <FormFieldSwitch
+        control={control}
+        isSubmitting={isSubmitting}
+        name="rankingPageLink"
+        label="ヘッダーメニューにランキングページへのリンクを表示する"
+      />
+      <FormFieldSwitch
+        control={control}
+        isSubmitting={isSubmitting}
+        name="showOnRanking"
+        label="ランキングに自分の記録を公開する"
+      />
     </Section>
   );
 }
