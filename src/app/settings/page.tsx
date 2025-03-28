@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSupabaseSession } from "../_hooks/useSupabaseSession";
 import { submitHandler } from "./_lib/submitHandler";
 import { Form } from "../_components/Form";
+import { DEFAULT_USER_SETTINGS } from "../_config/userSettingConfig";
 
 export default function Page() {
   const { token } = useSupabaseSession();
@@ -29,6 +30,11 @@ export default function Page() {
   const form = useForm<UpdateData>({
     resolver: zodResolver(settingSchema),
     mode: "onTouched",
+    defaultValues: {
+      nickname: "",
+      profileImageKey: null,
+      ...DEFAULT_USER_SETTINGS,
+    },
   });
   const {
     control,
