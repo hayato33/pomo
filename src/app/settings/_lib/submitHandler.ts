@@ -18,9 +18,6 @@ export const submitHandler = async (formData: UpdateData, token: string) => {
       }),
     ]);
 
-    console.log("userRes", userRes);
-    console.log("settingRes", settingRes);
-
     if (userRes.status !== "success" || settingRes.status !== "success") {
       throw new Error("ユーザー情報またはユーザー設定の更新に失敗しました");
     }
