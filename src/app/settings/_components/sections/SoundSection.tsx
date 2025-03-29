@@ -1,14 +1,7 @@
 import Section from "../Section";
-import { Slider } from "@/app/_components/elements/Slider";
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@/app/_components/Form";
 import { SectionProps } from "../../_types/SectionProps";
 import FormFieldSelect from "../FormFieldSelect";
+import FormFieldSlider from "../FormFieldSlider";
 
 export default function SoundSection({ control, isSubmitting }: SectionProps) {
   return (
@@ -57,29 +50,11 @@ export default function SoundSection({ control, isSubmitting }: SectionProps) {
           { value: "sound2", label: "サウンド2" },
         ]}
       />
-
-      <FormField
+      <FormFieldSlider
         control={control}
+        isSubmitting={isSubmitting}
         name="soundVolume"
-        render={({ field }) => (
-          <FormItem>
-            <div className="flex flex-wrap items-center justify-between gap-2 sm:flex-row">
-              <FormLabel className="min-w-36 font-normal">
-                音量を変更する
-              </FormLabel>
-              <FormControl className="flex-1">
-                <Slider
-                  // className="my-4"
-                  disabled={isSubmitting}
-                  value={[field.value]}
-                  defaultValue={[field.value]}
-                  onValueChange={([value]) => field.onChange(value)}
-                />
-              </FormControl>
-            </div>
-            <FormMessage />
-          </FormItem>
-        )}
+        label="音量を変更する"
       />
     </Section>
   );
