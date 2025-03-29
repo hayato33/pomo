@@ -1,12 +1,14 @@
 "use client";
 
 import PageTitle from "../_components/elements/PageTItle";
-import ProfileSection from "./_components/sections/ProfileSection";
-import TimerSection from "./_components/sections/TimerSection";
-import SoundSection from "./_components/sections/SoundSection";
-import TimelineSection from "./_components/sections/TimelineSection";
-import RankingSection from "./_components/sections/RankingSection";
-import PreferenceSection from "./_components/sections/PreferenceSection";
+import {
+  ProfileSection,
+  TimerSection,
+  SoundSection,
+  TimelineSection,
+  RankingSection,
+  PreferenceSection,
+} from "./_components/sections";
 import FormActions from "./_components/FormActions";
 import { useUser } from "../_hooks/useUser";
 import { useSetting } from "../_hooks/useSetting";
@@ -39,6 +41,8 @@ export default function Page() {
   const {
     control,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { isSubmitting },
   } = form;
 
@@ -58,12 +62,22 @@ export default function Page() {
       <PageTitle>各種設定</PageTitle>
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ProfileSection control={control} isSubmitting={isSubmitting} />
+          <ProfileSection
+            control={control}
+            isSubmitting={isSubmitting}
+            setValue={setValue}
+            getValues={getValues}
+          />
           <TimerSection control={control} isSubmitting={isSubmitting} />
           <SoundSection control={control} isSubmitting={isSubmitting} />
           <TimelineSection control={control} isSubmitting={isSubmitting} />
           <RankingSection control={control} isSubmitting={isSubmitting} />
-          <PreferenceSection control={control} isSubmitting={isSubmitting} />
+          <PreferenceSection
+            control={control}
+            isSubmitting={isSubmitting}
+            setValue={setValue}
+            getValues={getValues}
+          />
           <FormActions isSubmitting={form.formState.isSubmitting} />
         </form>
       </Form>

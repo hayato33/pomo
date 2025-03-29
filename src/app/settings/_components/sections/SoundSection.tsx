@@ -1,7 +1,6 @@
 import Section from "../Section";
 import { SectionProps } from "../../_types/SectionProps";
-import FormFieldSelect from "../FormFieldSelect";
-import FormFieldSlider from "../FormFieldSlider";
+import { FormFieldSelect, FormFieldSlider } from "../FormField";
 
 export default function SoundSection({ control, isSubmitting }: SectionProps) {
   return (

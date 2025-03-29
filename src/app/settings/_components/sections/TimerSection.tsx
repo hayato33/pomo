@@ -1,6 +1,6 @@
 import Section from "../Section";
 import { SectionProps } from "../../_types/SectionProps";
-import FormFieldSwitch from "../FormFieldSwitch";
+import { FormFieldSwitch } from "../FormField";
 
 export default function TimerSection({ control, isSubmitting }: SectionProps) {
   return (

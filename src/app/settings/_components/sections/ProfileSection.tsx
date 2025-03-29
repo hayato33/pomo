@@ -1,19 +1,13 @@
-import { Input } from "@/app/_components/elements/Input";
 import Section from "../Section";
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@/app/_components/Form";
-import { SectionProps } from "../../_types/SectionProps";
-import FormFieldInput from "../FormFieldInput";
+import { ImageUploadSectionProps } from "../../_types/SectionProps";
+import { FormFieldFileUpload, FormFieldInput } from "../FormField";
 
 export default function ProfileSection({
   control,
   isSubmitting,
-}: SectionProps) {
+  setValue,
+  getValues,
+}: ImageUploadSectionProps) {
   return (
     <Section title="プロフィール設定">
       <FormFieldInput
@@ -22,28 +16,15 @@ export default function ProfileSection({
         name="nickname"
         label="ニックネームを変更する"
       />
-      <FormField
+      <FormFieldFileUpload
         control={control}
+        isSubmitting={isSubmitting}
         name="profileImageKey"
-        render={({ field }) => (
-          <FormItem>
-            <div className="flex flex-wrap items-center justify-between gap-2 sm:flex-row">
-              <FormLabel className="min-w-36 font-normal">
-                プロフィール画像を変更する
-              </FormLabel>
-              <FormControl className="flex-1">
-                <Input
-                  className="!mt-0"
-                  type="file"
-                  accept="image/*"
-                  disabled={isSubmitting}
-                  onChange={field.onChange}
-                />
-              </FormControl>
-            </div>
-            <FormMessage />
-          </FormItem>
-        )}
+        label="プロフィール画像を変更する"
+        altText="プロフィール画像"
+        bucketName="profile-image"
+        setValue={setValue}
+        getValues={getValues}
       />
     </Section>
   );
