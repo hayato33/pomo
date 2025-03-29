@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/app/_components/Form";
 import { Control } from "react-hook-form";
-import { UpdateData } from "../_types/updateData";
+import { UpdateData } from "../../_types/updateData";
 
 interface Props {
   control: Control<UpdateData>;

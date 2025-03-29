@@ -1,4 +1,3 @@
-import { Switch } from "@/app/_components/elements/Switch";
 import {
   FormField,
   FormItem,
@@ -7,7 +6,8 @@ import {
   FormMessage,
 } from "@/app/_components/Form";
 import { Control } from "react-hook-form";
-import { UpdateData } from "../_types/updateData";
+import { UpdateData } from "../../_types/updateData";
+import { Input } from "@/app/_components/elements/Input";
 
 interface Props {
   control: Control<UpdateData>;
@@ -16,7 +16,7 @@ interface Props {
   label: string;
 }
 
-export default function FormFieldSwitch({
+export default function FormFieldInput({
   control,
   isSubmitting,
   name,
@@ -28,14 +28,14 @@ export default function FormFieldSwitch({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <div className="flex flex-wrap items-center justify-between gap-2 sm:flex-row">
+          <div className="grid gap-2">
             <FormLabel className="min-w-36 font-normal">{label}</FormLabel>
-            <FormControl>
-              <Switch
+            <FormControl className="flex-1">
+              <Input
                 className="!mt-0"
                 disabled={isSubmitting}
-                checked={field.value as boolean}
-                onCheckedChange={field.onChange}
+                value={field.value as string}
+                onChange={field.onChange}
               />
             </FormControl>
           </div>

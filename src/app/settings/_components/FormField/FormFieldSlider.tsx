@@ -6,8 +6,8 @@ import {
   FormMessage,
 } from "@/app/_components/Form";
 import { Control } from "react-hook-form";
-import { UpdateData } from "../_types/updateData";
-import { Input } from "@/app/_components/elements/Input";
+import { UpdateData } from "../../_types/updateData";
+import { Slider } from "@/app/_components/elements/Slider";
 
 interface Props {
   control: Control<UpdateData>;
@@ -16,7 +16,7 @@ interface Props {
   label: string;
 }
 
-export default function FormFieldInput({
+export default function FormFieldSlider({
   control,
   isSubmitting,
   name,
@@ -28,14 +28,15 @@ export default function FormFieldInput({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <div className="flex flex-wrap items-center justify-between gap-2 sm:flex-row">
-            <FormLabel className="min-w-36 font-normal">{label}</FormLabel>
+          <div className="grid gap-2">
+            <FormLabel className="min-w-36 font-normal">
+              {`${label}（現在：${field.value}）`}
+            </FormLabel>
             <FormControl className="flex-1">
-              <Input
-                className="!mt-0"
+              <Slider
                 disabled={isSubmitting}
-                value={field.value as string}
-                onChange={field.onChange}
+                value={[field.value as number]}
+                onValueChange={([value]) => field.onChange(value)}
               />
             </FormControl>
           </div>
