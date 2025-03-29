@@ -8,6 +8,7 @@ import {
   FormMessage,
 } from "@/app/_components/Form";
 import { SectionProps } from "../../_types/SectionProps";
+import FormFieldInput from "../FormFieldInput";
 
 export default function ProfileSection({
   control,
@@ -15,27 +16,11 @@ export default function ProfileSection({
 }: SectionProps) {
   return (
     <Section title="プロフィール設定">
-      <FormField
+      <FormFieldInput
         control={control}
+        isSubmitting={isSubmitting}
         name="nickname"
-        render={({ field }) => (
-          <FormItem>
-            <div className="flex flex-wrap items-center justify-between gap-2 sm:flex-row">
-              <FormLabel className="min-w-36 font-normal">
-                ニックネームを変更する
-              </FormLabel>
-              <FormControl className="flex-1">
-                <Input
-                  className="!mt-0"
-                  disabled={isSubmitting}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              </FormControl>
-            </div>
-            <FormMessage />
-          </FormItem>
-        )}
+        label="ニックネームを変更する"
       />
       <FormField
         control={control}
