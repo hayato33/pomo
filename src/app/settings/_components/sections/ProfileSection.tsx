@@ -22,7 +22,6 @@ export default function ProfileSection({
         name="profileImageKey"
         label="プロフィール画像を変更する"
         altText="プロフィール画像"
-        bucketName="profile-image"
         setValue={setValue}
         getValues={getValues}
       />

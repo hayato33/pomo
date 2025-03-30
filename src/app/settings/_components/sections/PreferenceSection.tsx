@@ -20,7 +20,6 @@ export default function PreferenceSection({
         name="backgroundImageKey"
         label="ポモドーロタイマーページの背景を変更する"
         altText="ポモドーロタイマーページの背景画像"
-        bucketName="background-image"
         setValue={setValue}
         getValues={getValues}
       />

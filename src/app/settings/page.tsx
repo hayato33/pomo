@@ -43,16 +43,17 @@ export default function Page() {
     handleSubmit,
     setValue,
     getValues,
+    reset,
     formState: { isSubmitting },
   } = form;
 
   useEffect(() => {
     if (user || settings)
-      form.reset({
+      reset({
         ...user,
         ...settings,
       });
-  }, [user, settings, form]);
+  }, [user, settings, reset]);
 
   const onSubmit = async (formData: UpdateData) =>
     await submitHandler(formData, token || "");
@@ -78,7 +79,7 @@ export default function Page() {
             setValue={setValue}
             getValues={getValues}
           />
-          <FormActions isSubmitting={form.formState.isSubmitting} />
+          <FormActions isSubmitting={isSubmitting} reset={reset} />
         </form>
       </Form>
     </div>

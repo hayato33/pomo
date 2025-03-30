@@ -11,7 +11,7 @@ export const DEFAULT_USER_SETTINGS = {
   timelinePageLink: true,
   postButtonToTimeline: true,
   rankingPageLink: true,
-  showOnRanking: false,
+  showOnRanking: true,
   backgroundImageKey: null,
   font: "font01", //仮の値
   hideExplainText: false,
