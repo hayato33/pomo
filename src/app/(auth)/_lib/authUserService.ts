@@ -1,4 +1,5 @@
 import { fetcher } from "@/app/_utils/fetcher";
+import { generateRandomNickname } from "@/app/_utils/generateRandomNickname";
 
 /**
  * ユーザーの存在確認と必要に応じて作成を行う関数
@@ -77,7 +78,7 @@ export const createUserSetting = async (token: string): Promise<void> => {
 export const createNewUser = async (token: string): Promise<void> => {
   try {
     // ユーザーを作成
-    const defaultNickname = `ユーザー${Math.floor(Math.random() * 10000)}`;
+    const defaultNickname = generateRandomNickname();
     await createUser(defaultNickname, token);
 
     // ユーザー設定も作成
