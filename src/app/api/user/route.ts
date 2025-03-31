@@ -5,6 +5,9 @@ import { getCurrentUser } from "../_lib/getCurrentUser";
 import { UpdateUserResponseType } from "./_types/response";
 import { UpdateUser } from "@/app/_types/user";
 import { updateUser } from "./_lib/updateUser";
+import { userSchema } from "@/app/settings/_lib/settingFormSchema";
+import { fromZodError } from "zod-validation-error";
+import { ValidationError } from "@/app/_types/response";
 
 /** ユーザーを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -95,8 +98,25 @@ export const PUT = async (req: NextRequest) => {
 
     const body: UpdateUser = await req.json();
 
+    // バリデーション
+    const result = userSchema.safeParse(body);
+    if (!result.success) {
+      const validationError = fromZodError(result.error);
+      return NextResponse.json<ValidationError>(
+        {
+          status: "error",
+          message: "入力内容に問題があります",
+          errors: validationError.details || validationError.message,
+        },
+        { status: 400 }
+      );
+    }
+
     // ユーザー情報を更新
-    const user = await updateUser({ userId: currentUser.id, body });
+    const user = await updateUser({
+      userId: currentUser.id,
+      body: result.data,
+    });
 
     // 成功レスポンスを返す
     return NextResponse.json<UpdateUserResponseType>(

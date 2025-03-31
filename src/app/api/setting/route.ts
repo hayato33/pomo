@@ -5,6 +5,9 @@ import { getCurrentUser } from "../_lib/getCurrentUser";
 import { UpdateUserSetting } from "@/app/_types/setting";
 import { UpdateSettingResponseType } from "./_types/response";
 import { updateSetting } from "./_lib/updateSetting";
+import { settingSchema } from "@/app/settings/_lib/settingFormSchema";
+import { fromZodError } from "zod-validation-error";
+import { ValidationError } from "@/app/_types/response";
 
 /** ユーザー設定を作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -98,8 +101,25 @@ export const PUT = async (req: NextRequest) => {
 
     const body: UpdateUserSetting = await req.json();
 
-    // ユーザー設定をデータベースに作成
-    const userSetting = await updateSetting({ userId: currentUser.id, body });
+    // バリデーション
+    const result = settingSchema.safeParse(body);
+    if (!result.success) {
+      const validationError = fromZodError(result.error);
+      return NextResponse.json<ValidationError>(
+        {
+          status: "error",
+          message: "入力内容に問題があります",
+          errors: validationError.details || validationError.message,
+        },
+        { status: 400 }
+      );
+    }
+
+    // ユーザー設定を更新
+    const userSetting = await updateSetting({
+      userId: currentUser.id,
+      body: result.data,
+    });
 
     // 成功レスポンスを返す
     return NextResponse.json<UpdateSettingResponseType>(

@@ -1,12 +1,14 @@
 import { z } from "zod";
 
-export const settingSchema = z.object({
+export const userSchema = z.object({
   nickname: z
     .string()
     .trim()
     .min(1, "ニックネームを入力してください")
     .max(100, "ニックネームは100文字以内で入力してください"),
   profileImageKey: z.string().nullable(),
+});
+export const settingSchema = z.object({
   autoStartShortBreak: z.boolean(),
   autoStartFocusTime: z.boolean(),
   autoStartLongBreak: z.boolean(),
@@ -24,3 +26,4 @@ export const settingSchema = z.object({
   hideExplainText: z.boolean(),
   setRandomTime: z.boolean(),
 });
+export const settingFormSchema = z.intersection(userSchema, settingSchema);

@@ -15,7 +15,7 @@ import { useSetting } from "../_hooks/useSetting";
 import { useForm } from "react-hook-form";
 import { UpdateData } from "./_types/updateData";
 import { useEffect } from "react";
-import { settingSchema } from "./_lib/settingSchema";
+import { settingFormSchema } from "./_lib/settingFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSupabaseSession } from "../_hooks/useSupabaseSession";
 import { submitHandler } from "./_lib/submitHandler";
@@ -42,7 +42,7 @@ export default function Page() {
   const isLoaded = !isLoading && user && settings;
 
   const form = useForm<UpdateData>({
-    resolver: zodResolver(settingSchema),
+    resolver: zodResolver(settingFormSchema),
     mode: "onTouched",
     defaultValues: {
       nickname: "",
