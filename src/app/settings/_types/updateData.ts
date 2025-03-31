@@ -1,4 +1,4 @@
-import { UpdateUserSetting } from "@/app/_types/setting";
-import { UpdateUser } from "@/app/_types/user";
+import { z } from "zod";
+import { settingFormSchema } from "../_lib/settingFormSchema";
 
-export type UpdateData = UpdateUser & UpdateUserSetting;
+export type UpdateData = z.infer<typeof settingFormSchema>;

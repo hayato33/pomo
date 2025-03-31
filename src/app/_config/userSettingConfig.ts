@@ -1,5 +1,7 @@
+import { UpdateUserSetting } from "../_types/setting";
+
 /** ユーザー設定のデフォルト値 */
-export const DEFAULT_USER_SETTINGS = {
+export const DEFAULT_USER_SETTINGS: UpdateUserSetting = {
   autoStartShortBreak: false,
   autoStartFocusTime: false,
   autoStartLongBreak: false,

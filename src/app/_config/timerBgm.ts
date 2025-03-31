@@ -9,5 +9,5 @@ export const TIMER_BGM_OPTIONS = [
   { value: "bgm2", label: "BGM2" },
 ];
 
-/**集中時間中BGMの型 */
-export type TimerBgmValue = "noBgm" | "bgm1" | "bgm2";
+/** 集中時間中BGMのvalue（バリデーション用） */
+export const TimerBgmValue = ["noBgm", "bgm1", "bgm2"] as const;

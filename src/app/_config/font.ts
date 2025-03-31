@@ -9,5 +9,5 @@ export const FONT_OPTIONS = [
   { value: "font03", label: "フォント3" },
 ];
 
-/**フォントの型 */
-export type FontValue = "font01" | "font02" | "font03";
+/** フォントのvalue（バリデーション用） */
+export const FontValue = ["font01", "font02", "font03"] as const;

@@ -8,7 +8,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-
 model User {
   id              String          @id @default(uuid())
   supabaseUserId  String          @unique
@@ -24,28 +23,46 @@ model PomodoroLog {
   completedCount  Int
   completedTime   Int
   displayInTimeline Boolean
-  loggedAt        DateTime				@default(now())
+  loggedAt        DateTime        @default(now())
 
   user            User            @relation(fields: [userId], references: [id])
 }
 
+enum TimerBgm {
+  noBgm
+  bgm1
+  bgm2
+}
+
+enum TimerEndSound {
+  noSound
+  sound1
+  sound2
+}
+
+enum Font {
+  font01
+  font02
+  font03
+}
+
 model UserSetting {
-  id              		String          @id @default(uuid())
+  id                	String          @id @default(uuid())
   userId              String          @unique
   autoStartShortBreak Boolean
   autoStartFocusTime  Boolean
   autoStartLongBreak  Boolean
-  focusTimeBgm        String          @default("noBgm")
-  focusTimeSound      String
-  shortBreakSound     String
-  longBreakSound      String
+  focusTimeBgm        TimerBgm        @default(noBgm)
+  focusTimeSound      TimerEndSound   @default(noSound)
+  shortBreakSound     TimerEndSound   @default(noSound)
+  longBreakSound      TimerEndSound   @default(noSound)
   soundVolume         Int
   timelinePageLink    Boolean
   postButtonToTimeline Boolean
   rankingPageLink     Boolean
   showOnRanking       Boolean
   backgroundImageKey  String?
-  font                String
+  font                Font            @default(font01)
   hideExplainText     Boolean
   setRandomTime       Boolean
   createdAt           DateTime        @default(now())

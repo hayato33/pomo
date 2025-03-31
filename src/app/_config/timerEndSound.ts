@@ -9,5 +9,5 @@ export const TIMER_END_SOUND_OPTIONS = [
   { value: "sound2", label: "サウンド2" },
 ];
 
-/**集中時間・小休憩・長休憩終了時サウンドの型 */
-export type TimerEndSoundValue = "noSound" | "sound1" | "sound2";
+/** 集中時間・小休憩・長休憩終了時サウンドのvalue（バリデーション用） */
+export const TimerEndSoundValue = ["noSound", "sound1", "sound2"] as const;
