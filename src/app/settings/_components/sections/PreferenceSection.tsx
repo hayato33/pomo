@@ -5,6 +5,7 @@ import {
   FormFieldSelect,
   FormFieldSwitch,
 } from "../FormField";
+import { FONT_OPTIONS } from "@/app/_config/font";
 
 export default function PreferenceSection({
   control,
@@ -28,11 +29,7 @@ export default function PreferenceSection({
         isSubmitting={isSubmitting}
         name="font"
         label="フォントを変更する"
-        options={[
-          { value: "font01", label: "フォント1" },
-          { value: "font02", label: "フォント2" },
-          { value: "font03", label: "フォント3" },
-        ]}
+        options={FONT_OPTIONS}
       />
       <FormFieldSwitch
         control={control}
