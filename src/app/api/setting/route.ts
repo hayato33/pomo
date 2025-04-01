@@ -4,10 +4,10 @@ import { DEFAULT_USER_SETTINGS } from "@/app/_config/userSettingConfig";
 import { getCurrentUser } from "../_lib/getCurrentUser";
 import { UpdateUserSetting } from "@/app/_types/setting";
 import { UpdateSettingResponseType } from "./_types/response";
-import { updateSetting } from "./_lib/updateSetting";
 import { settingSchema } from "@/app/settings/_lib/settingFormSchema";
 import { fromZodError } from "zod-validation-error";
 import { ValidationError } from "@/app/_types/response";
+import { SettingService } from "./_lib/SettingService";
 
 /** ユーザー設定を作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -116,7 +116,7 @@ export const PUT = async (req: NextRequest) => {
     }
 
     // ユーザー設定を更新
-    const userSetting = await updateSetting({
+    const userSetting = await SettingService.update({
       userId: currentUser.id,
       body: result.data,
     });

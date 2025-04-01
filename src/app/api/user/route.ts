@@ -4,10 +4,10 @@ import { prisma } from "@/app/_lib/prisma";
 import { getCurrentUser } from "../_lib/getCurrentUser";
 import { UpdateUserResponseType } from "./_types/response";
 import { UpdateUser } from "@/app/_types/user";
-import { updateUser } from "./_lib/updateUser";
 import { userSchema } from "@/app/settings/_lib/settingFormSchema";
 import { fromZodError } from "zod-validation-error";
 import { ValidationError } from "@/app/_types/response";
+import { UserService } from "./_lib/UserService";
 
 /** ユーザーを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -113,8 +113,8 @@ export const PUT = async (req: NextRequest) => {
     }
 
     // ユーザー情報を更新
-    const user = await updateUser({
-      userId: currentUser.id,
+    const user = await UserService.update({
+      id: currentUser.id,
       body: result.data,
     });
 
