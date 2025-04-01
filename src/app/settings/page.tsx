@@ -17,14 +17,12 @@ import { UpdateData } from "./_types/updateData";
 import { useEffect } from "react";
 import { settingFormSchema } from "./_lib/settingFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSupabaseSession } from "../_hooks/useSupabaseSession";
-import { submitHandler } from "./_lib/submitHandler";
+import { useSubmitHandler } from "./_hooks/useSubmitHandler";
 import { Form } from "../_components/Form";
 import { DEFAULT_USER_SETTINGS } from "../_config/userSettingConfig";
 import SettingLoading from "./_components/settingLoading";
 
 export default function Page() {
-  const { token } = useSupabaseSession();
   const {
     data: userData,
     isLoading: userLoading,
@@ -40,6 +38,7 @@ export default function Page() {
   const isLoading = userLoading || settingsLoading;
   const isError = userError || settingsError;
   const isLoaded = !isLoading && user && settings;
+  const { submitHandler } = useSubmitHandler();
 
   const form = useForm<UpdateData>({
     resolver: zodResolver(settingFormSchema),
@@ -64,7 +63,7 @@ export default function Page() {
   }, [user, settings, reset]);
 
   const onSubmit = async (formData: UpdateData) =>
-    await submitHandler(formData, token || "");
+    await submitHandler(formData);
 
   if (isError) return <div>エラーが発生しました</div>;
 
