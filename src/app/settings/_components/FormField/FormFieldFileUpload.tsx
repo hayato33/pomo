@@ -13,10 +13,10 @@ import {
 } from "react-hook-form";
 import { UpdateData } from "@/app/settings/_types/updateData";
 import { Input } from "@/app/_components/elements/Input";
-import { ChangeEvent, useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getImageUrl } from "@/app/_utils/getImageUrl";
 import { ImagePreview } from "./ImagePreview";
-import { handleImageChange } from "@/app/settings/_lib/handleImageChange";
+import { useHandleImageChange } from "@/app/settings/_hooks/useHandleImageChange";
 
 interface Props {
   control: Control<UpdateData>;
@@ -41,9 +41,7 @@ export default function FormFieldFileUpload({
     name === "profileImageKey" ? "profile-image" : "background-image";
 
   const [imageUrl, setImageUrl] = useState<null | string>(null);
-  const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [fileError, setFileError] = useState<string | null>(null);
 
   const watchedValue = useWatch({ control, name });
 
@@ -58,6 +56,13 @@ export default function FormFieldFileUpload({
       if (url) setImageUrl(url);
     },
     [bucketName]
+  );
+
+  const { fileError, isUploading, handleImageChange } = useHandleImageChange(
+    fetchImageUrl,
+    bucketName,
+    setValue,
+    name
   );
 
   useEffect(() => {
@@ -80,20 +85,6 @@ export default function FormFieldFileUpload({
     loadImage();
   }, [watchedValue, fetchImageUrl, getValues, name]);
 
-  const onImageChange = async (
-    event: ChangeEvent<HTMLInputElement>
-  ): Promise<void> => {
-    await handleImageChange(
-      event,
-      setFileError,
-      setIsUploading,
-      fetchImageUrl,
-      bucketName,
-      setValue,
-      name
-    );
-  };
-
   const onDeleteImage = () => {
     setValue(name, null);
     setImageUrl(null);
@@ -114,7 +105,7 @@ export default function FormFieldFileUpload({
                   type="file"
                   accept="image/*"
                   disabled={isSubmitting}
-                  onChange={onImageChange}
+                  onChange={handleImageChange}
                 />
               </FormControl>
             </div>
