@@ -5,8 +5,9 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { LuLogIn, LuLogOut } from "react-icons/lu";
 import { supabase } from "@/app/_utils/supabase";
-import { Button } from "@radix-ui/themes";
+import { Button, Skeleton } from "@radix-ui/themes";
 import UserProfileImage from "../elements/UserProfileImage";
+import { DesktopNav } from "./Nav";
 
 export default function Header() {
   const handleLogout = async () => {
@@ -17,29 +18,15 @@ export default function Header() {
   const { session, isLoading } = useSupabaseSession();
 
   return (
-    <header className="sticky left-0 right-0 top-0 z-10 bg-white/80 p-4 backdrop-blur-sm">
-      <div className="flex items-center justify-between">
+    <header className="fixed left-0 right-0 top-0 z-10 h-14 bg-white/80 p-4 backdrop-blur-sm sm:py-0">
+      <div className="flex size-full items-center justify-between">
         <Link href="/">
           <h1 className="text-2xl font-bold">Pomo!</h1>
         </Link>
-
-        <nav>
-          <ul className="flex gap-4">
-            <li>
-              <Link href="/timer">タイマー</Link>
-            </li>
-            <li>
-              <Link href="/analysis">分析</Link>
-            </li>
-            <li>
-              <Link href="/timeline">タイムライン</Link>
-            </li>
-            <li>
-              <Link href="/ranking">ランキング</Link>
-            </li>
-          </ul>
-        </nav>
-
+        <DesktopNav />
+        {isLoading && (
+          <Skeleton width="100px" height="40px" className="rounded-md" />
+        )}
         {!isLoading && (
           <div className="flex items-center gap-4">
             {session ? (
