@@ -33,10 +33,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} pb-16 antialiased sm:pb-0`}
       >
-        <Theme>
+        <Theme className="min-h-fit">
           <Header />
           <MobileNav />
-          <main className="mt-14 min-h-[calc(100vh-56px)] px-4 py-4 md:py-12">
+          <main className="min-h-[calc(100vh-7.5rem)] px-4 py-4 md:py-12">
             {children}
           </main>
           <Footer />

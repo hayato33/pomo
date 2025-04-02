@@ -82,7 +82,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6">
+    <div className="flex min-h-[calc(100vh-9.5rem)] w-full flex-col items-center justify-center gap-6 overflow-auto py-4">
       <PomodoroTimer
         isTimerRunning={isTimerRunning}
         handlePhaseComplete={handlePhaseComplete}
