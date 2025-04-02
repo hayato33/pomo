@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/app/_components/elements/Button";
 import { BsSkipEndFill } from "react-icons/bs";
 import { HiPause } from "react-icons/hi2";
@@ -19,12 +21,13 @@ export default function TimerController({
   resetTimer,
 }: TimerControllerProps) {
   /** タイマーの開始/停止を切り替える */
-  const toggleTimer = () => {
-    setIsTimerRunning(!isTimerRunning);
-  };
+  const toggleTimer = () => setIsTimerRunning(!isTimerRunning);
 
   // 現在のフェーズをスキップする関数
   const skipPhase = () => handlePhaseComplete();
+
+  // 開発環境かどうかを判定
+  const isDevelopment = process.env.NODE_ENV === "development";
 
   return (
     <div className="grid gap-4">
@@ -47,12 +50,16 @@ export default function TimerController({
           リセット
         </Button>
       </div>
-      <div className="grid place-content-center">
-        <Button variant="ghost" onClick={skipPhase}>
-          <BsSkipEndFill />
-          フェーズスキップ
-        </Button>
-      </div>
+
+      {/* 開発環境の場合のみ表示 */}
+      {isDevelopment && (
+        <div className="grid place-content-center">
+          <Button variant="ghost" onClick={skipPhase}>
+            <BsSkipEndFill />
+            フェーズスキップ
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
