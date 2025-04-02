@@ -1,8 +1,11 @@
+import { UpdateUserSetting } from "../_types/setting";
+
 /** ユーザー設定のデフォルト値 */
-export const DEFAULT_USER_SETTINGS = {
+export const DEFAULT_USER_SETTINGS: UpdateUserSetting = {
   autoStartShortBreak: false,
   autoStartFocusTime: false,
   autoStartLongBreak: false,
+  focusTimeBgm: "noBgm", //仮の値
   focusTimeSound: "noSound", //仮の値
   shortBreakSound: "noSound", //仮の値
   longBreakSound: "noSound", //仮の値
@@ -10,7 +13,8 @@ export const DEFAULT_USER_SETTINGS = {
   timelinePageLink: true,
   postButtonToTimeline: true,
   rankingPageLink: true,
-  showOnRanking: false,
+  showOnRanking: true,
+  backgroundImageKey: null,
   font: "font01", //仮の値
   hideExplainText: false,
   setRandomTime: false,
