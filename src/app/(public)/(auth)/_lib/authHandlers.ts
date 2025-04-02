@@ -17,7 +17,7 @@ const handleLoginSuccess = async (
     await ensureUserExists(accessToken);
 
     // ホームページにリダイレクト
-    router.replace("/");
+    router.replace("/timer");
   } catch (error) {
     console.error("ログインプロセス中にエラーが発生しました:", error);
     alert("ログイン処理中にエラーが発生しました。もう一度お試しください。");
