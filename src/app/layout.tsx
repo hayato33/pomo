@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Header from "@/app/_components/layout/Header";
+import { MobileNav } from "@/app/_components/layout/Nav";
 import Footer from "@/app/_components/layout/Footer";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
@@ -30,11 +31,14 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} pb-16 antialiased sm:pb-0`}
       >
         <Theme>
           <Header />
-          <main className="px-4 pb-12 pt-4 md:py-12">{children}</main>
+          <MobileNav />
+          <main className="mt-14 min-h-[calc(100vh-56px)] px-4 py-4 md:py-12">
+            {children}
+          </main>
           <Footer />
         </Theme>
       </body>
