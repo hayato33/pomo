@@ -4,7 +4,7 @@ import { prisma } from "@/app/_lib/prisma";
 import { getCurrentUser } from "../_lib/getCurrentUser";
 import { UpdateUserResponseType } from "./_types/response";
 import { UpdateUser } from "@/app/_types/user";
-import { userSchema } from "@/app/settings/_lib/settingFormSchema";
+import { userSchema } from "@/app/(protected)/settings/_lib/settingFormSchema";
 import { fromZodError } from "zod-validation-error";
 import { ValidationError } from "@/app/_types/response";
 import { UserService } from "./_lib/UserService";

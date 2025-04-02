@@ -4,7 +4,7 @@ import { DEFAULT_USER_SETTINGS } from "@/app/_config/userSettingConfig";
 import { getCurrentUser } from "../_lib/getCurrentUser";
 import { UpdateUserSetting } from "@/app/_types/setting";
 import { UpdateSettingResponseType } from "./_types/response";
-import { settingSchema } from "@/app/settings/_lib/settingFormSchema";
+import { settingSchema } from "@/app/(protected)/settings/_lib/settingFormSchema";
 import { fromZodError } from "zod-validation-error";
 import { ValidationError } from "@/app/_types/response";
 import { SettingService } from "./_lib/SettingService";
