@@ -1,5 +1,7 @@
 import { useUser } from "@/app/_hooks/useUser";
+import { getImageUrl } from "@/app/_utils/getImageUrl";
 import { Avatar } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
 
 interface Props {
   profileImageKey?: string | null;
@@ -16,15 +18,25 @@ interface Props {
 export default function UserProfileImage({ profileImageKey, nickname }: Props) {
   // Propsが渡されていない場合は、ログインしているユーザーデータから取得
   const user = useUser();
+  const [imageUrl, setImageUrl] = useState<null | string>(null);
   if (!profileImageKey && !nickname) {
     profileImageKey = user?.data?.data?.profileImageKey;
     nickname = user?.data?.data?.nickname;
   }
+  useEffect(() => {
+    const fetchImageUrl = async () => {
+      if (profileImageKey) {
+        const url = await getImageUrl(profileImageKey, "profile-image");
+        setImageUrl(url);
+      }
+    };
+    fetchImageUrl();
+  }, [profileImageKey]);
 
   return (
     <Avatar
-      size="2"
-      // src={profileImageKey} // TODO: profileImageKeyからURLを取得する関数を作成
+      size="3"
+      src={imageUrl ?? undefined}
       radius="full"
       variant="solid"
       color="gray"
