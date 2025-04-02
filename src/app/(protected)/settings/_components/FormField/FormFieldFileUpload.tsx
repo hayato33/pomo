@@ -11,12 +11,12 @@ import {
   UseFormGetValues,
   useWatch,
 } from "react-hook-form";
-import { UpdateData } from "@/app/settings/_types/updateData";
+import { UpdateData } from "@/app/(protected)/settings/_types/updateData";
 import { Input } from "@/app/_components/elements/Input";
 import { useEffect, useState, useCallback } from "react";
 import { getImageUrl } from "@/app/_utils/getImageUrl";
 import { ImagePreview } from "./ImagePreview";
-import { useHandleImageChange } from "@/app/settings/_hooks/useHandleImageChange";
+import { useHandleImageChange } from "@/app/(protected)/settings/_hooks/useHandleImageChange";
 
 interface Props {
   control: Control<UpdateData>;

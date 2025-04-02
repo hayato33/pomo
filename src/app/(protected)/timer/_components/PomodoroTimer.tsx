@@ -1,6 +1,6 @@
 "use client";
 
-import { PomodoroTimerPhase } from "@/app/timer/page";
+import { PomodoroTimerPhase } from "@/app/(protected)/timer/page";
 import { TimerSettings } from "@/app/_config/timerConfig";
 import { useEffect, useMemo } from "react";
 

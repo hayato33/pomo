@@ -1,6 +1,6 @@
 "use client";
 
-import PageTitle from "../_components/elements/PageTItle";
+import PageTitle from "../../_components/elements/PageTItle";
 import {
   ProfileSection,
   TimerSection,
@@ -10,16 +10,16 @@ import {
   PreferenceSection,
 } from "./_components/sections";
 import FormActions from "./_components/FormActions";
-import { useUser } from "../_hooks/useUser";
-import { useSetting } from "../_hooks/useSetting";
+import { useUser } from "../../_hooks/useUser";
+import { useSetting } from "../../_hooks/useSetting";
 import { useForm } from "react-hook-form";
 import { UpdateData } from "./_types/updateData";
 import { useEffect } from "react";
 import { settingFormSchema } from "./_lib/settingFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSubmitHandler } from "./_hooks/useSubmitHandler";
-import { Form } from "../_components/Form";
-import { DEFAULT_USER_SETTINGS } from "../_config/userSettingConfig";
+import { Form } from "../../_components/Form";
+import { DEFAULT_USER_SETTINGS } from "../../_config/userSettingConfig";
 import SettingLoading from "./_components/settingLoading";
 
 export default function Page() {
