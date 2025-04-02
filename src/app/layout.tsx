@@ -36,7 +36,7 @@ export default function RootLayout({
         <Theme className="min-h-fit">
           <Header />
           <MobileNav />
-          <main className="min-h-[calc(100vh-7.5rem)] px-4 py-4 md:py-12">
+          <main className="min-h-[calc(100vh-7.5rem)] p-4 sm:min-h-[calc(100vh-5.75rem)] sm:py-12">
             {children}
           </main>
           <Footer />
