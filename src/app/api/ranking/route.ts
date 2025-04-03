@@ -9,6 +9,7 @@ import { getWeeklyRankingByTime } from "./_lib/getWeeklyRankingByTime";
 import { getYearlyRankingByCount } from "./_lib/getYearlyRankingByCount";
 import { getYearlyRankingByTime } from "./_lib/getYearlyRankingByTime";
 import { RankingResponseType } from "./_types/response";
+export const dynamic = "force-dynamic";
 
 /** ランキングを取得するAPIエンドポイント */
 export const GET = async (req: NextRequest) => {
