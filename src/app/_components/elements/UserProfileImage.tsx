@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 interface Props {
   profileImageKey?: string | null;
   nickname?: string;
+  size?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 }
 
 /**
@@ -15,7 +16,11 @@ interface Props {
  * @param nickname - ユーザーのニックネーム
  * @returns ユーザープロフィール画像を表示するAvatarコンポーネント
  */
-export default function UserProfileImage({ profileImageKey, nickname }: Props) {
+export default function UserProfileImage({
+  profileImageKey,
+  nickname,
+  size = "3",
+}: Props) {
   // Propsが渡されていない場合は、ログインしているユーザーデータから取得
   const user = useUser();
   const [imageUrl, setImageUrl] = useState<null | string>(null);
@@ -35,7 +40,7 @@ export default function UserProfileImage({ profileImageKey, nickname }: Props) {
 
   return (
     <Avatar
-      size="3"
+      size={size}
       src={imageUrl ?? undefined}
       radius="full"
       variant="solid"
