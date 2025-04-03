@@ -30,7 +30,8 @@ export async function getDailyRankingByCount() {
 			id,
 			nickname,
 			profile_image_key,
-			daily_count
+			daily_count,
+			RANK() OVER(ORDER BY daily_count DESC)::numeric AS rank
 		FROM users
 		RIGHT JOIN user_settings ON user_settings.user_id = users.id
 		LEFT JOIN daily_logs ON daily_logs.user_id = users.id

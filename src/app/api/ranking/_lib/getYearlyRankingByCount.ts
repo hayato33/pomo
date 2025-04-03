@@ -30,7 +30,8 @@ export async function getYearlyRankingByCount() {
 			id,
 			nickname,
 			profile_image_key,
-			yearly_count
+			yearly_count,
+			RANK() OVER(ORDER BY yearly_count DESC)::numeric AS rank
 		FROM users
 		RIGHT JOIN user_settings ON user_settings.user_id = users.id
 		LEFT JOIN yearly_logs ON yearly_logs.user_id = users.id

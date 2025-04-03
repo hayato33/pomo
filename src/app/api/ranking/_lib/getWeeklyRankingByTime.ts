@@ -30,7 +30,8 @@ export async function getWeeklyRankingByTime() {
 			id,
 			nickname,
 			profile_image_key,
-			weekly_time
+			weekly_time,
+			RANK() OVER(ORDER BY weekly_time DESC)::numeric AS rank
 		FROM users
 		RIGHT JOIN user_settings ON user_settings.user_id = users.id
 		LEFT JOIN weekly_logs ON weekly_logs.user_id = users.id
