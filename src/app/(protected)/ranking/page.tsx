@@ -13,12 +13,16 @@ import { RankingTable } from "./_components/RankingTable";
 import { RankingData } from "./_types/rankingData";
 import { useState } from "react";
 
+/** ランキングページ */
 export default function Page() {
   const [valueType, setValueType] = useState<"count" | "time">("count");
 
   const { data: rankingData, isLoading, isError } = useRanking();
+
+  // 早期リターン
+  if (isError) return <div>エラーが発生しました</div>;
+
   const ranking = rankingData?.data;
-  if (!ranking) return <div>ランキングデータが存在しません</div>;
   const {
     dailyRankingByCount,
     dailyRankingByTime,
@@ -28,9 +32,7 @@ export default function Page() {
     weeklyRankingByTime,
     yearlyRankingByCount,
     yearlyRankingByTime,
-  }: RankingData = ranking;
-
-  if (isError) return <div>エラーが発生しました</div>;
+  }: RankingData = ranking ?? {};
 
   return (
     <div className="mx-auto max-w-[500px]">
@@ -38,7 +40,7 @@ export default function Page() {
 
       <div className="flex flex-col items-center justify-center gap-6">
         {isLoading && <RankingLoading />}
-        {!isLoading && (
+        {!isLoading && ranking && (
           <div className="relative w-full rounded-md border px-4 py-2">
             <Tabs defaultValue="daily" className="w-full">
               <TabsList>
@@ -99,6 +101,7 @@ export default function Page() {
             </Tabs>
           </div>
         )}
+        {!isLoading && !ranking && <div>ランキングデータが存在しません</div>}
       </div>
     </div>
   );
