@@ -21,7 +21,7 @@ export const RankingTabsContent = ({
   return (
     <TabsContent value={period}>
       <Tabs defaultValue={`${period}-count`}>
-        <TabsList>
+        <TabsList className="absolute right-4 top-2">
           <TabsTrigger value={`${period}-count`}>回数</TabsTrigger>
           <TabsTrigger value={`${period}-time`}>時間</TabsTrigger>
         </TabsList>

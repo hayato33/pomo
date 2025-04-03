@@ -31,13 +31,13 @@ export default function Page() {
       <div className="flex flex-col items-center justify-center gap-6">
         {isLoading && <RankingLoading />}
         {!isLoading && (
-          <div className="w-full rounded-md border px-4 py-2">
+          <div className="relative w-full rounded-md border px-4 py-2">
             <Tabs defaultValue="daily" className="w-full">
               <TabsList>
-                <TabsTrigger value="daily">日間</TabsTrigger>
-                <TabsTrigger value="weekly">週間</TabsTrigger>
-                <TabsTrigger value="monthly">月間</TabsTrigger>
-                <TabsTrigger value="yearly">年間</TabsTrigger>
+                <TabsTrigger value="daily">日</TabsTrigger>
+                <TabsTrigger value="weekly">週</TabsTrigger>
+                <TabsTrigger value="monthly">月</TabsTrigger>
+                <TabsTrigger value="yearly">年</TabsTrigger>
               </TabsList>
               <RankingTabsContent
                 period="daily"
