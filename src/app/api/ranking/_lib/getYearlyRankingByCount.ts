@@ -23,7 +23,7 @@ export async function getYearlyRankingByCount() {
 					"userId" AS user_id,
 					SUM("completedCount")::numeric AS yearly_count
 				FROM "PomodoroLog"
-				WHERE "loggedAt" >= DATE_TRUNC('day', CURRENT_DATE)
+				WHERE "loggedAt" >= DATE_TRUNC('year', CURRENT_DATE)
 				GROUP BY user_id
 		)
 		SELECT 
@@ -34,6 +34,7 @@ export async function getYearlyRankingByCount() {
 		FROM users
 		RIGHT JOIN user_settings ON user_settings.user_id = users.id
 		LEFT JOIN yearly_logs ON yearly_logs.user_id = users.id
+		WHERE yearly_count > 0
 		ORDER BY yearly_count DESC
 	`;
 }

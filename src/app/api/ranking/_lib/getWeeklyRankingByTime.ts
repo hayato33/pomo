@@ -23,7 +23,7 @@ export async function getWeeklyRankingByTime() {
 					"userId" AS user_id,
 					SUM("completedTime" * "completedCount")::numeric AS weekly_time
 				FROM "PomodoroLog"
-				WHERE "loggedAt" >= DATE_TRUNC('day', CURRENT_DATE)
+				WHERE "loggedAt" >= DATE_TRUNC('week', CURRENT_DATE)
 				GROUP BY user_id
 		)
 		SELECT 
@@ -34,6 +34,7 @@ export async function getWeeklyRankingByTime() {
 		FROM users
 		RIGHT JOIN user_settings ON user_settings.user_id = users.id
 		LEFT JOIN weekly_logs ON weekly_logs.user_id = users.id
+		WHERE weekly_time > 0
 		ORDER BY weekly_time DESC
 	`;
 }

@@ -34,6 +34,7 @@ export async function getDailyRankingByTime() {
 		FROM users
 		RIGHT JOIN user_settings ON user_settings.user_id = users.id
 		LEFT JOIN daily_logs ON daily_logs.user_id = users.id
+		WHERE daily_time > 0
 		ORDER BY daily_time DESC
 	`;
 }

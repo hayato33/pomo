@@ -23,7 +23,7 @@ export async function getMonthlyRankingByCount() {
 					"userId" AS user_id,
 					SUM("completedCount")::numeric AS monthly_count
 				FROM "PomodoroLog"
-				WHERE "loggedAt" >= DATE_TRUNC('day', CURRENT_DATE)
+				WHERE "loggedAt" >= DATE_TRUNC('month', CURRENT_DATE)
 				GROUP BY user_id
 		)
 		SELECT 
@@ -34,6 +34,7 @@ export async function getMonthlyRankingByCount() {
 		FROM users
 		RIGHT JOIN user_settings ON user_settings.user_id = users.id
 		LEFT JOIN monthly_logs ON monthly_logs.user_id = users.id
+		WHERE monthly_count > 0
 		ORDER BY monthly_count DESC
 	`;
 }
