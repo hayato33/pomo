@@ -1,20 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { IoSettingsOutline } from "react-icons/io5";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
-import { LuLogIn, LuLogOut } from "react-icons/lu";
-import { supabase } from "@/app/_utils/supabase";
-import { Button, Skeleton } from "@radix-ui/themes";
-import UserProfileImage from "../elements/UserProfileImage";
+import { LuLogIn } from "react-icons/lu";
+import { Skeleton } from "@radix-ui/themes";
 import { DesktopNav } from "./Nav";
+import UserMenu from "./UserMenu";
 
 export default function Header() {
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    window.location.href = "/";
-  };
-
   const { session, isLoading } = useSupabaseSession();
 
   return (
@@ -25,30 +18,12 @@ export default function Header() {
         </Link>
         <DesktopNav />
         {isLoading && (
-          <Skeleton width="100px" height="40px" className="rounded-md" />
+          <Skeleton width="40px" height="40px" className="rounded-full" />
         )}
         {!isLoading && (
           <div className="flex items-center gap-4">
             {session ? (
-              <>
-                <Link href="/settings">
-                  <IoSettingsOutline size={24} />
-                </Link>
-                <div className="group relative flex items-center gap-2">
-                  <UserProfileImage />
-                  <Button
-                    size="3"
-                    className="absolute right-0 top-full hidden w-[128px] cursor-pointer group-hover:flex"
-                    color="gray"
-                    variant="solid"
-                    highContrast
-                    onClick={handleLogout}
-                  >
-                    ログアウト
-                    <LuLogOut />
-                  </Button>
-                </div>
-              </>
+              <UserMenu />
             ) : (
               <Link
                 href="/login"
