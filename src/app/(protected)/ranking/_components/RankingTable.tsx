@@ -20,11 +20,11 @@ const getRankDisplay = (rank: number | string) => {
 
   switch (rankNum) {
     case 1:
-      return "🥇";
+      return <span className="text-2xl">🥇</span>;
     case 2:
-      return "🥈";
+      return <span className="text-xl">🥈</span>;
     case 3:
-      return "🥉";
+      return <span className="text-lg">🥉</span>;
     default:
       return rank;
   }
@@ -52,7 +52,7 @@ export const RankingTable = ({ data, dataType }: Props) => {
               key={item.id}
               className={currentUserId === item.id ? "bg-muted/50" : ""}
             >
-              <TableCell className="text-center text-lg font-medium">
+              <TableCell className="text-center font-medium">
                 {getRankDisplay(item.rank)}
               </TableCell>
               <TableCell className="flex items-center gap-2">
