@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { LuLogOut } from "react-icons/lu";
 import { TbSettings } from "react-icons/tb";
-import { MdOutlineFeedback } from "react-icons/md";
+import { RiSurveyLine } from "react-icons/ri";
 import { FiExternalLink } from "react-icons/fi";
 import { supabase } from "@/app/_utils/supabase";
 import UserProfileImage from "../elements/UserProfileImage";
@@ -44,12 +44,12 @@ export default function UserMenu() {
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer px-4 py-2">
           <Link
-            href=""
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc43XfK6GL-l3VIac0XoNd07UTdUjB_zJ7OJdTo_M_s12A_Aw/viewform?usp=dialog"
             target="_blank"
             className="flex items-center gap-2 text-base"
             onClick={handleClose}
           >
-            <MdOutlineFeedback size={18} />
+            <RiSurveyLine size={18} />
             <div className="flex items-center gap-1">
               フィードバック
               <FiExternalLink size={12} />
