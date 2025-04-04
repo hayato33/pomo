@@ -2,6 +2,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { FormData } from "./authSchema";
 import { ensureUserExists } from "./authUserService";
 import { supabase } from "@/app/_utils/supabase";
+import { toast } from "react-toastify";
 
 /**
  * ログイン成功時の処理
@@ -18,9 +19,11 @@ const handleLoginSuccess = async (
 
     // ホームページにリダイレクト
     router.replace("/timer");
+    toast.success("ログインに成功しました");
   } catch (error) {
-    console.error("ログインプロセス中にエラーが発生しました:", error);
-    alert("ログイン処理中にエラーが発生しました。もう一度お試しください。");
+    const errorMessage = "ログイン処理中にエラーが発生しました。";
+    console.error(errorMessage, error);
+    toast.error(`${errorMessage}もう一度お試しください。`);
   }
 };
 
@@ -35,9 +38,9 @@ const handleSignupSuccess = (
 ): void => {
   // 登録されているメールアドレスの場合、空の配列が返ってくる
   if (user?.identities?.length === 0) {
-    alert("このメールアドレスは既に登録されています。");
+    toast.warning("このメールアドレスは既に登録されています。");
   } else {
-    alert(
+    toast.success(
       "登録確認メールを送信しました。メールを確認してログインしてください。"
     );
   }
@@ -65,7 +68,7 @@ export const loginHandler = async (
       if (error.message.includes("credentials")) {
         errorMessage = "メールアドレスまたはパスワードが正しくありません。";
       }
-      alert(errorMessage);
+      toast.error(errorMessage);
       return;
     }
 
@@ -79,7 +82,7 @@ export const loginHandler = async (
     }
   } catch (error) {
     console.error("ログイン処理中にエラーが発生しました:", error);
-    alert("処理中にエラーが発生しました。もう一度お試しください。");
+    toast.error("処理中にエラーが発生しました。もう一度お試しください。");
   }
 };
 
@@ -103,13 +106,13 @@ export const signupHandler = async (formData: FormData, reset: () => void) => {
       if (error.message.includes("credentials")) {
         errorMessage = "メールアドレスまたはパスワードが正しくありません。";
       }
-      alert(errorMessage);
+      toast.error(errorMessage);
       return;
     }
 
     handleSignupSuccess(data.user, reset);
   } catch (error) {
     console.error("サインアップ処理中にエラーが発生しました:", error);
-    alert("処理中にエラーが発生しました。もう一度お試しください。");
+    toast.error("処理中にエラーが発生しました。もう一度お試しください。");
   }
 };

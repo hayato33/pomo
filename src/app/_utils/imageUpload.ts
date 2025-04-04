@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 import { supabase } from "@/app/_utils/supabase";
 import { v4 as uuidv4 } from "uuid";
 import { UseFormSetValue, Path, PathValue } from "react-hook-form";
+import { toast } from "react-toastify";
 
 /**
  * 画像をアップロードし、保存されたパスを返す関数
@@ -33,7 +34,7 @@ export const uploadImage = async <T extends object>(
     });
 
   if (error) {
-    alert(error.message);
+    toast.error(error.message);
     return null;
   }
 

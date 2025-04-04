@@ -15,6 +15,7 @@ import {
 } from "@/app/_components/elements/collapsible";
 import { ChevronsUpDown } from "lucide-react";
 import { timerSettingsFormSchema } from "../_lib/timerSettingsFormSchema";
+import { toast } from "react-toastify";
 
 /** Propsの型定義 */
 interface TimerSettingsFormProps {
@@ -70,6 +71,7 @@ export default function TimerSettingsForm({
       setPendingSettings(null);
       // タイマーをリセット
       resetTimer();
+      toast.success("タイマー設定を更新しました");
     }
   };
 

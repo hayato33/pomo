@@ -4,6 +4,8 @@ import Header from "@/app/_components/layout/Header";
 import { MobileNav } from "@/app/_components/layout/Nav";
 import Footer from "@/app/_components/layout/Footer";
 import { Theme } from "@radix-ui/themes";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
 
@@ -34,6 +36,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} pb-16 antialiased sm:pb-0`}
       >
         <Theme className="min-h-fit">
+          <ToastContainer autoClose={3000} hideProgressBar theme="colored" />
           <Header />
           <MobileNav />
           <main className="min-h-[calc(100vh-7.5rem)] p-4 sm:min-h-[calc(100vh-5.75rem)] sm:py-12">

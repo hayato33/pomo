@@ -1,6 +1,7 @@
 import { fetcher } from "@/app/_utils/fetcher";
 import { UpdateData } from "../_types/updateData";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
+import { toast } from "react-toastify";
 
 export const useSubmitHandler = () => {
   const { token } = useSupabaseSession();
@@ -26,10 +27,11 @@ export const useSubmitHandler = () => {
         throw new Error("ユーザー情報またはユーザー設定の更新に失敗しました");
       }
 
-      alert("設定を更新しました");
+      toast.success("設定を更新しました");
     } catch (error) {
-      console.error("設定更新処理中にエラーが発生しました:", error);
-      alert("処理中にエラーが発生しました。もう一度お試しください。");
+      const errorMessage = "設定更新処理中にエラーが発生しました";
+      console.error(errorMessage, error);
+      toast.error(`${errorMessage}もう一度お試しください。`);
     }
   };
 
