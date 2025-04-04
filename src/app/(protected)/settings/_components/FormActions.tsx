@@ -7,6 +7,7 @@ import { UseFormReset } from "react-hook-form";
 import { UpdateData } from "../_types/updateData";
 import { DEFAULT_USER_SETTINGS } from "@/app/_config/userSettingConfig";
 import { generateRandomNickname } from "@/app/_utils/generateRandomNickname";
+import { toast } from "react-toastify";
 
 interface Props {
   isSubmitting: boolean;
@@ -27,8 +28,18 @@ export default function FormActions({ isSubmitting, reset }: Props) {
         profileImageKey: null,
         ...DEFAULT_USER_SETTINGS,
       });
+      toast.info(
+        <div className="flex flex-col gap-1">
+          <p>設定を初期状態に戻しました。</p>
+          <p className="text-sm">
+            ※設定を適用するには「設定を保存する」ボタンを押してください
+          </p>
+        </div>
+      );
     } catch (error) {
-      console.error("設定のリセット中にエラーが発生しました", error);
+      const errorMessage = "設定のリセット中にエラーが発生しました";
+      console.error(errorMessage, error);
+      toast.error(errorMessage);
     } finally {
       setIsDialogOpen(false);
     }
