@@ -1,8 +1,8 @@
 import { prisma } from "@/app/_lib/prisma";
-import { YearlyRankingByCount } from "@/app/_types/ranking";
+import { Ranking } from "@/app/_types/ranking";
 
 export async function getYearlyRankingByCount() {
-  return await prisma.$queryRaw<YearlyRankingByCount[]>`
+  return await prisma.$queryRaw<Ranking[]>`
 		WITH users AS (
 			SELECT
 				"id" AS id,
@@ -21,7 +21,7 @@ export async function getYearlyRankingByCount() {
 		yearly_logs AS (
 				SELECT
 					"userId" AS user_id,
-					SUM("completedCount")::numeric AS yearly_count
+					SUM("completedCount")::numeric AS value
 				FROM "PomodoroLog"
 				WHERE "loggedAt" >= DATE_TRUNC('year', CURRENT_DATE)
 				GROUP BY user_id
@@ -30,11 +30,12 @@ export async function getYearlyRankingByCount() {
 			id,
 			nickname,
 			profile_image_key,
-			yearly_count
+			value,
+			RANK() OVER(ORDER BY value DESC)::numeric AS rank
 		FROM users
 		RIGHT JOIN user_settings ON user_settings.user_id = users.id
 		LEFT JOIN yearly_logs ON yearly_logs.user_id = users.id
-		WHERE yearly_count > 0
-		ORDER BY yearly_count DESC
+		WHERE value > 0
+		ORDER BY value DESC
 	`;
 }
