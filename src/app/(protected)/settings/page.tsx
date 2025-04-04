@@ -1,6 +1,6 @@
 "use client";
 
-import PageTitle from "../../_components/elements/PageTItle";
+import PageTitle from "../../_components/elements/PageTitle";
 import {
   ProfileSection,
   TimerSection,
