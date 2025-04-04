@@ -73,14 +73,14 @@ export default function PomodoroTimer({
   }, [remainingTime, currentPhase, timerSettings]);
 
   return (
-    <div className="relative aspect-square w-80 max-w-full">
+    <div className="relative aspect-square w-80 max-w-full rounded-full bg-white/75 backdrop-blur">
       <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
         <circle
           className="stroke-current text-gray-200"
           strokeWidth="4"
           cx="50"
           cy="50"
-          r="47"
+          r="48"
           fill="transparent"
         />
         <circle
@@ -95,10 +95,10 @@ export default function PomodoroTimer({
           strokeLinecap="round"
           cx="50"
           cy="50"
-          r="47"
+          r="48"
           fill="transparent"
-          strokeDasharray="295.31"
-          strokeDashoffset={295.31 * (1 - percentage / 100)}
+          strokeDasharray="301.59"
+          strokeDashoffset={301.59 * (1 - percentage / 100)}
         />
       </svg>
       <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center">

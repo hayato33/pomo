@@ -39,7 +39,7 @@ export default function RootLayout({
           <ToastContainer autoClose={3000} hideProgressBar theme="colored" />
           <Header />
           <MobileNav />
-          <main className="min-h-[calc(100vh-7.5rem)] p-4 sm:min-h-[calc(100vh-5.75rem)] sm:py-12">
+          <main className="relative min-h-[calc(100vh-7.5rem)] p-4 sm:min-h-[calc(100vh-5.75rem)] sm:py-12">
             {children}
           </main>
           <Footer />

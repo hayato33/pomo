@@ -84,17 +84,18 @@ export default function TimerSettingsForm({
 
   return (
     <Collapsible className="flex flex-col justify-center gap-4">
-      <CollapsibleTrigger className="flex items-center justify-center gap-2">
-        <h4 className="text-sm font-semibold">タイマー設定パネルを開く</h4>
+      <CollapsibleTrigger className="mx-auto flex w-fit items-center justify-center gap-2 rounded-md bg-white/75 px-4 py-2 backdrop-blur">
+        <h4 className="text-sm font-semibold">タイマー設定を開く</h4>
         <ChevronsUpDown className="h-4 w-4" />
         <span className="sr-only">Toggle</span>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="rounded-lg border p-6">
+        <div className="rounded-lg border bg-white/70 p-6 backdrop-blur">
           <h3 className="mb-4 text-lg font-bold">タイマー設定</h3>
           <form onSubmit={handleSubmit(onSubmitHandler)} className="grid gap-4">
             <FormItem
               label="集中時間(分)"
+              explain="1〜90分（デフォルト：25分）"
               id="focusTime"
               register={register}
               errors={errors}
@@ -104,6 +105,7 @@ export default function TimerSettingsForm({
             />
             <FormItem
               label="短い休憩時間(分)"
+              explain="1〜30分（デフォルト：5分）"
               id="shortBreakTime"
               register={register}
               errors={errors}
@@ -113,6 +115,7 @@ export default function TimerSettingsForm({
             />
             <FormItem
               label="長い休憩時間(分)"
+              explain="1〜90分（デフォルト：30分）"
               id="longBreakTime"
               register={register}
               errors={errors}
@@ -122,6 +125,7 @@ export default function TimerSettingsForm({
             />
             <FormItem
               label="サイクル数(回)"
+              explain="1〜10回（デフォルト：4回）"
               id="cycles"
               register={register}
               errors={errors}
@@ -136,6 +140,7 @@ export default function TimerSettingsForm({
                 type="reset"
                 onClick={timerSettingsReset}
                 disabled={isSubmitting}
+                className="!bg-transparent backdrop-blur-none"
               >
                 リセット
               </Button>
