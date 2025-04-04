@@ -5,7 +5,7 @@ import { TimelineLoading } from "./_components/TimelineLoading";
 import { useTimelinePomodoro } from "./_hooks/useTimelinePomodoro";
 import { PomodoroLogType } from "../../_types/pomodoro";
 import { Pagination } from "./_components/Pagination";
-import PageTitle from "../../_components/elements/PageTItle";
+import PageTitle from "../../_components/elements/PageTitle";
 
 /** タイムラインページ */
 export default function Page() {
