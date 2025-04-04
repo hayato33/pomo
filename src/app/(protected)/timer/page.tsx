@@ -11,6 +11,8 @@ import {
 } from "@/app/_config/timerConfig";
 import { useLocalStorage } from "@/app/_hooks/useLocalStorage";
 import PomodoroCompletionModal from "./_components/PomodoroCompletionModal";
+import { getImageUrl } from "@/app/_utils/getImageUrl";
+import { useSetting } from "@/app/_hooks/useSetting";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
@@ -34,6 +36,20 @@ export default function Page() {
   const [currentPhase, setCurrentPhase] = useState<PomodoroTimerPhase>("focus");
   // 現在のサイクル
   const [currentCycle, setCurrentCycle] = useState(1);
+
+  // 背景画像のURL
+  const setting = useSetting();
+  const bgImageKey = setting?.data?.data?.backgroundImageKey;
+  const [bgImageUrl, setBgImageUrl] = useState<null | string>(null);
+  useEffect(() => {
+    const fetchImageUrl = async () => {
+      if (bgImageKey) {
+        const url = await getImageUrl(bgImageKey, "background-image");
+        setBgImageUrl(url);
+      }
+    };
+    fetchImageUrl();
+  }, [bgImageKey]);
 
   // 設定が変更されたときに残り時間を更新する
   useEffect(() => {
@@ -82,32 +98,39 @@ export default function Page() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-9.5rem)] w-full flex-col items-center justify-center gap-6 overflow-auto py-4">
-      <PomodoroTimer
-        isTimerRunning={isTimerRunning}
-        handlePhaseComplete={handlePhaseComplete}
-        currentPhase={currentPhase}
-        currentCycle={currentCycle}
-        remainingTime={remainingTime}
-        setRemainingTime={setRemainingTime}
-        timerSettings={storedSettings}
-      />
-      <TimerController
-        isTimerRunning={isTimerRunning}
-        setIsTimerRunning={setIsTimerRunning}
-        handlePhaseComplete={handlePhaseComplete}
-        resetTimer={resetTimer}
-      />
-      <TimerSettingsForm
-        resetTimer={resetTimer}
-        storedSettings={storedSettings}
-        setStoredSettings={setStoredSettings}
-      />
-      <PomodoroCompletionModal
-        storedSettings={storedSettings}
-        isPomodoroCompletionModalOpen={isPomodoroCompletionModalOpen}
-        setIsPomodoroCompletionModalOpen={setIsPomodoroCompletionModalOpen}
-      />
+    <div
+      className="absolute inset-0 flex min-h-[calc(100vh-9.5rem)] w-full overflow-auto bg-cover bg-center py-4"
+      style={{
+        backgroundImage: bgImageUrl ? `url(${bgImageUrl})` : "none",
+      }}
+    >
+      <div className="my-auto flex w-full flex-1 flex-col items-center justify-center gap-6">
+        <PomodoroTimer
+          isTimerRunning={isTimerRunning}
+          handlePhaseComplete={handlePhaseComplete}
+          currentPhase={currentPhase}
+          currentCycle={currentCycle}
+          remainingTime={remainingTime}
+          setRemainingTime={setRemainingTime}
+          timerSettings={storedSettings}
+        />
+        <TimerController
+          isTimerRunning={isTimerRunning}
+          setIsTimerRunning={setIsTimerRunning}
+          handlePhaseComplete={handlePhaseComplete}
+          resetTimer={resetTimer}
+        />
+        <TimerSettingsForm
+          resetTimer={resetTimer}
+          storedSettings={storedSettings}
+          setStoredSettings={setStoredSettings}
+        />
+        <PomodoroCompletionModal
+          storedSettings={storedSettings}
+          isPomodoroCompletionModalOpen={isPomodoroCompletionModalOpen}
+          setIsPomodoroCompletionModalOpen={setIsPomodoroCompletionModalOpen}
+        />
+      </div>
     </div>
   );
 }
