@@ -4,6 +4,7 @@ import { TimerSettings } from "@/app/_config/timerConfig";
 /** Propsの型定義 */
 interface FormItemProps {
   label: string;
+  explain: string;
   id: keyof TimerSettings;
   disabled: boolean;
   register: UseFormRegister<TimerSettings>;
@@ -15,6 +16,7 @@ interface FormItemProps {
 /** ポモドーロタイマー各種数値変更フォームの項目 */
 export default function FormItem({
   label,
+  explain,
   id,
   disabled,
   register,
@@ -25,18 +27,16 @@ export default function FormItem({
   return (
     <div>
       <div className="flex items-center justify-between gap-4">
-        <label
-          htmlFor={id}
-          className="block min-w-28 text-sm font-medium text-gray-900"
-        >
-          {label}
+        <label htmlFor={id} className="grid min-w-28 text-sm text-gray-900">
+          <p className="font-medium">{label}</p>
+          <p className="text-xs text-gray-700">{explain}</p>
         </label>
         <input
           type="number"
           min={min}
           max={max}
           id={id}
-          className="block w-full min-w-28 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+          className="block w-20 rounded-lg border border-gray-300 bg-white/75 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={disabled}
           {...register(id)}
         />
