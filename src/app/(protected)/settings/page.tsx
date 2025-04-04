@@ -6,7 +6,7 @@ import {
   TimerSection,
   SoundSection,
   TimelineSection,
-  RankingSection,
+  // RankingSection,
   PreferenceSection,
 } from "./_components/sections";
 import FormActions from "./_components/FormActions";
@@ -83,7 +83,7 @@ export default function Page() {
             <TimerSection control={control} isSubmitting={isSubmitting} />
             <SoundSection control={control} isSubmitting={isSubmitting} />
             <TimelineSection control={control} isSubmitting={isSubmitting} />
-            <RankingSection control={control} isSubmitting={isSubmitting} />
+            {/* <RankingSection control={control} isSubmitting={isSubmitting} /> */}
             <PreferenceSection
               control={control}
               isSubmitting={isSubmitting}

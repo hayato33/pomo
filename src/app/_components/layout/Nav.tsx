@@ -4,7 +4,7 @@ import Link from "next/link";
 import { IoTimerOutline } from "react-icons/io5";
 import { MdOutlineAnalytics } from "react-icons/md";
 import { RiTimelineView } from "react-icons/ri";
-import { FaRankingStar } from "react-icons/fa6";
+// import { FaRankingStar } from "react-icons/fa6";
 import { IconType } from "react-icons";
 import { usePathname } from "next/navigation";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
@@ -36,11 +36,11 @@ const NAV_ITEMS: NavItem[] = [
     icon: RiTimelineView,
     label: "タイムライン",
   },
-  {
-    href: "/ranking",
-    icon: FaRankingStar,
-    label: "ランキング",
-  },
+  // {
+  //   href: "/ranking",
+  //   icon: FaRankingStar,
+  //   label: "ランキング",
+  // },
 ];
 
 /**
