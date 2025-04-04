@@ -19,6 +19,20 @@ export default function Page() {
 
   const { data: rankingData, isLoading, isError } = useRanking();
 
+  // ユーザー数がある程度つくまでランキング非表示
+  if (true) {
+    return (
+      <div className="mx-auto max-w-[500px]">
+        <PageTitle>ランキング</PageTitle>
+        <p>
+          ランキング機能は現在準備中です。
+          <br />
+          今しばらくお待ちください！
+        </p>
+      </div>
+    );
+  }
+
   // 早期リターン
   if (isError) return <div>エラーが発生しました</div>;
 
