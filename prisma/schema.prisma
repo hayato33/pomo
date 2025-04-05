@@ -30,14 +30,30 @@ model PomodoroLog {
 
 enum TimerBgm {
   noBgm
-  bgm1
-  bgm2
+  focusBoost
+  lofiWorkMode
+  steadyPulse
+  cinematicFocus
+  acousticBreeze
+  cafeProductivity
+  natureCocoon
+  electroFlow
+  calmFlow
+  pianoSerenity
 }
 
 enum TimerEndSound {
   noSound
-  sound1
-  sound2
+  trumpetFanfare
+  levelUp
+  pop
+  shakiin
+  chanChan
+  jajaan
+  menOh
+  womenOh
+  cuckooClock
+  ramenYatai
 }
 
 enum Font {
