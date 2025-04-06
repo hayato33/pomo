@@ -1,7 +1,6 @@
 /**
- * 集中時間中BGM（以下は仮の設定）
+ * 集中時間・小休憩・長休憩中BGM
  * デフォルトはBGMなし
- * TODO: 実際にBGMを設定する
  */
 export const TIMER_BGM_OPTIONS = [
   { value: "noBgm", label: "BGMなし" },
@@ -17,7 +16,7 @@ export const TIMER_BGM_OPTIONS = [
   { value: "pianoSerenity", label: "Piano Serenity" },
 ];
 
-/** 集中時間中BGMのvalue（バリデーション用） */
+/** 集中時間・小休憩・長休憩中BGMのvalue（バリデーション用） */
 export const TimerBgmValue = [
   "noBgm",
   "focusBoost",

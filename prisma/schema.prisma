@@ -69,6 +69,8 @@ model UserSetting {
   autoStartFocusTime  Boolean
   autoStartLongBreak  Boolean
   focusTimeBgm        TimerBgm        @default(noBgm)
+  shortBreakBgm       TimerBgm        @default(noBgm)
+  longBreakBgm        TimerBgm        @default(noBgm)
   focusTimeSound      TimerEndSound   @default(noSound)
   shortBreakSound     TimerEndSound   @default(noSound)
   longBreakSound      TimerEndSound   @default(noSound)

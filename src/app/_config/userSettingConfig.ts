@@ -6,6 +6,8 @@ export const DEFAULT_USER_SETTINGS: UpdateUserSetting = {
   autoStartFocusTime: false,
   autoStartLongBreak: false,
   focusTimeBgm: "noBgm",
+  shortBreakBgm: "noBgm",
+  longBreakBgm: "noBgm",
   focusTimeSound: "noSound",
   shortBreakSound: "noSound",
   longBreakSound: "noSound",

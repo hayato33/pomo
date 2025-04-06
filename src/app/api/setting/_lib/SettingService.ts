@@ -16,6 +16,8 @@ export class SettingService {
         autoStartFocusTime: body.autoStartFocusTime,
         autoStartLongBreak: body.autoStartLongBreak,
         focusTimeBgm: body.focusTimeBgm,
+        shortBreakBgm: body.shortBreakBgm,
+        longBreakBgm: body.longBreakBgm,
         focusTimeSound: body.focusTimeSound,
         shortBreakSound: body.shortBreakSound,
         longBreakSound: body.longBreakSound,
