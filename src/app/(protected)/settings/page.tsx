@@ -27,12 +27,14 @@ export default function Page() {
     data: userData,
     isLoading: userLoading,
     isError: userError,
+    mutate: userMutate,
   } = useUser();
   const user = userData?.data;
   const {
     data: settingsData,
     isLoading: settingsLoading,
     isError: settingsError,
+    mutate: settingsMutate,
   } = useSetting();
   const settings = settingsData?.data;
   const isLoading = userLoading || settingsLoading;
@@ -62,8 +64,11 @@ export default function Page() {
     if (user && settings) reset({ ...user, ...settings });
   }, [user, settings, reset]);
 
-  const onSubmit = async (formData: UpdateData) =>
+  const onSubmit = async (formData: UpdateData) => {
     await submitHandler(formData);
+    userMutate();
+    settingsMutate();
+  };
 
   if (isError) return <div>エラーが発生しました</div>;
 
