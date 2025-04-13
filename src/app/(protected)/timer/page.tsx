@@ -13,7 +13,7 @@ import { useLocalStorage } from "@/app/_hooks/useLocalStorage";
 import PomodoroCompletionModal from "./_components/PomodoroCompletionModal";
 import { getImageUrl } from "@/app/_utils/getImageUrl";
 import { useSetting } from "@/app/_hooks/useSetting";
-import TimerAudio from "./_components/TimerAudio";
+import useTimerAudio from "./_hooks/useTimerAudio";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
@@ -116,6 +116,13 @@ export default function Page() {
     }
   };
 
+  // タイマーの音声管理
+  useTimerAudio({
+    currentPhase,
+    isTimerRunning,
+    isTimerCompleted,
+  });
+
   return (
     <div
       className="absolute inset-0 flex min-h-[calc(100vh-9.5rem)] w-full overflow-auto bg-cover bg-center py-4"
@@ -138,11 +145,6 @@ export default function Page() {
           toggleTimer={toggleTimer}
           handlePhaseComplete={handlePhaseComplete}
           resetTimer={resetTimer}
-        />
-        <TimerAudio
-          currentPhase={currentPhase}
-          isTimerRunning={isTimerRunning}
-          isTimerCompleted={isTimerCompleted}
         />
         <TimerSettingsForm
           resetTimer={resetTimer}

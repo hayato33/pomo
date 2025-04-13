@@ -10,7 +10,7 @@ interface Props {
 }
 
 /** ポモドーロタイマーの音声管理コンポーネント */
-export default function TimerAudio({
+export default function useTimerAudio({
   currentPhase,
   isTimerRunning,
   isTimerCompleted,
