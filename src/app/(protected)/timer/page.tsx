@@ -13,6 +13,7 @@ import { useLocalStorage } from "@/app/_hooks/useLocalStorage";
 import PomodoroCompletionModal from "./_components/PomodoroCompletionModal";
 import { getImageUrl } from "@/app/_utils/getImageUrl";
 import { useSetting } from "@/app/_hooks/useSetting";
+import TimerAudio from "./_components/TimerAudio";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
@@ -36,6 +37,8 @@ export default function Page() {
   const [currentPhase, setCurrentPhase] = useState<PomodoroTimerPhase>("focus");
   // 現在のサイクル
   const [currentCycle, setCurrentCycle] = useState(1);
+  // タイマーが完了したかどうか（自然終了かユーザー操作による停止かを区別）
+  const [isTimerCompleted, setIsTimerCompleted] = useState(false);
 
   // 背景画像のURL
   const setting = useSetting();
@@ -68,6 +71,9 @@ export default function Page() {
    */
   const handlePhaseComplete = () => {
     setIsTimerRunning(false);
+    // タイマーが自然に完了したことを示す
+    setIsTimerCompleted(true);
+
     if (currentPhase === "focus") {
       setCurrentPhase("short-break");
       setRemainingTime(storedSettings.shortBreakTime * 60);
@@ -92,9 +98,22 @@ export default function Page() {
   const resetTimer = () => {
     setCurrentPhase("focus");
     setIsTimerRunning(false);
+    setIsTimerCompleted(false);
     setCurrentCycle(1);
     // 常に最新のstoredSettingsを使用
     setRemainingTime(storedSettings.focusTime * 60);
+  };
+
+  // タイマーを手動で開始/停止するための関数
+  const toggleTimer = () => {
+    if (isTimerRunning) {
+      // タイマーを停止する場合
+      setIsTimerRunning(false);
+      setIsTimerCompleted(false);
+    } else {
+      // タイマーを開始する場合
+      setIsTimerRunning(true);
+    }
   };
 
   return (
@@ -116,9 +135,14 @@ export default function Page() {
         />
         <TimerController
           isTimerRunning={isTimerRunning}
-          setIsTimerRunning={setIsTimerRunning}
+          toggleTimer={toggleTimer}
           handlePhaseComplete={handlePhaseComplete}
           resetTimer={resetTimer}
+        />
+        <TimerAudio
+          currentPhase={currentPhase}
+          isTimerRunning={isTimerRunning}
+          isTimerCompleted={isTimerCompleted}
         />
         <TimerSettingsForm
           resetTimer={resetTimer}
