@@ -17,6 +17,20 @@ export default function SoundSection({ control, isSubmitting }: SectionProps) {
       <FormFieldSelect
         control={control}
         isSubmitting={isSubmitting}
+        name="shortBreakBgm"
+        label="小休憩中のBGMを変更する"
+        options={TIMER_BGM_OPTIONS}
+      />
+      <FormFieldSelect
+        control={control}
+        isSubmitting={isSubmitting}
+        name="longBreakBgm"
+        label="長休憩中のBGMを変更する"
+        options={TIMER_BGM_OPTIONS}
+      />
+      <FormFieldSelect
+        control={control}
+        isSubmitting={isSubmitting}
         name="focusTimeSound"
         label="集中時間終了時のサウンドを変更する"
         options={TIMER_END_SOUND_OPTIONS}

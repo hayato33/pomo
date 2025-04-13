@@ -16,6 +16,8 @@ export const settingSchema = z.object({
   autoStartFocusTime: z.boolean(),
   autoStartLongBreak: z.boolean(),
   focusTimeBgm: z.enum(TimerBgmValue),
+  shortBreakBgm: z.enum(TimerBgmValue),
+  longBreakBgm: z.enum(TimerBgmValue),
   focusTimeSound: z.enum(TimerEndSoundValue),
   shortBreakSound: z.enum(TimerEndSoundValue),
   longBreakSound: z.enum(TimerEndSoundValue),

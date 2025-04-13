@@ -9,20 +9,17 @@ import { VscDebugStart } from "react-icons/vsc";
 /** Propsの型定義 */
 interface TimerControllerProps {
   isTimerRunning: boolean;
-  setIsTimerRunning: (isTimerRunning: boolean) => void;
+  toggleTimer: () => void;
   handlePhaseComplete: () => void;
   resetTimer: () => void;
 }
 
 export default function TimerController({
   isTimerRunning,
-  setIsTimerRunning,
+  toggleTimer,
   handlePhaseComplete,
   resetTimer,
 }: TimerControllerProps) {
-  /** タイマーの開始/停止を切り替える */
-  const toggleTimer = () => setIsTimerRunning(!isTimerRunning);
-
   // 現在のフェーズをスキップする関数
   const skipPhase = () => handlePhaseComplete();
 

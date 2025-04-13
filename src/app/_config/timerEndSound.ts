@@ -1,13 +1,32 @@
 /**
- * 集中時間・小休憩・長休憩終了時サウンドの設定（以下は仮の設定）
+ * 集中時間・小休憩・長休憩終了時サウンドの設定
  * デフォルトはサウンドなし
- * TODO: 実際にサウンドを設定する
  */
 export const TIMER_END_SOUND_OPTIONS = [
   { value: "noSound", label: "サウンドなし" },
-  { value: "sound1", label: "サウンド1" },
-  { value: "sound2", label: "サウンド2" },
+  { value: "trumpetFanfare", label: "ラッパのファンファーレ" },
+  { value: "levelUp", label: "レベルアップ" },
+  { value: "pop", label: "パッ" },
+  { value: "shakiin", label: "シャキーン" },
+  { value: "chanChan", label: "ちゃんちゃん♪" },
+  { value: "jajaan", label: "ジャジャーン" },
+  { value: "menOh", label: "男衆「オウ！」" },
+  { value: "womenOh", label: "女衆「おう！」" },
+  { value: "cuckooClock", label: "鳩時計" },
+  { value: "ramenYatai", label: "ラーメン屋台登場" },
 ];
 
 /** 集中時間・小休憩・長休憩終了時サウンドのvalue（バリデーション用） */
-export const TimerEndSoundValue = ["noSound", "sound1", "sound2"] as const;
+export const TimerEndSoundValue = [
+  "noSound",
+  "trumpetFanfare",
+  "levelUp",
+  "pop",
+  "shakiin",
+  "chanChan",
+  "jajaan",
+  "menOh",
+  "womenOh",
+  "cuckooClock",
+  "ramenYatai",
+] as const;

@@ -5,10 +5,12 @@ export const DEFAULT_USER_SETTINGS: UpdateUserSetting = {
   autoStartShortBreak: false,
   autoStartFocusTime: false,
   autoStartLongBreak: false,
-  focusTimeBgm: "noBgm", //仮の値
-  focusTimeSound: "noSound", //仮の値
-  shortBreakSound: "noSound", //仮の値
-  longBreakSound: "noSound", //仮の値
+  focusTimeBgm: "noBgm",
+  shortBreakBgm: "noBgm",
+  longBreakBgm: "noBgm",
+  focusTimeSound: "noSound",
+  shortBreakSound: "noSound",
+  longBreakSound: "noSound",
   soundVolume: 50,
   timelinePageLink: true,
   postButtonToTimeline: true,
