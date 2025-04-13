@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import Header from "@/app/_components/layout/Header";
 import { MobileNav } from "@/app/_components/layout/Nav";
 import Footer from "@/app/_components/layout/Footer";
@@ -8,17 +7,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} pb-16 antialiased sm:pb-0`}
-      >
+      <body className={`pb-16 antialiased sm:pb-0`}>
         <Theme className="min-h-fit">
           <ToastContainer autoClose={3000} hideProgressBar theme="colored" />
           <Header />
