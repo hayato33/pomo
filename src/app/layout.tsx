@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import Header from "@/app/_components/layout/Header";
-import { MobileNav } from "@/app/_components/layout/Nav";
-import Footer from "@/app/_components/layout/Footer";
-import { Theme } from "@radix-ui/themes";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
+import ClientLayout from "./_components/layout/ClientLayout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,17 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
-      <body className={`pb-16 antialiased sm:pb-0`}>
-        <Theme className="min-h-fit">
-          <ToastContainer autoClose={3000} hideProgressBar theme="colored" />
-          <Header />
-          <MobileNav />
-          <main className="relative min-h-[calc(100vh-7.5rem)] p-4 sm:min-h-[calc(100vh-5.75rem)] sm:py-12">
-            {children}
-          </main>
-          <Footer />
-        </Theme>
+    <html lang="ja" className="antialiased">
+      <body className="pb-16 sm:pb-0">
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
