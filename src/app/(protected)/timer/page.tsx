@@ -15,11 +15,14 @@ import { getImageUrl } from "@/app/_utils/getImageUrl";
 import { useSetting } from "@/app/_hooks/useSetting";
 import useTimerAudio from "./_hooks/useTimerAudio";
 import ExplainText from "./_components/ExplainText";
+import { createPomodoroLog } from "./_lib/createPomodoroLog";
+import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
 
 export default function Page() {
+  const { token } = useSupabaseSession();
   const [isPomodoroCompletionModalOpen, setIsPomodoroCompletionModalOpen] =
     useState(false);
   // ローカルストレージから設定を取得
@@ -59,6 +62,8 @@ export default function Page() {
   const autoStartShortBreak = setting?.data?.data?.autoStartShortBreak;
   const autoStartFocusTime = setting?.data?.data?.autoStartFocusTime;
   const autoStartLongBreak = setting?.data?.data?.autoStartLongBreak;
+  // タイムラインへの投稿ボタンの表示/非表示
+  const postButtonToTimeline = setting?.data?.data?.postButtonToTimeline;
 
   // 設定が変更されたときに残り時間を更新する
   useEffect(() => {
@@ -75,7 +80,7 @@ export default function Page() {
    * 現在のフェーズが完了した時の処理
    * 次のフェーズに移行し、適切な時間をセットする
    */
-  const handlePhaseComplete = () => {
+  const handlePhaseComplete = async () => {
     setIsTimerRunning(false);
     // タイマーが自然に完了したことを示す
     setIsTimerCompleted(true);
@@ -100,7 +105,16 @@ export default function Page() {
       }
     } else if (currentPhase === "long-break") {
       // 長休憩⇒集中時間
-      setIsPomodoroCompletionModalOpen(true);
+      if (postButtonToTimeline) {
+        setIsPomodoroCompletionModalOpen(true);
+      } else {
+        await createPomodoroLog({
+          completedCount: storedSettings.cycles,
+          completedTime: storedSettings.focusTime,
+          displayInTimeline: false,
+          token: token ?? "",
+        });
+      }
       setCurrentPhase("focus");
       setRemainingTime(storedSettings.focusTime * 60);
       setCurrentCycle(1);
