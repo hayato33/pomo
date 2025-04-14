@@ -6,6 +6,12 @@ import { LuLogIn } from "react-icons/lu";
 import { Skeleton } from "@radix-ui/themes";
 import { DesktopNav } from "./Nav";
 import UserMenu from "./UserMenu";
+import { Work_Sans } from "next/font/google";
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 export default function Header() {
   const { session, isLoading } = useSupabaseSession();
@@ -14,7 +20,7 @@ export default function Header() {
     <header className="sticky left-0 right-0 top-0 z-10 h-14 bg-white/80 p-4 backdrop-blur-sm sm:py-0">
       <div className="flex size-full items-center justify-between">
         <Link href="/">
-          <h1 className="text-2xl font-bold">Pomo!</h1>
+          <h1 className={`${workSans.className} text-2xl font-bold`}>Pomo!</h1>
         </Link>
         <DesktopNav />
         {isLoading && (
