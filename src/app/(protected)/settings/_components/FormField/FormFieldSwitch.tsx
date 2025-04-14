@@ -14,6 +14,7 @@ interface Props {
   isSubmitting: boolean;
   name: keyof UpdateData;
   label: string;
+  subtext?: string;
 }
 
 export default function FormFieldSwitch({
@@ -21,6 +22,7 @@ export default function FormFieldSwitch({
   isSubmitting,
   name,
   label,
+  subtext,
 }: Props) {
   return (
     <FormField
@@ -29,7 +31,12 @@ export default function FormFieldSwitch({
       render={({ field }) => (
         <FormItem>
           <div className="flex flex-wrap items-center justify-between gap-2 sm:flex-row">
-            <FormLabel className="min-w-36 font-normal">{label}</FormLabel>
+            <FormLabel className="grid min-w-36 gap-1.5 font-normal">
+              {label}
+              {subtext && (
+                <span className="text-xs text-gray-600">{subtext}</span>
+              )}
+            </FormLabel>
             <FormControl>
               <Switch
                 className="!mt-0"

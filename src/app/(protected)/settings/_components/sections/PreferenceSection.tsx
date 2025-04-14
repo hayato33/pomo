@@ -36,6 +36,7 @@ export default function PreferenceSection({
         isSubmitting={isSubmitting}
         name="hideExplainText"
         label="タイマーページの説明テキストを非表示にする"
+        subtext="「1セット◯分～」から始まる文章です。"
       />
       <FormFieldSwitch
         control={control}
