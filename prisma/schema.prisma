@@ -57,9 +57,11 @@ enum TimerEndSound {
 }
 
 enum Font {
-  font01
-  font02
-  font03
+  mPlus1
+  notoSansJP
+  mochiyPopOne
+  yuseiMagic
+  zenKurenaido
 }
 
 model UserSetting {
@@ -80,7 +82,7 @@ model UserSetting {
   rankingPageLink     Boolean
   showOnRanking       Boolean
   backgroundImageKey  String?
-  font                Font            @default(font01)
+  font                Font            @default(mPlus1)
   hideExplainText     Boolean
   setRandomTime       Boolean
   createdAt           DateTime        @default(now())

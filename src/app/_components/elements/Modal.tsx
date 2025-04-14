@@ -4,6 +4,7 @@ import React, { FC, ReactNode } from "react";
 import ReactModal from "react-modal";
 import { FaXmark } from "react-icons/fa6";
 import { Theme } from "@radix-ui/themes";
+import { useFont } from "@/app/_hooks/useFont";
 
 interface Props {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const Modal: FC<Props> = ({ isOpen, onClose, children }) => {
+  const { fontVariable, fontClass } = useFont();
   return (
     <ReactModal
       isOpen={isOpen}
@@ -21,7 +23,7 @@ export const Modal: FC<Props> = ({ isOpen, onClose, children }) => {
       className="relative max-h-[80vh] w-[90vw] max-w-md overflow-hidden rounded-lg bg-white p-6 shadow-xl"
       overlayClassName="fixed inset-0 bg-black/80 flex items-center justify-center z-[99]"
     >
-      <Theme>
+      <Theme className={`${fontVariable} ${fontClass}`}>
         {/* モーダルの中身 */}
         {children}
         {/* 閉じるボタン */}

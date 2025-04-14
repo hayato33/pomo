@@ -14,10 +14,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/app/_components/DropdownMenu";
+import { useFont } from "@/app/_hooks/useFont";
 
 /** ユーザーメニューを表示するドロップダウンコンポーネント */
 export default function UserMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const { fontVariable, fontClass } = useFont();
 
   const handleClose = () => setIsOpen(false);
 
@@ -31,7 +33,7 @@ export default function UserMenu() {
       <DropdownMenuTrigger>
         <UserProfileImage />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className={`${fontVariable} ${fontClass}`}>
         <DropdownMenuItem className="cursor-pointer px-4 py-2">
           <Link
             href="/settings"
