@@ -17,7 +17,7 @@ export const DEFAULT_USER_SETTINGS: UpdateUserSetting = {
   rankingPageLink: true,
   showOnRanking: true,
   backgroundImageKey: null,
-  font: "font01", //仮の値
+  font: "mPlus1",
   hideExplainText: false,
   setRandomTime: false,
 };
