@@ -14,6 +14,7 @@ import PomodoroCompletionModal from "./_components/PomodoroCompletionModal";
 import { getImageUrl } from "@/app/_utils/getImageUrl";
 import { useSetting } from "@/app/_hooks/useSetting";
 import useTimerAudio from "./_hooks/useTimerAudio";
+import ExplainText from "./_components/ExplainText";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
@@ -146,6 +147,7 @@ export default function Page() {
           handlePhaseComplete={handlePhaseComplete}
           resetTimer={resetTimer}
         />
+        <ExplainText storedSettings={storedSettings} />
         <TimerSettingsForm
           resetTimer={resetTimer}
           storedSettings={storedSettings}
