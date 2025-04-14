@@ -62,7 +62,7 @@ export default function Page() {
   const autoStartShortBreak = setting?.data?.data?.autoStartShortBreak;
   const autoStartFocusTime = setting?.data?.data?.autoStartFocusTime;
   const autoStartLongBreak = setting?.data?.data?.autoStartLongBreak;
-  // タイムラインへの投稿ボタンの表示/非表示
+  // タイムラインへの投稿画面の表示/非表示
   const postButtonToTimeline = setting?.data?.data?.postButtonToTimeline;
 
   // 設定が変更されたときに残り時間を更新する
