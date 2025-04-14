@@ -41,8 +41,9 @@ export default function Page() {
   // タイマーが完了したかどうか（自然終了かユーザー操作による停止かを区別）
   const [isTimerCompleted, setIsTimerCompleted] = useState(false);
 
-  // 背景画像のURL
+  // ユーザー設定取得
   const setting = useSetting();
+  // 背景画像のURL
   const bgImageKey = setting?.data?.data?.backgroundImageKey;
   const [bgImageUrl, setBgImageUrl] = useState<null | string>(null);
   useEffect(() => {
@@ -54,6 +55,10 @@ export default function Page() {
     };
     fetchImageUrl();
   }, [bgImageKey]);
+  // タイマー自動開始設定
+  const autoStartShortBreak = setting?.data?.data?.autoStartShortBreak;
+  const autoStartFocusTime = setting?.data?.data?.autoStartFocusTime;
+  const autoStartLongBreak = setting?.data?.data?.autoStartLongBreak;
 
   // 設定が変更されたときに残り時間を更新する
   useEffect(() => {
@@ -76,18 +81,25 @@ export default function Page() {
     setIsTimerCompleted(true);
 
     if (currentPhase === "focus") {
+      // 集中時間⇒小休憩
       setCurrentPhase("short-break");
       setRemainingTime(storedSettings.shortBreakTime * 60);
+      if (autoStartShortBreak) setIsTimerRunning(true);
     } else if (currentPhase === "short-break") {
       if (currentCycle === storedSettings.cycles) {
+        // 小休憩⇒長休憩
         setCurrentPhase("long-break");
         setRemainingTime(storedSettings.longBreakTime * 60);
+        if (autoStartLongBreak) setIsTimerRunning(true);
       } else {
+        // 小休憩⇒集中時間
         setCurrentPhase("focus");
         setRemainingTime(storedSettings.focusTime * 60);
         setCurrentCycle((prev) => prev + 1);
+        if (autoStartFocusTime) setIsTimerRunning(true);
       }
     } else if (currentPhase === "long-break") {
+      // 長休憩⇒集中時間
       setIsPomodoroCompletionModalOpen(true);
       setCurrentPhase("focus");
       setRemainingTime(storedSettings.focusTime * 60);
