@@ -1,3 +1,4 @@
+import { useFont } from "@/app/_hooks/useFont";
 import { Button } from "@radix-ui/themes";
 
 export default function ButtonComponent({
@@ -17,13 +18,14 @@ export default function ButtonComponent({
   onClick?: () => void;
   disabled?: boolean;
 }) {
+  const { fontClass } = useFont();
   return (
     <Button
       size={size}
       color="gray"
       variant={variant}
       highContrast
-      className={`cursor-pointer ${className} ${variant !== "solid" ? "bg-white/75 backdrop-blur" : ""}`}
+      className={`${fontClass} cursor-pointer ${className} ${variant !== "solid" ? "bg-white/75 backdrop-blur" : ""}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
