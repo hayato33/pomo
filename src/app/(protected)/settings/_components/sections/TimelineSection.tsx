@@ -18,7 +18,8 @@ export default function TimelineSection({
         control={control}
         isSubmitting={isSubmitting}
         name="postButtonToTimeline"
-        label="タイマー終了時にタイムラインへの投稿ボタンを表示する"
+        label="タイマー終了時に投稿画面を表示する"
+        subtext="記録は保存されます(分析ページにて確認可能)"
       />
     </Section>
   );
