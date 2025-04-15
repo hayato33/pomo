@@ -1,6 +1,6 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { FormData } from "./authSchema";
-import { ensureUserExists } from "./authUserService";
+import { FormData } from "../(public)/(auth)/_lib/authSchema";
+import { ensureUserExists } from "../(public)/(auth)/_lib/authUserService";
 import { supabase } from "@/app/_utils/supabase";
 import { toast } from "react-toastify";
 
