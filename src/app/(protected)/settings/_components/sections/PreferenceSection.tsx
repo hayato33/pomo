@@ -42,7 +42,8 @@ export default function PreferenceSection({
         control={control}
         isSubmitting={isSubmitting}
         name="setRandomTime"
-        label="集中時間・小休憩・長休憩の時間をランダムにする"
+        label="時間・サイクル数をランダムにする"
+        subtext="1セット終わるごとにランダムな時間・サイクル数が設定されます。"
       />
     </Section>
   );

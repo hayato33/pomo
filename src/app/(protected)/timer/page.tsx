@@ -17,6 +17,8 @@ import useTimerAudio from "./_hooks/useTimerAudio";
 import ExplainText from "./_components/ExplainText";
 import { createPomodoroLog } from "./_lib/createPomodoroLog";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
+import { generateRandomInt } from "./_lib/generateRandomFloor";
+import { toast } from "react-toastify";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
@@ -64,6 +66,8 @@ export default function Page() {
   const autoStartLongBreak = setting?.data?.data?.autoStartLongBreak;
   // タイムラインへの投稿画面の表示/非表示
   const postButtonToTimeline = setting?.data?.data?.postButtonToTimeline;
+  // ランダム
+  const setRandomTime = setting?.data?.data?.setRandomTime;
 
   // 設定が変更されたときに残り時間を更新する
   useEffect(() => {
@@ -114,6 +118,16 @@ export default function Page() {
           displayInTimeline: false,
           token: token ?? "",
         });
+      }
+      if (setRandomTime) {
+        // ランダムな設定をセット
+        setStoredSettings({
+          focusTime: generateRandomInt(90),
+          shortBreakTime: generateRandomInt(30),
+          longBreakTime: generateRandomInt(90),
+          cycles: generateRandomInt(10),
+        });
+        toast.success("ランダムな設定を適用しました");
       }
       setCurrentPhase("focus");
       setRemainingTime(storedSettings.focusTime * 60);
