@@ -7,7 +7,7 @@ import AuthFormItem from "./AuthFormItem";
 import PasswordInput from "./PasswordInput";
 import FormActions from "./FormActions";
 import { authSchema, FormData, FormType } from "../_lib/authSchema";
-import { loginHandler, signupHandler } from "../_lib/authHandlers";
+import { loginHandler, signupHandler } from "@/app/_lib/authHandlers";
 
 /**
  * ログインと新規登録で共通して使用されるフォームコンポーネント

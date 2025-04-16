@@ -1,12 +1,10 @@
 import Button from "@/app/_components/elements/Button";
 import Link from "next/link";
-import { toast } from "react-toastify";
+import { useGuestLogin } from "@/app/_hooks/useGuestLogin";
 
 export default function Buttons() {
-  const guestLogin = () => {
-    // TODO: ゲストログイン
-    toast.success("ゲストログインに成功しました");
-  };
+  const { guestLogin } = useGuestLogin();
+
   return (
     <>
       <Link
