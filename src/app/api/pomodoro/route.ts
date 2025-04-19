@@ -18,7 +18,7 @@ export const POST = async (req: NextRequest) => {
         { status: 404 }
       );
 
-    const { completedCount, completedTime, displayInTimeline } =
+    const { completedCount, completedTime, displayInTimeline, categoryIds } =
       await req.json();
 
     // ポモドーロログをデータベースに作成
@@ -30,6 +30,27 @@ export const POST = async (req: NextRequest) => {
         user: {
           connect: {
             id: currentUser.id,
+          },
+        },
+        // カテゴリーが指定されている場合は関連付け
+        ...(categoryIds && categoryIds.length > 0
+          ? {
+              categories: {
+                create: categoryIds.map((categoryId: string) => ({
+                  category: {
+                    connect: {
+                      id: categoryId,
+                    },
+                  },
+                })),
+              },
+            }
+          : {}),
+      },
+      include: {
+        categories: {
+          include: {
+            category: true,
           },
         },
       },
