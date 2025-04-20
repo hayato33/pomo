@@ -5,6 +5,7 @@ import { PomodoroStatsResponseType } from "./_types/response";
 import { getStatsData } from "./_lib/getStatsData";
 import { getWeeklyDataSQL } from "./_lib/getWeeklyData";
 import { getMonthlyDataSQL } from "./_lib/getMonthlyData";
+import { getTotalTimeByCategory } from "./_lib/getTotalTimeByCategory";
 
 /** ポモドーロログを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -83,10 +84,22 @@ export const GET = async (req: NextRequest) => {
         { status: 404 }
       );
 
-    const [statsData, weeklyData, monthlyData] = await Promise.all([
+    const [
+      statsData,
+      weeklyData,
+      monthlyData,
+      dailyTotalTimeByCategory,
+      weeklyTotalTimeByCategory,
+      monthlyTotalTimeByCategory,
+      yearlyTotalTimeByCategory,
+    ] = await Promise.all([
       getStatsData(currentUser.id),
       getWeeklyDataSQL(currentUser.id),
       getMonthlyDataSQL(currentUser.id),
+      getTotalTimeByCategory(currentUser.id, "day"),
+      getTotalTimeByCategory(currentUser.id, "week"),
+      getTotalTimeByCategory(currentUser.id, "month"),
+      getTotalTimeByCategory(currentUser.id, "year"),
     ]);
 
     const responseData = {
@@ -94,8 +107,12 @@ export const GET = async (req: NextRequest) => {
       totalTime: statsData.totalTime,
       totalDays: statsData.totalDays,
       averageTimePerDay: statsData.averageTimePerDay,
-      weeklyData: weeklyData,
-      monthlyData: monthlyData,
+      weeklyData,
+      monthlyData,
+      dailyTotalTimeByCategory,
+      weeklyTotalTimeByCategory,
+      monthlyTotalTimeByCategory,
+      yearlyTotalTimeByCategory,
     };
 
     return NextResponse.json<PomodoroStatsResponseType>(
