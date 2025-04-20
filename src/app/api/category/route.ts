@@ -12,7 +12,7 @@ export const POST = async (req: NextRequest) => {
     if (!currentUser)
       return NextResponse.json(
         { error: "ユーザーが見つかりません" },
-        { status: 404 }
+        { status: 401 }
       );
 
     const { name } = await req.json();
@@ -30,7 +30,7 @@ export const POST = async (req: NextRequest) => {
         message: "カテゴリーを作成しました",
         data: category,
       },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (error) {
     if (error instanceof Error)
@@ -47,7 +47,7 @@ export const GET = async (req: NextRequest) => {
     if (!currentUser)
       return NextResponse.json(
         { error: "ユーザーが見つかりません" },
-        { status: 404 }
+        { status: 401 }
       );
 
     const categories = await CategoryService.findByUserId(currentUser.id);
@@ -76,7 +76,7 @@ export const PUT = async (req: NextRequest) => {
     if (!currentUser)
       return NextResponse.json(
         { error: "ユーザーが見つかりません" },
-        { status: 404 }
+        { status: 401 }
       );
 
     const { id, name } = await req.json();
@@ -112,7 +112,7 @@ export const DELETE = async (req: NextRequest) => {
     if (!currentUser)
       return NextResponse.json(
         { error: "ユーザーが見つかりません" },
-        { status: 404 }
+        { status: 401 }
       );
 
     const { id } = await req.json();
