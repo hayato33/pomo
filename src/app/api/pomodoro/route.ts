@@ -5,6 +5,7 @@ import { PomodoroStatsResponseType } from "./_types/response";
 import { getStatsData } from "./_lib/getStatsData";
 import { getWeeklyDataSQL } from "./_lib/getWeeklyData";
 import { getMonthlyDataSQL } from "./_lib/getMonthlyData";
+import { getTotalTimeByCategory } from "./_lib/getTotalTimeByCategory";
 
 /** ポモドーロログを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
@@ -18,7 +19,7 @@ export const POST = async (req: NextRequest) => {
         { status: 404 }
       );
 
-    const { completedCount, completedTime, displayInTimeline } =
+    const { completedCount, completedTime, displayInTimeline, categoryIds } =
       await req.json();
 
     // ポモドーロログをデータベースに作成
@@ -30,6 +31,27 @@ export const POST = async (req: NextRequest) => {
         user: {
           connect: {
             id: currentUser.id,
+          },
+        },
+        // カテゴリーが指定されている場合は関連付け
+        ...(categoryIds && categoryIds.length > 0
+          ? {
+              categories: {
+                create: categoryIds.map((categoryId: string) => ({
+                  category: {
+                    connect: {
+                      id: categoryId,
+                    },
+                  },
+                })),
+              },
+            }
+          : {}),
+      },
+      include: {
+        categories: {
+          include: {
+            category: true,
           },
         },
       },
@@ -62,10 +84,22 @@ export const GET = async (req: NextRequest) => {
         { status: 404 }
       );
 
-    const [statsData, weeklyData, monthlyData] = await Promise.all([
+    const [
+      statsData,
+      weeklyData,
+      monthlyData,
+      dailyTotalTimeByCategory,
+      weeklyTotalTimeByCategory,
+      monthlyTotalTimeByCategory,
+      yearlyTotalTimeByCategory,
+    ] = await Promise.all([
       getStatsData(currentUser.id),
       getWeeklyDataSQL(currentUser.id),
       getMonthlyDataSQL(currentUser.id),
+      getTotalTimeByCategory(currentUser.id, "day"),
+      getTotalTimeByCategory(currentUser.id, "week"),
+      getTotalTimeByCategory(currentUser.id, "month"),
+      getTotalTimeByCategory(currentUser.id, "year"),
     ]);
 
     const responseData = {
@@ -73,8 +107,12 @@ export const GET = async (req: NextRequest) => {
       totalTime: statsData.totalTime,
       totalDays: statsData.totalDays,
       averageTimePerDay: statsData.averageTimePerDay,
-      weeklyData: weeklyData,
-      monthlyData: monthlyData,
+      weeklyData,
+      monthlyData,
+      dailyTotalTimeByCategory,
+      weeklyTotalTimeByCategory,
+      monthlyTotalTimeByCategory,
+      yearlyTotalTimeByCategory,
     };
 
     return NextResponse.json<PomodoroStatsResponseType>(
