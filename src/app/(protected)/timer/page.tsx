@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import PomodoroTimer from "./_components/PomodoroTimer";
 import TimerController from "./_components/TimerController";
 import TimerSettingsForm from "./_components/TimerSettingsForm";
@@ -19,6 +19,8 @@ import { createPomodoroLog } from "./_lib/createPomodoroLog";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { generateRandomInt } from "./_lib/generateRandomFloor";
 import { toast } from "react-toastify";
+import CategorySetting from "./_components/CategorySetting";
+import { CategoryOption } from "./_types/category";
 
 /** ポモドーロタイマーフェーズ */
 export type PomodoroTimerPhase = "focus" | "short-break" | "long-break";
@@ -32,6 +34,16 @@ export default function Page() {
     TIMER_SETTINGS_KEY,
     DEFAULT_TIMER_SETTINGS
   );
+
+  // カテゴリー
+  const initialCategories = useMemo<CategoryOption[]>(() => [], []);
+  const [selectedCategories, setSelectedCategories] = useLocalStorage<
+    CategoryOption[]
+  >("selected-categories", initialCategories);
+  const [categoryIds, setCategoryIds] = useState<string[]>([]);
+  useEffect(() => {
+    setCategoryIds(selectedCategories.map((c) => c.value));
+  }, [selectedCategories]);
 
   // 現在のフェーズの残り時間（秒）
   const [remainingTime, setRemainingTime] = useState(
@@ -116,6 +128,7 @@ export default function Page() {
           completedCount: storedSettings.cycles,
           completedTime: storedSettings.focusTime,
           displayInTimeline: false,
+          categoryIds,
           token: token ?? "",
         });
       }
@@ -171,7 +184,7 @@ export default function Page() {
         backgroundImage: bgImageUrl ? `url(${bgImageUrl})` : "none",
       }}
     >
-      <div className="my-auto flex w-full flex-1 flex-col items-center justify-center gap-6">
+      <div className="m-auto flex w-full max-w-[600px] flex-1 flex-col items-center justify-center gap-6 p-4">
         <PomodoroTimer
           isTimerRunning={isTimerRunning}
           handlePhaseComplete={handlePhaseComplete}
@@ -187,6 +200,10 @@ export default function Page() {
           handlePhaseComplete={handlePhaseComplete}
           resetTimer={resetTimer}
         />
+        <CategorySetting
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+        />
         <ExplainText storedSettings={storedSettings} />
         <TimerSettingsForm
           resetTimer={resetTimer}
@@ -197,6 +214,7 @@ export default function Page() {
           storedSettings={storedSettings}
           isPomodoroCompletionModalOpen={isPomodoroCompletionModalOpen}
           setIsPomodoroCompletionModalOpen={setIsPomodoroCompletionModalOpen}
+          categoryIds={categoryIds}
         />
       </div>
     </div>

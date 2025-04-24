@@ -14,12 +14,14 @@ interface Props {
   setIsPomodoroCompletionModalOpen: React.Dispatch<
     React.SetStateAction<boolean>
   >;
+  categoryIds: string[];
 }
 
 export default function PomodoroCompletionModal({
   storedSettings,
   isPomodoroCompletionModalOpen,
   setIsPomodoroCompletionModalOpen,
+  categoryIds,
 }: Props) {
   const { token } = useSupabaseSession();
   const { data: userData } = useUser();
@@ -31,6 +33,7 @@ export default function PomodoroCompletionModal({
       completedCount: storedSettings.cycles,
       completedTime: storedSettings.focusTime,
       displayInTimeline,
+      categoryIds,
       token: token ?? "",
     });
     Confetti();
