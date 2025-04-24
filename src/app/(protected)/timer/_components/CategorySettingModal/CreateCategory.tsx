@@ -16,8 +16,8 @@ export default function CreateCategory({ mutate }: { mutate: () => void }) {
     reset,
   } = useForm<{ name: string }>({ resolver: zodResolver(categorySchema) });
 
-  const onSubmit = (formData: { name: string }) => {
-    fetcher({
+  const onSubmit = async (formData: { name: string }) => {
+    await fetcher({
       apiPath: "/api/category",
       method: "POST",
       body: { ...formData },

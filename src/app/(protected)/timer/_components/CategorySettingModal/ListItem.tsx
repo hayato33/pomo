@@ -30,8 +30,8 @@ export default function ListItem({
     defaultValues: { name: category.name },
   });
 
-  const onSave = (formData: { name: string }) => {
-    fetcher({
+  const onSave = async (formData: { name: string }) => {
+    await fetcher({
       apiPath: "/api/category",
       method: "PUT",
       body: { id: category.id, ...formData },
