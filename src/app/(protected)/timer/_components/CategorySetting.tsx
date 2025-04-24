@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import CategorySettingModal from "./CategorySettingModal";
 import Select from "react-select";
 import Button from "@/app/_components/elements/Button";
