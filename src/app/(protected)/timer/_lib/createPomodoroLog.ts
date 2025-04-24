@@ -4,6 +4,7 @@ interface Props {
   completedCount: number;
   completedTime: number;
   displayInTimeline: boolean;
+  categoryIds: string[];
   token: string;
 }
 
@@ -11,6 +12,7 @@ export const createPomodoroLog = async ({
   completedCount,
   completedTime,
   displayInTimeline,
+  categoryIds,
   token,
 }: Props): Promise<void> => {
   try {
@@ -21,6 +23,7 @@ export const createPomodoroLog = async ({
         completedCount,
         completedTime,
         displayInTimeline,
+        categoryIds,
       },
       token,
     });
