@@ -6,6 +6,7 @@ import { useCategories } from "@/app/_hooks/useCategories";
 import { Category } from "@prisma/client";
 import { TbSettings } from "react-icons/tb";
 import { CategoryOption } from "../_types/category";
+import { GetCategoriesResponse } from "@/app/_types/category";
 
 interface Props {
   selectedCategories: CategoryOption[];
@@ -17,7 +18,7 @@ export default function CategorySetting({
   setSelectedCategories,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: categories } = useCategories();
+  const { data: categories }: { data: GetCategoriesResponse } = useCategories();
   const options = categories?.data.map((item: Category) => ({
     value: item.id,
     label: item.name,
