@@ -42,8 +42,8 @@ export default function PomodoroCompletionModal({
   // プレビュー用のログデータ
   const log: PomodoroLogType = {
     user: {
-      nickname: currentUser?.nickname,
-      profileImageKey: currentUser?.profileImageKey,
+      nickname: currentUser?.nickname ?? "",
+      profileImageKey: currentUser?.profileImageKey ?? null,
     },
     completedTime: storedSettings.focusTime,
     completedCount: storedSettings.cycles,
