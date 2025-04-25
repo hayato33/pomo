@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "../_lib/getCurrentUser";
 import { CategoryService } from "./_lib/CategoryService";
-import { CategoryResponse, GetCategoriesResponse } from "./_types/response";
+import { CategoryResponse, GetCategoriesResponse } from "@/app/_types/category";
 
 /** カテゴリーを作成するAPIエンドポイント */
 export const POST = async (req: NextRequest) => {
