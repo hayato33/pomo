@@ -7,12 +7,12 @@ import { useSupabaseSession } from "./useSupabaseSession";
  * @param endpoint - APIエンドポイントパス（例: "/api/user"）
  * @returns リソースデータ、ローディング状態、エラー状態、データ再取得関数
  */
-export const useGetEndpoint = (endpoint: string) => {
+export const useGetEndpoint = <T>(endpoint: string) => {
   const { token } = useSupabaseSession();
 
-  const { data, error, isLoading, mutate } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR<T>(
     token ? endpoint : null,
-    token ? (apiPath) => fetcher({ apiPath, token }) : null
+    token ? (apiPath: string) => fetcher({ apiPath, token }) : null
   );
 
   return {
