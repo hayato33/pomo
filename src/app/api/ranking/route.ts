@@ -8,7 +8,7 @@ import { getWeeklyRankingByCount } from "./_lib/getWeeklyRankingByCount";
 import { getWeeklyRankingByTime } from "./_lib/getWeeklyRankingByTime";
 import { getYearlyRankingByCount } from "./_lib/getYearlyRankingByCount";
 import { getYearlyRankingByTime } from "./_lib/getYearlyRankingByTime";
-import { RankingResponseType } from "./_types/response";
+import { GetRankingResponse } from "@/app/_types/ranking";
 export const dynamic = "force-dynamic";
 
 /** ランキングを取得するAPIエンドポイント */
@@ -44,7 +44,7 @@ export const GET = async (req: NextRequest) => {
     ]);
 
     // 成功レスポンスを返す
-    return NextResponse.json<RankingResponseType>(
+    return NextResponse.json<GetRankingResponse>(
       {
         status: "success",
         message: "ランキングデータを取得しました",

@@ -3,7 +3,7 @@ import { supabase } from "@/app/_utils/supabase";
 import { prisma } from "@/app/_lib/prisma";
 import { getCurrentUser } from "../_lib/getCurrentUser";
 import { UpdateUserResponseType } from "./_types/response";
-import { UpdateUser } from "@/app/_types/user";
+import { UpdateUser, UserResponse } from "@/app/_types/user";
 import { userSchema } from "@/app/(protected)/settings/_lib/settingFormSchema";
 import { fromZodError } from "zod-validation-error";
 import { ValidationError } from "@/app/_types/response";
@@ -31,7 +31,7 @@ export const POST = async (req: NextRequest) => {
     });
 
     // 成功レスポンスを返す
-    return NextResponse.json(
+    return NextResponse.json<UserResponse>(
       {
         status: "success",
         message: "ユーザーを作成しました",
@@ -70,7 +70,7 @@ export const GET = async (req: NextRequest) => {
       );
 
     // 成功レスポンスを返す
-    return NextResponse.json(
+    return NextResponse.json<UserResponse>(
       {
         status: "success",
         message: "ユーザーを取得しました",

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/_lib/prisma";
 import { DEFAULT_USER_SETTINGS } from "@/app/_config/userSettingConfig";
 import { getCurrentUser } from "../_lib/getCurrentUser";
-import { UpdateUserSetting } from "@/app/_types/setting";
+import { SettingResponse, UpdateUserSetting } from "@/app/_types/setting";
 import { UpdateSettingResponseType } from "./_types/response";
 import { settingSchema } from "@/app/(protected)/settings/_lib/settingFormSchema";
 import { fromZodError } from "zod-validation-error";
@@ -34,7 +34,7 @@ export const POST = async (req: NextRequest) => {
     });
 
     // 成功レスポンスを返す
-    return NextResponse.json(
+    return NextResponse.json<SettingResponse>(
       {
         status: "success",
         message: "ユーザー設定を作成しました",
@@ -73,7 +73,7 @@ export const GET = async (req: NextRequest) => {
       );
 
     // 成功レスポンスを返す
-    return NextResponse.json(
+    return NextResponse.json<SettingResponse>(
       {
         status: "success",
         message: "ユーザー設定を取得しました",

@@ -33,7 +33,7 @@ export default function useTimerAudio({
   const [completionSoundPath, setCompletionSoundPath] = useState("");
 
   // 音量を0〜1の範囲に正規化
-  const volume = soundVolume / 100 || 0;
+  const volume = soundVolume ? soundVolume / 100 : 0;
 
   // 各フェーズの設定をまとめたオブジェクト
   const phaseSettings = useMemo(

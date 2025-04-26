@@ -10,7 +10,6 @@ import {
   TabsContent,
 } from "@/app/_components/Tabs";
 import { RankingTable } from "./_components/RankingTable";
-import { RankingData } from "./_types/rankingData";
 import { useState } from "react";
 
 /** ランキングページ */
@@ -46,7 +45,16 @@ export default function Page() {
     weeklyRankingByTime,
     yearlyRankingByCount,
     yearlyRankingByTime,
-  }: RankingData = ranking ?? {};
+  } = ranking || {
+    dailyRankingByCount: [],
+    dailyRankingByTime: [],
+    monthlyRankingByCount: [],
+    monthlyRankingByTime: [],
+    weeklyRankingByCount: [],
+    weeklyRankingByTime: [],
+    yearlyRankingByCount: [],
+    yearlyRankingByTime: [],
+  };
 
   return (
     <div className="mx-auto max-w-[500px]">
