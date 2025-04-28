@@ -21,10 +21,10 @@ export default function CategoryChartChild({
   if (totalTimeByCategory.length === 0)
     return <TabsContent value={period}>データがありません</TabsContent>;
 
-  const chartData = totalTimeByCategory.map((data) => ({
+  const chartData = totalTimeByCategory.map((data, index) => ({
     category: data.categoryName,
     total: Number(data.totalTime),
-    fill: `var(--color-${data.categoryName})`,
+    fill: `hsl(var(--chart-${index + 1}))`,
   }));
   const chartConfig = totalTimeByCategory.reduce<ChartConfig>(
     (acc, data, index) => {
