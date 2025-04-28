@@ -6,6 +6,7 @@ import StatCard from "./_components/StatCard";
 import AnalysisLoading from "./_components/AnalysisLoading";
 import { minutesToHours } from "./_utils/minutesToHours";
 import Record from "./_components/Record";
+import CategoryChart from "./_components/CategoryChart";
 
 /** ポモドーロの分析ページ */
 export default function Page() {
@@ -47,7 +48,12 @@ export default function Page() {
               weeklyData={data.weeklyData}
               monthlyData={data.monthlyData}
             />
-            {/* TODO: カテゴリ機能追加後にカテゴリごとのデータを追加 */}
+            <CategoryChart
+              dailyTotalTimeByCategory={data.dailyTotalTimeByCategory}
+              weeklyTotalTimeByCategory={data.weeklyTotalTimeByCategory}
+              monthlyTotalTimeByCategory={data.monthlyTotalTimeByCategory}
+              yearlyTotalTimeByCategory={data.yearlyTotalTimeByCategory}
+            />
           </div>
         </>
       )}
