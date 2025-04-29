@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Pomo! - カスタマイズ性抜群のポモドーロ記録アプリ",
   description:
     "カスタマイズ性抜群のポモドーロ記録アプリです。ほぼ全ての機能をオン/オフ切り替え可能です。",
-  metadataBase: new URL("https://pomo-app.vercel.app"),
+  metadataBase: new URL("https://pomo-custom.vercel.app/"),
   openGraph: {
     title: "Pomo! - カスタマイズ性抜群のポモドーロ記録アプリ",
     description:
