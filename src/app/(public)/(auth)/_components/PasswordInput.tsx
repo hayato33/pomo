@@ -65,7 +65,7 @@ export default function PasswordInput({
           type={showPassword ? "text" : "password"}
           id="password"
           placeholder="••••••••"
-          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={isSubmitting}
           {...register("password")}
         />
