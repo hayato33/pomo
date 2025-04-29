@@ -25,7 +25,7 @@ export default function HeroSection() {
             <br className="hidden lg:block" />
             ポモドーロ記録アプリ
           </h1>
-          <p className="text-center text-lg text-gray-600 lg:text-left xl:text-xl">
+          <p className="text-center text-lg text-gray-600 dark:text-gray-400 lg:text-left xl:text-xl">
             タイマー、BGM、背景、通知音…
             <br />
             必要な機能だけONにして

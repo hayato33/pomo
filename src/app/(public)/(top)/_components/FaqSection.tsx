@@ -13,7 +13,7 @@ export default function FaqSection() {
     },
     {
       question: "音が鳴らせない環境でも使えますか？",
-      answer: "はい。通知音のON/OFFや音量調整が可能です。",
+      answer: "はい。BGMのON/OFFや音量調整が可能です。",
     },
     {
       question: "PCとスマホでデータは同期されますか？",
@@ -22,7 +22,7 @@ export default function FaqSection() {
   ];
 
   return (
-    <section className="-mx-4 bg-red-50 px-4 py-16 md:py-24">
+    <section className="-mx-4 bg-red-50 px-4 py-16 dark:bg-white dark:text-gray-900 md:py-24">
       <div className="container mx-auto max-w-3xl px-4">
         <h2 className="mb-12 text-center text-2xl font-bold md:text-3xl">
           よくある質問

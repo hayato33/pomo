@@ -9,7 +9,7 @@ export default function CtaSection() {
           <br className="lg:hidden" />
           作りませんか？
         </h2>
-        <p className="mb-8 text-lg text-gray-600">
+        <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
           必要な機能だけを選んで、あなたに最適な集中環境を構築しましょう。
         </p>
         <div className="mx-auto mb-4 flex w-fit flex-wrap justify-center gap-4">

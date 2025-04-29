@@ -9,13 +9,13 @@ export default function Buttons() {
     <>
       <Link
         href="/signup"
-        className="flex h-10 w-full items-center justify-center rounded-md bg-gray-800 px-4 font-medium text-white transition-transform hover:scale-105 md:w-36"
+        className="flex h-10 w-full items-center justify-center rounded-md bg-gray-800 px-4 font-medium text-white transition-transform hover:scale-105 dark:bg-white dark:text-gray-900 md:w-36"
       >
         ユーザー登録
       </Link>
       <Link
         href="/login"
-        className="flex h-10 w-full items-center justify-center rounded-md bg-gray-800 px-4 font-medium text-white transition-transform hover:scale-105 md:w-36"
+        className="flex h-10 w-full items-center justify-center rounded-md bg-gray-800 px-4 font-medium text-white transition-transform hover:scale-105 dark:bg-white dark:text-gray-900 md:w-36"
       >
         ログイン
       </Link>
