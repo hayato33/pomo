@@ -23,6 +23,7 @@ https://pomo-custom.vercel.app/
 ## 主要機能
 
 - **カスタマイズ可能なポモドーロタイマー**: 作業時間・休憩時間を自由に設定
+- **カテゴリー機能**: カテゴリー登録＆カテゴリーごとの分析が可能
 - **機能のオン/オフ切り替え**: 必要な機能だけを有効化
 - **統計とデータ可視化**: 学習・作業時間の分析と可視化
 - **サウンド設定**: カスタマイズ可能な音声通知
@@ -62,6 +63,7 @@ https://pomo-custom.vercel.app/
 
 - [React Hook Form](https://react-hook-form.com/): フォーム管理
 - [Zod](https://zod.dev/): バリデーション
+- [React Select](https://react-select.com/home): セレクトボックス
 - [ESLint](https://eslint.org/) / [Prettier](https://prettier.io/): コード品質管理
 - [Tone.js](https://tonejs.github.io/): 音声再生
 - [Recharts](https://recharts.org/): データ可視化
