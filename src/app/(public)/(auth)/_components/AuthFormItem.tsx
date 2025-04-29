@@ -25,7 +25,7 @@ export default function AuthFormItem({
     <div>
       <label
         htmlFor={id}
-        className="mb-2 block text-sm font-medium text-gray-900"
+        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
       >
         {label}
       </label>
