@@ -20,9 +20,9 @@ export default function PainPointsSection() {
   ];
 
   return (
-    <section className="-mx-4 bg-red-50 px-4 py-16 md:py-24">
+    <section className="-mx-4 bg-red-50 px-4 py-16 dark:bg-white md:py-24">
       <div className="container mx-auto px-4">
-        <h2 className="mb-12 text-center text-2xl font-bold md:text-3xl">
+        <h2 className="mb-12 text-center text-2xl font-bold dark:text-gray-900 md:text-3xl">
           こんなお悩み
           <br className="lg:hidden" />
           ありませんか？
@@ -35,7 +35,9 @@ export default function PainPointsSection() {
             >
               <CardContent className="p-6">
                 <h3 className="mb-3 text-xl font-semibold">{point.title}</h3>
-                <p className="text-gray-600">{point.description}</p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {point.description}
+                </p>
               </CardContent>
             </Card>
           ))}

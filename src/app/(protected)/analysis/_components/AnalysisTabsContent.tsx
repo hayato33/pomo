@@ -49,7 +49,7 @@ export default function AnalysisTabsContent({
 
   return (
     <TabsContent value={value} className="-mt-8 sm:mt-2">
-      <Card>
+      <Card className="bg-transparent">
         <CardHeader>
           <CardTitle className="font-normal">
             {chartData.length > 0 &&

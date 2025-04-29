@@ -66,7 +66,7 @@ export default function ListItem({
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="h-10 rounded-md border border-red-600 px-4 text-red-600"
+            className="h-10 rounded-md border border-red-600 px-4 text-red-600 dark:border-red-500 dark:text-red-500"
           >
             削除
           </button>

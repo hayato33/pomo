@@ -84,13 +84,13 @@ export default function TimerSettingsForm({
 
   return (
     <Collapsible className="flex flex-col justify-center gap-4">
-      <CollapsibleTrigger className="mx-auto flex w-fit items-center justify-center gap-2 rounded-md bg-white/75 px-4 py-2 backdrop-blur">
+      <CollapsibleTrigger className="mx-auto flex w-fit items-center justify-center gap-2 rounded-md bg-white/75 px-4 py-2 backdrop-blur dark:bg-black/75">
         <h4 className="text-sm font-semibold">タイマー設定を開く</h4>
         <ChevronsUpDown className="h-4 w-4" />
         <span className="sr-only">Toggle</span>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="rounded-lg border bg-white/70 p-6 backdrop-blur">
+        <div className="rounded-lg border border-gray-300 bg-white/70 p-6 backdrop-blur dark:border-gray-500 dark:bg-black/70">
           <h3 className="mb-4 text-lg font-bold">タイマー設定</h3>
           <form onSubmit={handleSubmit(onSubmitHandler)} className="grid gap-4">
             <FormItem

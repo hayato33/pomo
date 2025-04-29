@@ -3,6 +3,7 @@ import "@radix-ui/themes/styles.css";
 import "./globals.css";
 import ClientLayout from "./_components/layout/ClientLayout";
 import { GoogleTagManager } from "@next/third-parties/google";
+import { ThemeProvider } from "@/app/_components/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Pomo! - カスタマイズ性抜群のポモドーロ記録アプリ",
@@ -29,9 +30,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className="antialiased">
+    <html lang="ja" className="antialiased" suppressHydrationWarning>
       <body className="pb-16 sm:pb-0">
-        <ClientLayout>{children}</ClientLayout>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ClientLayout>{children}</ClientLayout>
+        </ThemeProvider>
       </body>
       <GoogleTagManager gtmId="GTM-PMLJ2R6P" />
     </html>

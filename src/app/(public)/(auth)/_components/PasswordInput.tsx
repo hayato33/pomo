@@ -56,7 +56,7 @@ export default function PasswordInput({
     <div>
       <label
         htmlFor="password"
-        className="mb-2 block text-sm font-medium text-gray-900"
+        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
       >
         パスワード
       </label>
@@ -82,9 +82,13 @@ export default function PasswordInput({
           )}
         </button>
       </div>
-      {error && <p className="mt-1 text-sm text-red-600">{error.message}</p>}
+      {error && (
+        <p className="mt-1 text-sm text-red-600 dark:text-red-500">
+          {error.message}
+        </p>
+      )}
       {showRequirements && (
-        <div className="mt-2 space-y-1 text-sm text-gray-600">
+        <div className="mt-2 space-y-1 text-sm text-gray-600 dark:text-gray-400">
           <p>パスワードは以下の要件を満たす必要があります：</p>
           <ul className="list-inside space-y-1">
             <li className={passwordRequirements.length ? "text-green-600" : ""}>

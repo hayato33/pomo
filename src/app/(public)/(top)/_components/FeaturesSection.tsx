@@ -64,11 +64,13 @@ export default function FeaturesSection() {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="border-none shadow-md transition-shadow hover:shadow-lg"
+              className="border-none shadow-md transition-shadow hover:shadow-lg dark:bg-white dark:shadow-gray-500"
             >
               <CardContent className="flex flex-col items-center p-4 text-center">
                 <div className="mb-4">{feature.icon}</div>
-                <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
+                <h3 className="mb-2 text-xl font-semibold dark:text-gray-900">
+                  {feature.title}
+                </h3>
                 <p className="text-gray-600">{feature.description}</p>
               </CardContent>
             </Card>

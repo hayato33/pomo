@@ -34,7 +34,9 @@ export default function FormFieldSwitch({
             <FormLabel className="grid min-w-36 gap-1.5 font-normal">
               {label}
               {subtext && (
-                <span className="text-xs text-gray-600">{subtext}</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400">
+                  {subtext}
+                </span>
               )}
             </FormLabel>
             <FormControl>

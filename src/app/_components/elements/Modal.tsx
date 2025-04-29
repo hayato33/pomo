@@ -20,8 +20,8 @@ export const Modal: FC<Props> = ({ isOpen, onClose, children }) => {
       onRequestClose={onClose}
       contentLabel="Modal"
       ariaHideApp={false}
-      className="relative max-h-[80vh] w-[90vw] max-w-md overflow-hidden rounded-lg bg-white p-6 shadow-xl"
-      overlayClassName="fixed inset-0 bg-black/80 flex items-center justify-center z-[99]"
+      className="relative max-h-[80vh] w-[90vw] max-w-md overflow-hidden rounded-lg bg-white p-6 shadow-xl dark:bg-black"
+      overlayClassName="fixed inset-0 bg-black/80 flex items-center justify-center z-[99] dark:bg-white/10"
     >
       <Theme className={`${fontVariable} ${fontClass}`}>
         {/* モーダルの中身 */}

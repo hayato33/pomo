@@ -12,12 +12,12 @@ export default function PomodoroLog({ log }: { log: PomodoroLogType }) {
         />
         <div>
           <p className="text-lg font-bold">{log.user.nickname}</p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             {new Date(log.loggedAt).toLocaleString()}
           </p>
         </div>
       </div>
-      <div className="grid gap-2 rounded-md border border-gray-900 px-6 py-4">
+      <div className="grid gap-2 rounded-md border border-gray-900 px-6 py-4 dark:border-gray-200">
         <p>{"🍅".repeat(log.completedCount)}</p>
         <p>
           {log.completedTime}分 × {log.completedCount}回 達成

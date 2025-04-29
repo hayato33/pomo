@@ -26,7 +26,7 @@ export default function ResetConfirmDialog({
           <br />
           よろしいですか？
         </p>
-        <p className="mb-6 text-red-600">
+        <p className="mb-6 text-red-600 dark:text-red-500">
           ※リセット後の設定を適用するには別途「設定を保存する」ボタンを押してください
         </p>
         <div className="flex justify-end gap-4">
