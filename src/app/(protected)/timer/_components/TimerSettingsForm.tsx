@@ -137,7 +137,7 @@ export default function TimerSettingsForm({
             <div className="flex justify-between">
               <Button
                 variant="outline"
-                type="reset"
+                type="button"
                 onClick={timerSettingsReset}
                 disabled={isSubmitting}
                 className="!bg-transparent backdrop-blur-none"
