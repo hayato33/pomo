@@ -1,5 +1,5 @@
 import { PeriodicPomoData } from "@/app/_types/pomodoro";
-import { CategoryStats } from "@/app/api/pomodoro/_types/categoryStats";
+import { CategoryStats } from "@/app/_types/category";
 
 /** ポモドーロ統計情報のレスポンス型定義 */
 export interface PomodoroStatsResponseType {
