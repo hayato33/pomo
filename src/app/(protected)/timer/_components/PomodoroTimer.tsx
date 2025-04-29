@@ -73,10 +73,10 @@ export default function PomodoroTimer({
   }, [remainingTime, currentPhase, timerSettings]);
 
   return (
-    <div className="relative aspect-square w-80 max-w-full rounded-full bg-white/75 backdrop-blur">
+    <div className="relative aspect-square w-80 max-w-full rounded-full bg-white/75 backdrop-blur dark:bg-black/75">
       <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
         <circle
-          className="stroke-current text-gray-200"
+          className="stroke-current text-gray-200 dark:text-gray-600"
           strokeWidth="4"
           cx="50"
           cy="50"
@@ -102,7 +102,10 @@ export default function PomodoroTimer({
         />
       </svg>
       <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center">
-        <span className="text-5xl font-bold text-gray-800" aria-live="polite">
+        <span
+          className="text-5xl font-bold text-gray-800 dark:text-gray-200"
+          aria-live="polite"
+        >
           {minutes.toString().padStart(2, "0")}:
           {seconds.toString().padStart(2, "0")}
         </span>
