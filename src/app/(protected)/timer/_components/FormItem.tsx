@@ -36,7 +36,7 @@ export default function FormItem({
           min={min}
           max={max}
           id={id}
-          className="block w-20 rounded-lg border border-gray-300 bg-white/75 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+          className="block w-20 rounded-lg border border-gray-300 bg-white/75 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={disabled}
           {...register(id)}
         />
