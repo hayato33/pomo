@@ -61,7 +61,7 @@ export default function ListItem({
     <li key={category.id}>
       {mode === "view" ? (
         <div className="flex w-full items-center gap-2">
-          <p className="mr-auto w-[min(240px,37vw)]">{category.name}</p>
+          <p className="mr-auto w-[min(230px,33vw)]">{category.name}</p>
           <Button onClick={() => setMode("edit")}>編集</Button>
           <button
             type="button"
