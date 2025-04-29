@@ -25,7 +25,7 @@ export default function ButtonComponent({
       color="gray"
       variant={variant}
       highContrast
-      className={`${fontClass} cursor-pointer ${className} ${variant !== "solid" ? "bg-white/75 backdrop-blur" : ""}`}
+      className={`${fontClass} cursor-pointer ${className} ${variant !== "solid" ? "bg-white/75 backdrop-blur dark:bg-black/75" : ""}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
