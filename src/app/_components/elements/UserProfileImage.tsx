@@ -16,11 +16,11 @@ interface Props {
  * @param nickname - ユーザーのニックネーム
  * @returns ユーザープロフィール画像を表示するAvatarコンポーネント
  */
-export default function UserProfileImage({
+export const UserProfileImage: React.FC<Props> = ({
   profileImageKey,
   nickname,
   size = "3",
-}: Props) {
+}) => {
   // Propsが渡されていない場合は、ログインしているユーザーデータから取得
   const user = useUser();
   const [imageUrl, setImageUrl] = useState<null | string>(null);
@@ -48,4 +48,4 @@ export default function UserProfileImage({
       fallback={nickname ? nickname[0].toUpperCase() : "?"} // 画像が読み込めない場合のフォールバック（ニックネームの最初の文字または「?」）
     />
   );
-}
+};

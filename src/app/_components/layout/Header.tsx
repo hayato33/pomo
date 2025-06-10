@@ -5,16 +5,16 @@ import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { LuLogIn } from "react-icons/lu";
 import { Skeleton } from "@radix-ui/themes";
 import { DesktopNav } from "./Nav";
-import UserMenu from "./UserMenu";
+import { UserMenu } from "./UserMenu";
 import { Work_Sans } from "next/font/google";
-import ModeToggle from "../elements/ModeToggle";
+import { ModeToggle } from "../elements/ModeToggle";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
   weight: ["700"],
 });
 
-export default function Header() {
+export const Header: React.FC = () => {
   const { session, isLoading } = useSupabaseSession();
 
   return (
@@ -48,4 +48,4 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};

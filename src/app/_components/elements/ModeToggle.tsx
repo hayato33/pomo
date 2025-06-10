@@ -11,7 +11,7 @@ import {
 } from "../DropdownMenu";
 import { Button } from "@radix-ui/themes";
 
-export default function ModeToggle() {
+export const ModeToggle: React.FC = () => {
   const { setTheme } = useTheme();
 
   return (
@@ -39,4 +39,4 @@ export default function ModeToggle() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

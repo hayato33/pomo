@@ -3,9 +3,9 @@
 import { Theme } from "@radix-ui/themes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "@/app/_components/layout/Header";
+import { Header } from "@/app/_components/layout/Header";
 import { MobileNav } from "@/app/_components/layout/Nav";
-import Footer from "@/app/_components/layout/Footer";
+import { Footer } from "@/app/_components/layout/Footer";
 import { useFont } from "@/app/_hooks/useFont";
 import { usePWADetection } from "@/app/_hooks/usePWADetection";
 import PullToRefresh from "react-simple-pull-to-refresh";
@@ -31,11 +31,9 @@ const AppShell = ({ children }: { children: React.ReactNode }) => {
  * クライアントサイドのレイアウトコンポーネント
  * PWAモードの場合は画面を下スワイプで更新
  */
-export default function ClientLayout({
-  children,
-}: Readonly<{
+export const ClientLayout: React.FC<{
   children: React.ReactNode;
-}>) {
+}> = ({ children }) => {
   const isPWA = usePWADetection();
 
   // PWAモードでない場合は通常のコンテンツを表示
@@ -49,4 +47,4 @@ export default function ClientLayout({
       <AppShell>{children}</AppShell>
     </PullToRefresh>
   );
-}
+};
