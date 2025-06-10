@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CategorySettingModal from "./CategorySettingModal";
 import Select, { StylesConfig } from "react-select";
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 import { useCategories } from "@/app/_hooks/useCategories";
 import { Category } from "@prisma/client";
 import { TbSettings } from "react-icons/tb";

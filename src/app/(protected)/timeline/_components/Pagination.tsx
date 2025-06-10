@@ -1,4 +1,4 @@
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 
 interface Props {
   pagination?: {

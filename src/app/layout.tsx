@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
-import ClientLayout from "./_components/layout/ClientLayout";
+import { ClientLayout } from "./_components/layout/ClientLayout";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { ThemeProvider } from "@/app/_components/providers/ThemeProvider";
 

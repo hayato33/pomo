@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { fetcher } from "@/app/_utils/fetcher";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { toast } from "react-toastify";
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { categorySchema } from "../../_lib/categorySchema";
 

@@ -1,4 +1,4 @@
-import UserProfileImage from "@/app/_components/elements/UserProfileImage";
+import { UserProfileImage } from "@/app/_components/elements/UserProfileImage";
 import {
   Table,
   TableBody,

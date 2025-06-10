@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 import ResetConfirmDialog from "./ResetConfirmDialog";
 import { UseFormReset } from "react-hook-form";
 import { UpdateData } from "../_types/updateData";

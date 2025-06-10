@@ -1,7 +1,7 @@
 "use client";
 
 import { Modal } from "@/app/_components/elements/Modal";
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 
 interface Props {
   isOpen: boolean;

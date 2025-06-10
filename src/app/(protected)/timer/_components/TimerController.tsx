@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 import { BsSkipEndFill } from "react-icons/bs";
 import { HiPause } from "react-icons/hi2";
 import { RiResetLeftFill } from "react-icons/ri";

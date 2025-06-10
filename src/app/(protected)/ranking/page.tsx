@@ -1,6 +1,6 @@
 "use client";
 
-import PageTitle from "../../_components/elements/PageTitle";
+import { PageTitle } from "../../_components/elements/PageTitle";
 import { useRanking } from "../../_hooks/useRanking";
 import { RankingLoading } from "./_components/RankingLoading";
 import {

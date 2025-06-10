@@ -1,6 +1,6 @@
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 import { Modal } from "@/app/_components/elements/Modal";
-import PomodoroLog from "@/app/_components/elements/PomodoroLog";
+import { PomodoroLog } from "@/app/_components/elements/PomodoroLog";
 import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { useUser } from "@/app/_hooks/useUser";
 import { createPomodoroLog } from "../_lib/createPomodoroLog";

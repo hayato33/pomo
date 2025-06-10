@@ -1,7 +1,7 @@
 "use client";
 
 import { useCurrentUserPomodoro } from "./_hooks/useCurrentUserPomodoro";
-import PageTitle from "../../_components/elements/PageTitle";
+import { PageTitle } from "../../_components/elements/PageTitle";
 import StatCard from "./_components/StatCard";
 import AnalysisLoading from "./_components/AnalysisLoading";
 import { minutesToHours } from "./_utils/minutesToHours";
