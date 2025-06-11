@@ -9,7 +9,7 @@ import {
   // RankingSection,
   PreferenceSection,
 } from "./_components/sections";
-import FormActions from "./_components/FormActions";
+import { FormActions } from "./_components/FormActions";
 import { useUser } from "../../_hooks/useUser";
 import { useSetting } from "../../_hooks/useSetting";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSubmitHandler } from "./_hooks/useSubmitHandler";
 import { Form } from "../../_components/Form";
 import { DEFAULT_USER_SETTINGS } from "../../_config/userSettingConfig";
-import SettingLoading from "./_components/settingLoading";
+import { SettingLoading } from "./_components/settingLoading";
 
 export default function Page() {
   const {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/app/_components/elements/Button";
-import ResetConfirmDialog from "./ResetConfirmDialog";
+import { ResetConfirmDialog } from "./ResetConfirmDialog";
 import { UseFormReset } from "react-hook-form";
 import { UpdateData } from "../_types/updateData";
 import { DEFAULT_USER_SETTINGS } from "@/app/_config/userSettingConfig";
@@ -14,7 +14,7 @@ interface Props {
   reset: UseFormReset<UpdateData>;
 }
 
-export default function FormActions({ isSubmitting, reset }: Props) {
+export const FormActions: React.FC<Props> = ({ isSubmitting, reset }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   /** 設定を初期状態にリセットする関数 */
@@ -67,4 +67,4 @@ export default function FormActions({ isSubmitting, reset }: Props) {
       />
     </>
   );
-}
+};

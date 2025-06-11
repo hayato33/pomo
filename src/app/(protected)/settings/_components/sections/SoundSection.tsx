@@ -1,10 +1,13 @@
-import Section from "../Section";
+import { Section } from "../Section";
 import { SectionProps } from "../../_types/SectionProps";
 import { FormFieldSelect, FormFieldSlider } from "../FormField";
 import { TIMER_BGM_OPTIONS } from "@/app/_config/timerBgm";
 import { TIMER_END_SOUND_OPTIONS } from "@/app/_config/timerEndSound";
 
-export default function SoundSection({ control, isSubmitting }: SectionProps) {
+export const SoundSection: React.FC<SectionProps> = ({
+  control,
+  isSubmitting,
+}) => {
   return (
     <Section title="サウンド設定">
       <FormFieldSelect
@@ -57,4 +60,4 @@ export default function SoundSection({ control, isSubmitting }: SectionProps) {
       />
     </Section>
   );
-}
+};
