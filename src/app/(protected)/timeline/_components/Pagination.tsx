@@ -9,7 +9,11 @@ interface Props {
 }
 
 /** ページネーションコンポーネント */
-export function Pagination({ pagination, currentPage, changePage }: Props) {
+export const Pagination: React.FC<Props> = ({
+  pagination,
+  currentPage,
+  changePage,
+}) => {
   if (!pagination) return null;
 
   return (
@@ -35,4 +39,4 @@ export function Pagination({ pagination, currentPage, changePage }: Props) {
       </Button>
     </div>
   );
-}
+};

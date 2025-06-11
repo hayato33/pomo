@@ -1,7 +1,7 @@
 import { Skeleton } from "@radix-ui/themes";
 
 /** タイムラインページのローディング表示コンポーネント */
-export function TimelineLoading() {
+export const TimelineLoading: React.FC = () => {
   const skeletons = [];
 
   for (let i = 0; i < 10; i++) {
@@ -11,4 +11,4 @@ export function TimelineLoading() {
   }
 
   return <>{skeletons}</>;
-}
+};
