@@ -1,8 +1,8 @@
 "use client";
 
-import ChartCard from "./ChartCard";
+import { ChartCard } from "./ChartCard";
 import { Tabs, TabsList, TabsTrigger } from "@/app/_components/Tabs";
-import CategoryChartChild from "./CategoryChartChild";
+import { CategoryChartChild } from "./CategoryChartChild";
 import { CategoryStats } from "@/app/_types/category";
 
 interface Props {
@@ -11,12 +11,13 @@ interface Props {
   monthlyTotalTimeByCategory: CategoryStats[];
   yearlyTotalTimeByCategory: CategoryStats[];
 }
-export default function CategoryChart({
+
+export const CategoryChart: React.FC<Props> = ({
   dailyTotalTimeByCategory,
   weeklyTotalTimeByCategory,
   monthlyTotalTimeByCategory,
   yearlyTotalTimeByCategory,
-}: Props) {
+}) => {
   if (
     dailyTotalTimeByCategory.length === 0 &&
     weeklyTotalTimeByCategory.length === 0 &&
@@ -53,4 +54,4 @@ export default function CategoryChart({
       </Tabs>
     </ChartCard>
   );
-}
+};

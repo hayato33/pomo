@@ -14,10 +14,11 @@ interface Props {
   totalTimeByCategory: CategoryStats[];
   period: "daily" | "weekly" | "monthly" | "yearly";
 }
-export default function CategoryChartChild({
+
+export const CategoryChartChild: React.FC<Props> = ({
   totalTimeByCategory,
   period,
-}: Props) {
+}) => {
   if (totalTimeByCategory.length === 0)
     return <TabsContent value={period}>データがありません</TabsContent>;
 
@@ -57,4 +58,4 @@ export default function CategoryChartChild({
       </ChartContainer>
     </TabsContent>
   );
-}
+};

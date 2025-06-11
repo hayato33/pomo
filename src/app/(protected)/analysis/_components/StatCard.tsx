@@ -5,7 +5,7 @@ interface Props {
 }
 
 /** 統計カード */
-export default function StatCard({ title, text, value }: Props) {
+export const StatCard: React.FC<Props> = ({ title, text, value }) => {
   return (
     <div className="rounded-md border p-4">
       <h2 className="text-lg font-bold">{title}</h2>
@@ -13,4 +13,4 @@ export default function StatCard({ title, text, value }: Props) {
       <p className="text-2xl font-bold">{value}</p>
     </div>
   );
-}
+};
