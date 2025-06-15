@@ -14,12 +14,12 @@ interface TimerControllerProps {
   resetTimer: () => void;
 }
 
-export default function TimerController({
+export const TimerController: React.FC<TimerControllerProps> = ({
   isTimerRunning,
   toggleTimer,
   handlePhaseComplete,
   resetTimer,
-}: TimerControllerProps) {
+}) => {
   // 現在のフェーズをスキップする関数
   const skipPhase = () => handlePhaseComplete();
 
@@ -59,4 +59,4 @@ export default function TimerController({
       )}
     </div>
   );
-}
+};

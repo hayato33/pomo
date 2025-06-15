@@ -7,7 +7,11 @@ import { Button } from "@/app/_components/elements/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { categorySchema } from "../../_lib/categorySchema";
 
-export default function CreateCategory({ mutate }: { mutate: () => void }) {
+interface Props {
+  mutate: () => void;
+}
+
+export const CreateCategory: React.FC<Props> = ({ mutate }) => {
   const { token } = useSupabaseSession();
   const {
     register,
@@ -43,4 +47,4 @@ export default function CreateCategory({ mutate }: { mutate: () => void }) {
       <ErrorMessage message={errors.name?.message} />
     </section>
   );
-}
+};

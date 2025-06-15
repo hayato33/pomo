@@ -1,12 +1,12 @@
 import { Category } from "@prisma/client";
-import ListItem from "./ListItem";
+import { ListItem } from "./ListItem";
 
 interface Props {
   categories?: Category[];
   mutate: () => void;
 }
 
-export default function CategoryList({ categories, mutate }: Props) {
+export const CategoryList: React.FC<Props> = ({ categories, mutate }) => {
   return (
     <section className="">
       <h3 className="mb-2 text-base font-bold">カテゴリー一覧</h3>
@@ -21,4 +21,4 @@ export default function CategoryList({ categories, mutate }: Props) {
       </ul>
     </section>
   );
-}
+};

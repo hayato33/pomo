@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CategorySettingModal from "./CategorySettingModal";
+import { CategorySettingModal } from "./CategorySettingModal";
 import Select, { StylesConfig } from "react-select";
 import { Button } from "@/app/_components/elements/Button";
 import { useCategories } from "@/app/_hooks/useCategories";
@@ -13,10 +13,10 @@ interface Props {
   setSelectedCategories: (categories: CategoryOption[]) => void;
 }
 
-export default function CategorySetting({
+export const CategorySetting: React.FC<Props> = ({
   selectedCategories,
   setSelectedCategories,
-}: Props) {
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: categories } = useCategories();
   const { resolvedTheme } = useTheme();
@@ -115,4 +115,4 @@ export default function CategorySetting({
       <CategorySettingModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
-}
+};

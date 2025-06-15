@@ -5,7 +5,7 @@ import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { useUser } from "@/app/_hooks/useUser";
 import { createPomodoroLog } from "../_lib/createPomodoroLog";
 import { TimerSettings } from "@/app/_config/timerConfig";
-import Confetti from "./Confetti";
+import { Confetti } from "./Confetti";
 import { PomodoroLogType } from "@/app/_types/pomodoro";
 
 interface Props {
@@ -17,12 +17,12 @@ interface Props {
   categoryIds: string[];
 }
 
-export default function PomodoroCompletionModal({
+export const PomodoroCompletionModal: React.FC<Props> = ({
   storedSettings,
   isPomodoroCompletionModalOpen,
   setIsPomodoroCompletionModalOpen,
   categoryIds,
-}: Props) {
+}) => {
   const { token } = useSupabaseSession();
   const { data: userData } = useUser();
   const currentUser = userData?.data;
@@ -80,4 +80,4 @@ export default function PomodoroCompletionModal({
       </div>
     </Modal>
   );
-}
+};

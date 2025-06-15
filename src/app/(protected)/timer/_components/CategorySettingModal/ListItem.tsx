@@ -10,13 +10,12 @@ import { useSupabaseSession } from "@/app/_hooks/useSupabaseSession";
 import { Modal } from "@/app/_components/elements/Modal";
 import { categorySchema } from "../../_lib/categorySchema";
 
-export default function ListItem({
-  category,
-  mutate,
-}: {
+interface Props {
   category: Category;
   mutate: () => void;
-}) {
+}
+
+export const ListItem: React.FC<Props> = ({ category, mutate }) => {
   const { token } = useSupabaseSession();
   const [mode, setMode] = useState<"view" | "edit">("view");
   const [isOpen, setIsOpen] = useState(false);
@@ -103,4 +102,4 @@ export default function ListItem({
       )}
     </li>
   );
-}
+};

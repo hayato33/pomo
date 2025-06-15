@@ -10,11 +10,11 @@ interface Props {
 }
 
 /** ポモドーロタイマーの音声管理コンポーネント */
-export default function useTimerAudio({
+export const useTimerAudio = ({
   currentPhase,
   isTimerRunning,
   isTimerCompleted,
-}: Props) {
+}: Props) => {
   const { data: settings, isLoading } = useSetting();
   const {
     focusTimeBgm,
@@ -197,4 +197,4 @@ export default function useTimerAudio({
   }, [isTimerRunning]);
 
   return null;
-}
+};
