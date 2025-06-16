@@ -3,9 +3,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import AuthFormItem from "./AuthFormItem";
-import PasswordInput from "./PasswordInput";
-import FormActions from "./FormActions";
+import { AuthFormItem } from "./AuthFormItem";
+import { PasswordInput } from "./PasswordInput";
+import { FormActions } from "./FormActions";
 import { authSchema, FormData, FormType } from "../_lib/authSchema";
 import { loginHandler, signupHandler } from "@/app/_lib/authHandlers";
 
@@ -13,7 +13,7 @@ import { loginHandler, signupHandler } from "@/app/_lib/authHandlers";
  * ログインと新規登録で共通して使用されるフォームコンポーネント
  * React Hook FormとZodによるバリデーション、パスワードの表示切り替え機能付き
  */
-export default function AuthForm({ formType }: { formType: FormType }) {
+export const AuthForm: React.FC<{ formType: FormType }> = ({ formType }) => {
   const {
     register,
     handleSubmit,
@@ -66,4 +66,4 @@ export default function AuthForm({ formType }: { formType: FormType }) {
       </form>
     </div>
   );
-}
+};

@@ -2,7 +2,7 @@ import { Button } from "@/app/_components/elements/Button";
 import Link from "next/link";
 import { useGuestLogin } from "@/app/_hooks/useGuestLogin";
 
-export default function Buttons() {
+export const Buttons: React.FC = () => {
   const { guestLogin } = useGuestLogin();
 
   return (
@@ -28,4 +28,4 @@ export default function Buttons() {
       </Button>
     </>
   );
-}
+};

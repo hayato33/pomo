@@ -12,7 +12,7 @@ interface Props {
 }
 
 /** サインアップ/ログインフォームの入力フィールド */
-export default function AuthFormItem({
+export const AuthFormItem: React.FC<Props> = ({
   id,
   label,
   type,
@@ -20,7 +20,7 @@ export default function AuthFormItem({
   register,
   errors,
   isSubmitting,
-}: Props) {
+}) => {
   return (
     <div>
       <label
@@ -43,4 +43,4 @@ export default function AuthFormItem({
       )}
     </div>
   );
-}
+};
