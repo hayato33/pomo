@@ -1,14 +1,14 @@
-import ChartCard from "./ChartCard";
+import { ChartCard } from "./ChartCard";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/app/_components/Tabs";
-import AnalysisTabsContent from "./AnalysisTabsContent";
+import { AnalysisTabsContent } from "./AnalysisTabsContent";
 import { useState } from "react";
 import { PeriodicPomoData } from "@/app/_types/pomodoro";
-import PeriodTabsList from "./PeriodTabsList";
+import { PeriodTabsList } from "./PeriodTabsList";
 
 /** Recordコンポーネントのprops型定義 */
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   monthlyData: PeriodicPomoData[];
 }
 
-export default function Record({ weeklyData, monthlyData }: Props) {
+export const Record: React.FC<Props> = ({ weeklyData, monthlyData }) => {
   // 期間の状態を管理
   const [periodType, setPeriodType] = useState<"weekly" | "monthly">("weekly");
 
@@ -77,4 +77,4 @@ export default function Record({ weeklyData, monthlyData }: Props) {
       </ChartCard>
     </>
   );
-}
+};

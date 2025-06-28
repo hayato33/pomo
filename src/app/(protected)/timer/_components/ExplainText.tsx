@@ -1,11 +1,9 @@
 import { useSetting } from "@/app/_hooks/useSetting";
 import { TimerSettings } from "@/app/_config/timerConfig";
 /* タイマーの説明テキスト */
-export default function ExplainText({
+export const ExplainText: React.FC<{ storedSettings: TimerSettings }> = ({
   storedSettings,
-}: {
-  storedSettings: TimerSettings;
-}) {
+}) => {
   const { data: setting } = useSetting();
   const hideExplainText = setting?.data?.hideExplainText;
 
@@ -19,4 +17,4 @@ export default function ExplainText({
       サイクル{cycles}回 + 長休憩{longBreakTime}分
     </p>
   );
-}
+};

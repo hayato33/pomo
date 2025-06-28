@@ -1,6 +1,6 @@
 import confetti from "canvas-confetti";
 
-export default function Confetti() {
+export const Confetti = () => {
   const count = 200;
   const defaults = {
     origin: { y: 0.7 },
@@ -36,4 +36,4 @@ export default function Confetti() {
     spread: 120,
     startVelocity: 45,
   });
-}
+};

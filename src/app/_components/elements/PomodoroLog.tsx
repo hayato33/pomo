@@ -1,8 +1,8 @@
-import UserProfileImage from "./UserProfileImage";
+import { UserProfileImage } from "./UserProfileImage";
 import { PomodoroLogType } from "@/app/_types/pomodoro";
 
 /** ポモドーロログコンポーネント */
-export default function PomodoroLog({ log }: { log: PomodoroLogType }) {
+export const PomodoroLog: React.FC<{ log: PomodoroLogType }> = ({ log }) => {
   return (
     <div className="grid w-full gap-4">
       <div className="flex items-center gap-4">
@@ -26,4 +26,4 @@ export default function PomodoroLog({ log }: { log: PomodoroLogType }) {
       </div>
     </div>
   );
-}
+};

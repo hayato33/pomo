@@ -28,7 +28,7 @@ interface Props {
   getValues: UseFormGetValues<UpdateData>;
 }
 
-export default function FormFieldFileUpload({
+export const FormFieldFileUpload: React.FC<Props> = ({
   control,
   isSubmitting,
   name,
@@ -36,7 +36,7 @@ export default function FormFieldFileUpload({
   altText,
   setValue,
   getValues,
-}: Props) {
+}) => {
   const bucketName =
     name === "profileImageKey" ? "profile-image" : "background-image";
 
@@ -127,4 +127,4 @@ export default function FormFieldFileUpload({
       )}
     </>
   );
-}
+};

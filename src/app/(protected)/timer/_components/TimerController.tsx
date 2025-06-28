@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 import { BsSkipEndFill } from "react-icons/bs";
 import { HiPause } from "react-icons/hi2";
 import { RiResetLeftFill } from "react-icons/ri";
@@ -14,12 +14,12 @@ interface TimerControllerProps {
   resetTimer: () => void;
 }
 
-export default function TimerController({
+export const TimerController: React.FC<TimerControllerProps> = ({
   isTimerRunning,
   toggleTimer,
   handlePhaseComplete,
   resetTimer,
-}: TimerControllerProps) {
+}) => {
   // 現在のフェーズをスキップする関数
   const skipPhase = () => handlePhaseComplete();
 
@@ -59,4 +59,4 @@ export default function TimerController({
       )}
     </div>
   );
-}
+};

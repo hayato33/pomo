@@ -10,13 +10,13 @@ interface Props {
 }
 
 /** 画像プレビューコンポーネント */
-export const ImagePreview = ({
+export const ImagePreview: React.FC<Props> = ({
   imageUrl,
   altText,
   isUploading,
   isLoading,
   onDelete,
-}: Props) => {
+}) => {
   return (
     <div className="flex items-center gap-4">
       {isUploading || isLoading ? (

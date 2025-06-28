@@ -1,11 +1,11 @@
-import Section from "../Section";
+import { Section } from "../Section";
 import { SectionProps } from "../../_types/SectionProps";
 import { FormFieldSwitch } from "../FormField";
 
-export default function RankingSection({
+export const RankingSection: React.FC<SectionProps> = ({
   control,
   isSubmitting,
-}: SectionProps) {
+}) => {
   return (
     <Section title="ランキング設定">
       <FormFieldSwitch
@@ -22,4 +22,4 @@ export default function RankingSection({
       />
     </Section>
   );
-}
+};

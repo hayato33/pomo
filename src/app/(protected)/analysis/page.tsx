@@ -1,12 +1,12 @@
 "use client";
 
 import { useCurrentUserPomodoro } from "./_hooks/useCurrentUserPomodoro";
-import PageTitle from "../../_components/elements/PageTitle";
-import StatCard from "./_components/StatCard";
-import AnalysisLoading from "./_components/AnalysisLoading";
+import { PageTitle } from "../../_components/elements/PageTitle";
+import { StatCard } from "./_components/StatCard";
+import { AnalysisLoading } from "./_components/AnalysisLoading";
 import { minutesToHours } from "./_utils/minutesToHours";
-import Record from "./_components/Record";
-import CategoryChart from "./_components/CategoryChart";
+import { Record } from "./_components/Record";
+import { CategoryChart } from "./_components/CategoryChart";
 
 /** ポモドーロの分析ページ */
 export default function Page() {

@@ -19,7 +19,7 @@ interface PomodoroTimerProps {
  * ポモドーロタイマーのメインコンポーネント
  * カウントダウンと表示を担当
  */
-export default function PomodoroTimer({
+export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   isTimerRunning,
   handlePhaseComplete,
   currentPhase,
@@ -27,7 +27,7 @@ export default function PomodoroTimer({
   remainingTime,
   setRemainingTime,
   timerSettings,
-}: PomodoroTimerProps) {
+}) => {
   // タイマーのカウントダウンの制御
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -125,4 +125,4 @@ export default function PomodoroTimer({
       </div>
     </div>
   );
-}
+};

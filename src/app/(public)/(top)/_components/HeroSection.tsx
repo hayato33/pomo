@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Buttons from "./Buttons";
+import { Buttons } from "./Buttons";
 
-export default function HeroSection() {
+export const HeroSection: React.FC = () => {
   return (
     <section className="container mx-auto px-4 py-16 md:py-24">
       <div className="flex flex-col items-center justify-center gap-8 md:flex-row">
@@ -55,4 +55,4 @@ export default function HeroSection() {
       </div>
     </section>
   );
-}
+};

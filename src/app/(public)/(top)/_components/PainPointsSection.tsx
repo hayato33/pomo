@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/app/_components/Card";
 
-export default function PainPointsSection() {
+export const PainPointsSection: React.FC = () => {
   const painPoints = [
     {
       title: "余計な機能が多すぎる",
@@ -45,4 +45,4 @@ export default function PainPointsSection() {
       </div>
     </section>
   );
-}
+};

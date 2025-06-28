@@ -1,8 +1,11 @@
-import Section from "../Section";
+import { Section } from "../Section";
 import { SectionProps } from "../../_types/SectionProps";
 import { FormFieldSwitch } from "../FormField";
 
-export default function TimerSection({ control, isSubmitting }: SectionProps) {
+export const TimerSection: React.FC<SectionProps> = ({
+  control,
+  isSubmitting,
+}) => {
   return (
     <Section title="タイマー設定">
       <FormFieldSwitch
@@ -28,4 +31,4 @@ export default function TimerSection({ control, isSubmitting }: SectionProps) {
       />
     </Section>
   );
-}
+};

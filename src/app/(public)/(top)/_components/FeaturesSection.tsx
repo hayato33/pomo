@@ -8,7 +8,7 @@ import {
 } from "react-icons/fi";
 import { AiOutlineTrophy } from "react-icons/ai";
 
-export default function FeaturesSection() {
+export const FeaturesSection: React.FC = () => {
   const features = [
     {
       icon: <FiClock className="h-10 w-10 text-black" />,
@@ -79,4 +79,4 @@ export default function FeaturesSection() {
       </div>
     </section>
   );
-}
+};

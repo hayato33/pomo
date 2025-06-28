@@ -7,7 +7,7 @@ import { TbSettings } from "react-icons/tb";
 import { RiSurveyLine } from "react-icons/ri";
 import { FiExternalLink } from "react-icons/fi";
 import { supabase } from "@/app/_utils/supabase";
-import UserProfileImage from "../elements/UserProfileImage";
+import { UserProfileImage } from "../elements/UserProfileImage";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ import {
 import { useFont } from "@/app/_hooks/useFont";
 
 /** ユーザーメニューを表示するドロップダウンコンポーネント */
-export default function UserMenu() {
+export const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { fontVariable, fontClass } = useFont();
 
@@ -68,4 +68,4 @@ export default function UserMenu() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

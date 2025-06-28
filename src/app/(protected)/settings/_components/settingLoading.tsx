@@ -1,7 +1,7 @@
 import { Skeleton } from "@radix-ui/themes";
 
 /** 設定ページのローディング表示コンポーネント */
-export default function SettingLoading() {
+export const SettingLoading: React.FC = () => {
   return (
     <div className="flex flex-col">
       {/* プロフィール設定セクション */}
@@ -41,4 +41,4 @@ export default function SettingLoading() {
       </div>
     </div>
   );
-}
+};

@@ -1,6 +1,6 @@
 import { Modal } from "@/app/_components/elements/Modal";
-import CreateCategory from "./CategorySettingModal/CreateCategory";
-import CategoryList from "./CategorySettingModal/CategoryList";
+import { CreateCategory } from "./CategorySettingModal/CreateCategory";
+import { CategoryList } from "./CategorySettingModal/CategoryList";
 import { useCategories } from "@/app/_hooks/useCategories";
 
 interface Props {
@@ -8,7 +8,10 @@ interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CategorySettingModal({ isOpen, setIsOpen }: Props) {
+export const CategorySettingModal: React.FC<Props> = ({
+  isOpen,
+  setIsOpen,
+}) => {
   const { data: categories, mutate } = useCategories();
 
   return (
@@ -18,4 +21,4 @@ export default function CategorySettingModal({ isOpen, setIsOpen }: Props) {
       <CategoryList categories={categories?.data} mutate={mutate} />
     </Modal>
   );
-}
+};

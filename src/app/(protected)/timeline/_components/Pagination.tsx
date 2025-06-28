@@ -1,4 +1,4 @@
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 
 interface Props {
   pagination?: {
@@ -9,7 +9,11 @@ interface Props {
 }
 
 /** ページネーションコンポーネント */
-export function Pagination({ pagination, currentPage, changePage }: Props) {
+export const Pagination: React.FC<Props> = ({
+  pagination,
+  currentPage,
+  changePage,
+}) => {
   if (!pagination) return null;
 
   return (
@@ -35,4 +39,4 @@ export function Pagination({ pagination, currentPage, changePage }: Props) {
       </Button>
     </div>
   );
-}
+};

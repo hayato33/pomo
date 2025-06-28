@@ -1,11 +1,11 @@
-import Section from "../Section";
+import { Section } from "../Section";
 import { SectionProps } from "../../_types/SectionProps";
 import { FormFieldSwitch } from "../FormField";
 
-export default function TimelineSection({
+export const TimelineSection: React.FC<SectionProps> = ({
   control,
   isSubmitting,
-}: SectionProps) {
+}) => {
   return (
     <Section title="タイムライン設定">
       <FormFieldSwitch
@@ -23,4 +23,4 @@ export default function TimelineSection({
       />
     </Section>
   );
-}
+};
