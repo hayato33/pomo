@@ -1,4 +1,4 @@
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 import { Text } from "@radix-ui/themes";
 import Link from "next/link";
 
@@ -24,10 +24,10 @@ const AUTH_ACTIONS_CONFIG = {
 } as const;
 
 /** フォームアクションコンポーネント */
-export default function FormActions({
+export const FormActions: React.FC<FormActionsProps> = ({
   formType,
   isSubmitting,
-}: FormActionsProps) {
+}) => {
   // フォームタイプに応じた設定を取得
   const config = AUTH_ACTIONS_CONFIG[formType];
 
@@ -47,4 +47,4 @@ export default function FormActions({
       </Text>
     </>
   );
-}
+};

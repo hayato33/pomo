@@ -17,13 +17,13 @@ interface Props {
   subtext?: string;
 }
 
-export default function FormFieldSwitch({
+export const FormFieldSwitch: React.FC<Props> = ({
   control,
   isSubmitting,
   name,
   label,
   subtext,
-}: Props) {
+}) => {
   return (
     <FormField
       control={control}
@@ -53,4 +53,4 @@ export default function FormFieldSwitch({
       )}
     />
   );
-}
+};

@@ -16,12 +16,12 @@ interface Props {
   label: string;
 }
 
-export default function FormFieldSlider({
+export const FormFieldSlider: React.FC<Props> = ({
   control,
   isSubmitting,
   name,
   label,
-}: Props) {
+}) => {
   return (
     <FormField
       control={control}
@@ -45,4 +45,4 @@ export default function FormFieldSlider({
       )}
     />
   );
-}
+};

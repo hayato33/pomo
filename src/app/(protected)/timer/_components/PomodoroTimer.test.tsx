@@ -1,5 +1,5 @@
 import { render, screen, act } from "@testing-library/react";
-import PomodoroTimer from "./PomodoroTimer";
+import { PomodoroTimer } from "./PomodoroTimer";
 import { DEFAULT_TIMER_SETTINGS } from "@/app/_config/timerConfig";
 import { jest } from "@jest/globals";
 

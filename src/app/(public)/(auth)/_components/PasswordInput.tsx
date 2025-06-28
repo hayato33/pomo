@@ -23,13 +23,13 @@ interface PasswordInputProps {
   watch: UseFormWatch<FormData>;
 }
 
-export default function PasswordInput({
+export const PasswordInput: React.FC<PasswordInputProps> = ({
   register,
   error,
   isSubmitting,
   showRequirements = false,
   watch,
-}: PasswordInputProps) {
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   const password = watch("password", "");
 
@@ -110,4 +110,4 @@ export default function PasswordInput({
       )}
     </div>
   );
-}
+};

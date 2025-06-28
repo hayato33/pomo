@@ -1,4 +1,4 @@
-import Section from "../Section";
+import { Section } from "../Section";
 import { ImageUploadSectionProps } from "../../_types/SectionProps";
 import {
   FormFieldFileUpload,
@@ -7,12 +7,12 @@ import {
 } from "../FormField";
 import { FONT_OPTIONS } from "@/app/_config/font";
 
-export default function PreferenceSection({
+export const PreferenceSection: React.FC<ImageUploadSectionProps> = ({
   control,
   isSubmitting,
   setValue,
   getValues,
-}: ImageUploadSectionProps) {
+}) => {
   return (
     <Section title="こだわり設定" className="border-none">
       <FormFieldFileUpload
@@ -47,4 +47,4 @@ export default function PreferenceSection({
       />
     </Section>
   );
-}
+};

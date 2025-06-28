@@ -1,15 +1,7 @@
 import { useFont } from "@/app/_hooks/useFont";
-import { Button } from "@radix-ui/themes";
+import { Button as RadixButton } from "@radix-ui/themes";
 
-export default function ButtonComponent({
-  children,
-  size = "3",
-  variant = "solid",
-  className,
-  type = "button",
-  onClick,
-  disabled,
-}: {
+interface Props {
   children: React.ReactNode;
   size?: "1" | "2" | "3" | "4";
   variant?: "solid" | "outline" | "ghost";
@@ -17,10 +9,20 @@ export default function ButtonComponent({
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   disabled?: boolean;
-}) {
+}
+
+export const Button: React.FC<Props> = ({
+  children,
+  size = "3",
+  variant = "solid",
+  className,
+  type = "button",
+  onClick,
+  disabled,
+}) => {
   const { fontClass } = useFont();
   return (
-    <Button
+    <RadixButton
       size={size}
       color="gray"
       variant={variant}
@@ -31,6 +33,6 @@ export default function ButtonComponent({
       disabled={disabled}
     >
       {children}
-    </Button>
+    </RadixButton>
   );
-}
+};

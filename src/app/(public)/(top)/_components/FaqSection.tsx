@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/app/_components/elements/accordion";
 
-export default function FaqSection() {
+export const FaqSection: React.FC = () => {
   const faqs = [
     {
       question: "無料で使えますか？",
@@ -46,4 +46,4 @@ export default function FaqSection() {
       </div>
     </section>
   );
-}
+};

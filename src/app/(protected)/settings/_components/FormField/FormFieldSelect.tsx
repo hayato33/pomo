@@ -24,13 +24,13 @@ interface Props {
  * 通常のHTMLのselectを使用
  * TODO: Shadcn UIのSelectコンポーネントを使用するよう修正
  */
-export default function FormFieldSelect({
+export const FormFieldSelect: React.FC<Props> = ({
   control,
   isSubmitting,
   name,
   label,
   options,
-}: Props) {
+}) => {
   return (
     <FormField
       control={control}
@@ -82,4 +82,4 @@ export default function FormFieldSelect({
       }}
     />
   );
-}
+};

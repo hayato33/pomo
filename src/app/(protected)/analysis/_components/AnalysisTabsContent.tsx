@@ -37,11 +37,11 @@ interface Props {
 }
 
 /** 分析ページのタブコンテンツ */
-export default function AnalysisTabsContent({
+export const AnalysisTabsContent: React.FC<Props> = ({
   value,
   chartData,
   dataKey,
-}: Props) {
+}) => {
   const maxValue = chartData.reduce(
     (max, val) => Math.max(val[dataKey], max),
     0
@@ -93,4 +93,4 @@ export default function AnalysisTabsContent({
       </Card>
     </TabsContent>
   );
-}
+};

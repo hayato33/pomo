@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 import { useForm } from "react-hook-form";
-import FormItem from "./FormItem";
+import { FormItem } from "./FormItem";
 import {
   DEFAULT_TIMER_SETTINGS,
   TimerSettings,
@@ -24,11 +24,11 @@ interface TimerSettingsFormProps {
   setStoredSettings: (settings: TimerSettings) => void;
 }
 
-export default function TimerSettingsForm({
+export const TimerSettingsForm: React.FC<TimerSettingsFormProps> = ({
   resetTimer,
   storedSettings,
   setStoredSettings,
-}: TimerSettingsFormProps) {
+}) => {
   // ダイアログの表示状態
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   // 確認待ちの設定値
@@ -183,4 +183,4 @@ export default function TimerSettingsForm({
       </CollapsibleContent>
     </Collapsible>
   );
-}
+};

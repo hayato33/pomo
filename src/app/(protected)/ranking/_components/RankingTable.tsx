@@ -1,4 +1,4 @@
-import UserProfileImage from "@/app/_components/elements/UserProfileImage";
+import { UserProfileImage } from "@/app/_components/elements/UserProfileImage";
 import {
   Table,
   TableBody,
@@ -30,7 +30,7 @@ const getRankDisplay = (rank: number | string) => {
   }
 };
 
-export const RankingTable = ({ data, dataType }: Props) => {
+export const RankingTable: React.FC<Props> = ({ data, dataType }) => {
   const { data: currentUser } = useUser();
   const currentUserId = currentUser?.data?.id;
 

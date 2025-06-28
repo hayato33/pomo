@@ -14,7 +14,7 @@ interface FormItemProps {
 }
 
 /** ポモドーロタイマー各種数値変更フォームの項目 */
-export default function FormItem({
+export const FormItem: React.FC<FormItemProps> = ({
   label,
   explain,
   id,
@@ -23,7 +23,7 @@ export default function FormItem({
   errors,
   min,
   max,
-}: FormItemProps) {
+}) => {
   return (
     <div>
       <div className="flex items-center justify-between gap-4">
@@ -49,4 +49,4 @@ export default function FormItem({
       )}
     </div>
   );
-}
+};

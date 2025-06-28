@@ -16,12 +16,12 @@ interface Props {
   label: string;
 }
 
-export default function FormFieldInput({
+export const FormFieldInput: React.FC<Props> = ({
   control,
   isSubmitting,
   name,
   label,
-}: Props) {
+}) => {
   return (
     <FormField
       control={control}
@@ -44,4 +44,4 @@ export default function FormFieldInput({
       )}
     />
   );
-}
+};

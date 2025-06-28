@@ -1,13 +1,13 @@
-import Section from "../Section";
+import { Section } from "../Section";
 import { ImageUploadSectionProps } from "../../_types/SectionProps";
 import { FormFieldFileUpload, FormFieldInput } from "../FormField";
 
-export default function ProfileSection({
+export const ProfileSection: React.FC<ImageUploadSectionProps> = ({
   control,
   isSubmitting,
   setValue,
   getValues,
-}: ImageUploadSectionProps) {
+}) => {
   return (
     <Section title="プロフィール設定">
       <FormFieldInput
@@ -27,4 +27,4 @@ export default function ProfileSection({
       />
     </Section>
   );
-}
+};

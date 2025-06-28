@@ -1,7 +1,7 @@
 "use client";
 
 import { Modal } from "@/app/_components/elements/Modal";
-import Button from "@/app/_components/elements/Button";
+import { Button } from "@/app/_components/elements/Button";
 
 interface Props {
   isOpen: boolean;
@@ -10,11 +10,11 @@ interface Props {
 }
 
 /** 設定リセット確認ダイアログコンポーネント */
-export default function ResetConfirmDialog({
+export const ResetConfirmDialog: React.FC<Props> = ({
   isOpen,
   onClose,
   onConfirm,
-}: Props) {
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="">
@@ -38,4 +38,4 @@ export default function ResetConfirmDialog({
       </div>
     </Modal>
   );
-}
+};
