@@ -1,0 +1,32 @@
+name: Test
+
+# 実行タイミング
+on:
+  push:
+    branches: [main, develop] # mainとdevelopブランチへのpush時
+  pull_request:
+    branches: [main, develop] # mainとdevelopへのPR作成・更新時
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリのコードをチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Node.js環境のセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # 依存関係のインストール
+      - name: Install dependencies
+        run: npm ci
+
+      # テスト実行
+      - name: Run tests
+        run: npm test -- --passWithNoTests --coverage
