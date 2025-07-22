@@ -124,13 +124,19 @@ export default function Page() {
       if (postButtonToTimeline) {
         setIsPomodoroCompletionModalOpen(true);
       } else {
-        await createPomodoroLog({
-          completedCount: storedSettings.cycles,
-          completedTime: storedSettings.focusTime,
-          displayInTimeline: false,
-          categoryIds,
-          token: token ?? "",
-        });
+        try {
+          await createPomodoroLog({
+            completedCount: storedSettings.cycles,
+            completedTime: storedSettings.focusTime,
+            displayInTimeline: false,
+            categoryIds,
+            token: token ?? "",
+          });
+          toast.success("ポモドーロが正常に記録されました！");
+        } catch (error) {
+          console.error("ポモドーロログの保存に失敗:", error);
+          toast.error("データ保存に失敗しました。インターネット接続を確認してください。");
+        }
       }
       if (setRandomTime) {
         // ランダムな設定をセット

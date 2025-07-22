@@ -29,14 +29,20 @@ export const PomodoroCompletionModal: React.FC<Props> = ({
 
   const onSubmitPomodoroLogModal = async (displayInTimeline: boolean) => {
     setIsPomodoroCompletionModalOpen(false);
-    await createPomodoroLog({
-      completedCount: storedSettings.cycles,
-      completedTime: storedSettings.focusTime,
-      displayInTimeline,
-      categoryIds,
-      token: token ?? "",
-    });
-    Confetti();
+    try {
+      await createPomodoroLog({
+        completedCount: storedSettings.cycles,
+        completedTime: storedSettings.focusTime,
+        displayInTimeline,
+        categoryIds,
+        token: token ?? "",
+      });
+      Confetti();
+    } catch (error) {
+      console.error("ポモドーロログの保存に失敗:", error);
+      // エラー時は通知のみで、Confettiは実行しない
+      alert("データ保存に失敗しました。インターネット接続を確認してください。");
+    }
   };
 
   // プレビュー用のログデータ
