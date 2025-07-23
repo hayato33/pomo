@@ -98,7 +98,22 @@ npm install
 ```
 
 3. 環境変数を設定:
-   `.env`ファイルを作成し、変数を設定（具体的な値は管理者にお問い合わせください）
+
+   `.env.local`ファイルを作成し、以下の環境変数を設定してください：
+
+   ```bash
+   # Supabase設定
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+
+   # データベース設定
+   DATABASE_URL=your_database_url_here
+   ```
+
+   **注意**: これらの値はSupabaseプロジェクトの設定から取得できます。
+   - Supabase URL: プロジェクト設定 > API > Project URL
+   - Supabase Anon Key: プロジェクト設定 > API > Project API keys > anon public
+   - Database URL: プロジェクト設定 > Database > Connection string > URI
 
 4. 開発サーバーを起動:
 
@@ -107,3 +122,16 @@ npm run dev
 ```
 
 5. ブラウザで http://localhost:3000 を開いてアプリにアクセス
+
+### GitHub Actions設定
+
+CI/CDパイプラインを正常に動作させるために、GitHub Secretsに以下の環境変数を設定してください：
+
+1. GitHubリポジトリの設定ページに移動
+2. Settings > Secrets and variables > Actions
+3. 以下のSecretsを追加：
+   - `NEXT_PUBLIC_SUPABASE_URL`: SupabaseプロジェクトのURL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Supabaseの匿名キー
+   - `DATABASE_URL`: データベース接続文字列
+
+これらの値は開発環境で使用するものと同じです。
