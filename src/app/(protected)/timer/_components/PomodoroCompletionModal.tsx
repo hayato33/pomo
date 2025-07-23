@@ -7,6 +7,7 @@ import { createPomodoroLog } from "../_lib/createPomodoroLog";
 import { TimerSettings } from "@/app/_config/timerConfig";
 import { Confetti } from "./Confetti";
 import { PomodoroLogType } from "@/app/_types/pomodoro";
+import { toast } from "react-toastify";
 
 interface Props {
   storedSettings: TimerSettings;
@@ -41,7 +42,9 @@ export const PomodoroCompletionModal: React.FC<Props> = ({
     } catch (error) {
       console.error("ポモドーロログの保存に失敗:", error);
       // エラー時は通知のみで、Confettiは実行しない
-      alert("データ保存に失敗しました。インターネット接続を確認してください。");
+      toast.error(
+        "データ保存に失敗しました。インターネット接続を確認してください。"
+      );
     }
   };
 
