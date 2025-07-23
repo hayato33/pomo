@@ -7,6 +7,7 @@ import { createPomodoroLog } from "../_lib/createPomodoroLog";
 import { TimerSettings } from "@/app/_config/timerConfig";
 import { Confetti } from "./Confetti";
 import { PomodoroLogType } from "@/app/_types/pomodoro";
+import { toast } from "react-toastify";
 
 interface Props {
   storedSettings: TimerSettings;
@@ -29,14 +30,22 @@ export const PomodoroCompletionModal: React.FC<Props> = ({
 
   const onSubmitPomodoroLogModal = async (displayInTimeline: boolean) => {
     setIsPomodoroCompletionModalOpen(false);
-    await createPomodoroLog({
-      completedCount: storedSettings.cycles,
-      completedTime: storedSettings.focusTime,
-      displayInTimeline,
-      categoryIds,
-      token: token ?? "",
-    });
-    Confetti();
+    try {
+      await createPomodoroLog({
+        completedCount: storedSettings.cycles,
+        completedTime: storedSettings.focusTime,
+        displayInTimeline,
+        categoryIds,
+        token: token ?? "",
+      });
+      Confetti();
+    } catch (error) {
+      console.error("ポモドーロログの保存に失敗:", error);
+      // エラー時は通知のみで、Confettiは実行しない
+      toast.error(
+        "データ保存に失敗しました。インターネット接続を確認してください。"
+      );
+    }
   };
 
   // プレビュー用のログデータ
